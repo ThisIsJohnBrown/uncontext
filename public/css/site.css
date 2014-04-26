@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+}
+
+button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.data {
+  width: 450px;
+  height: 120px;
+  background-color: white;
+  position: absolute;
+  top: 40px;
+  left: 20px;
+  display: none;
+}
+
+.data li {
+  list-style: none;
+  text-decoration: none;
+}
