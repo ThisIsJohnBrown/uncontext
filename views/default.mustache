@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <title>uncontext.</title>
+        <link href="/css/vendor/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/css/site.css" rel="stylesheet" type="text/css"/>
+        {{#slug}}<script src="/css/{{dataset}}/{{slug}}.js"></script>{{/slug}}
+    </head>
+    <body>
+        <button class="toggle">info</button>
+        <header>
+            <div class="data">
+              <ul></ul>
+            </div>
+            
+            {{#datasets}}
+            <h3>{{name}}</h3>
+            <ul class="scenes">
+            {{#slugs}}
+                <li class="scene"><a href="/{{name}}/{{.}}">{{.}}</a></li>
+            {{/slugs}}
+            </ul>
+            <div class="clear"></div>
+            {{/datasets}}
+        </header>
+        <script src="/js/vendor/jquery-1.11.0.min.js"></script>
+        {{#assets.threejs}}<script src='/js/vendor/three.min.js'></script>
+        <script src="/fonts/helvetiker_regular.typeface.js"></script>{{/assets.threejs}}
+        {{#assets.processing}}<script src='/js/vendor/processing.min.js'></script>{{/assets.processing}}
+        {{#assets.raphael}}<script src='/js/vendor/raphael.min.js'></script>{{/assets.raphael}}
+        {{#assets.toxiclibs}}<script src='/js/vendor/toxiclibs.min.js'></script>{{/assets.toxiclibs}}
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/js/site.js"></script>
+        {{#slug}}<script src="/js/{{dataset}}/{{slug}}.js"></script>{{/slug}}
+        <script src="/js/analytics.js"></script>
+        {{content}}
+    </body>
+</html>

@@ -10,20 +10,44 @@ canvas {
 button {
   position: absolute;
   top: 20px;
-  left: 20px;
+  right: 20px;
+  z-index:2;
+}
+
+header {
+  background:rgba(255, 255, 255, .5);
+  display: none;
+  position:fixed;
+  top:0;
+  left:0;
+  width: 100%;
 }
 
 .data {
-  width: 450px;
-  height: 120px;
+  width: 400px;
   background-color: white;
   position: absolute;
-  top: 40px;
-  left: 20px;
-  display: none;
+  top: 20;
+  right: 110px;
+  border: 1px solid gray;
 }
 
-.data li {
+li {
   list-style: none;
   text-decoration: none;
+}
+
+.scenes {
+  margin: 0;
+  padding: 0;
+}
+
+.scene {
+  display: inline-block;
+  float:left;
+  padding: 0 10px;
+}
+
+.clear {
+  clear: both;
 }

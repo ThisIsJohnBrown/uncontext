@@ -1,0 +1,11 @@
+{
+  "creator": "John Brown",
+  "dataset": "literature",
+  "name": "My Thing",
+  "slug": "ampersand",
+  "description": "It's a thing!",
+  "twitter": "thisisjohnbrown",
+  "assets": {
+    "threejs": true
+  }
+}

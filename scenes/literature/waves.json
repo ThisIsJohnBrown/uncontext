@@ -1,0 +1,14 @@
+{
+  "creator": "John Brown",
+  "dataset": "literature",
+  "name": "My Thing",
+  "slug": "waves",
+  "description": "It's a thing!",
+  "twitter": "thisisjohnbrown",
+  "assets": {
+    "threejs": true,
+    "raphael": true,
+    "toxiclibs": true,
+    "processing": true
+  }
+}
