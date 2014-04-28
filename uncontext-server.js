@@ -20,7 +20,7 @@ app.get('/', function(req, res){
 });
 
 var datasets = [];
-var sets = fs.readdirSync(__dirname + '/scenes');
+var sets = fs.readdirSync(__dirname + '/scenes/');
 for (var i = 1;i < sets.length; i++) {
   datasets[sets[i]] = [];
   app.get('/' + sets[i], function(req, res){
