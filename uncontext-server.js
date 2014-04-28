@@ -21,6 +21,7 @@ app.get('/', function(req, res){
 
 var datasets = [];
 var sets = fs.readdirSync(__dirname + '/scenes/');
+console.log(sets);
 for (var i = 1;i < sets.length; i++) {
   datasets[sets[i]] = [];
   app.get('/' + sets[i], function(req, res){
