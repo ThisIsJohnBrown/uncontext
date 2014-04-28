@@ -21,21 +21,24 @@ app.get('/', function(req, res){
 
 var datasets = [];
 var sets = fs.readdirSync(__dirname + '/scenes/');
-console.log(sets);
-for (var i = 1;i < sets.length; i++) {
-  datasets[sets[i]] = [];
-  app.get('/' + sets[i], function(req, res){
-    return res.render(req.url.substr(1) + '.mustache', {datasets: datasets});
-  });
-  var scenes = fs.readdirSync(__dirname + '/scenes/' + sets[i]);
-  var sceneArray = [];
-  for (var j = 0; j < scenes.length; j++) {
-    sceneArray.push(scenes[j].split('.')[0]);
+for (var i = 0;i < sets.length; i++) {
+  if (sets[i].substr(0, 1) !== '.') {
+    datasets[sets[i]] = [];
+    app.get('/' + sets[i], function(req, res){
+      return res.render(req.url.substr(1) + '.mustache', {datasets: datasets});
+    });
+    var scenes = fs.readdirSync(__dirname + '/scenes/' + sets[i]);
+    var sceneArray = [];
+    for (var j = 0; j < scenes.length; j++) {
+      if (scenes[j].substr(0, 1) !== '.') {
+        sceneArray.push(scenes[j].split('.')[0]);
+      }
+    }
+    datasets.push({
+      name: sets[i],
+      slugs: sceneArray
+    })
   }
-  datasets.push({
-    name: sets[i],
-    slugs: sceneArray
-  })
 }
 
 app.get('/:dataset/:slug', function(req, res){

@@ -6,9 +6,6 @@
   "description": "It's a thing!",
   "twitter": "thisisjohnbrown",
   "assets": {
-    "threejs": true,
-    "raphael": true,
-    "toxiclibs": true,
-    "processing": true
+    "threejs": true
   }
 }
