@@ -3,6 +3,7 @@ var express = require('express');
 var app = express();
 var port = Number(process.env.PORT || 12097);
 console.log('------------------------------- ' + port);
+var consolidate = require('consolidate');
 var server = http.createServer(app).listen(port);
 var io = require('socket.io').listen(server);
 var fs = require('fs');
@@ -10,13 +11,15 @@ io.set('log level', 1);
 
 app.set('views', __dirname + '/views');
 
+app.set('view engine', 'html');
 app.set('view engine', 'mustache');
+app.engine('html', require('hogan-middleware').__express);
 app.engine('mustache', require('hogan-middleware').__express);
 
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res){
-  return res.render('home.mustache', {datasets: datasets});
+  return res.render('home.html', {datasets: datasets});
 });
 
 var datasets = [];
@@ -53,16 +56,25 @@ app.get('/:dataset/:slug', function(req, res){
     if (!data.slug) {
       return res.render('404.mustache');
     }
-
-    res.render(req.params.slug + '.mustache', function(err, html) {
-      if (!err) {
-        data.content = html;
-      }
-      data.datasets = datasets;
-      res.render('creations.mustache', data, function(err, html2) {
-        res.send(html2);
+    data.datasets = datasets;
+    if (data.youtube) {
+      res.render('youtube.mustache', data, function(err, html) {
+        res.send(html);
       });
-    });
+    } else if (data.vimeo) {
+      res.render('vimeo.mustache', data, function(err, html) {
+        res.send(html);
+      });
+    } else {
+      res.render(req.params.dataset + '/' + req.params.slug + '.mustache', function(err, html) {
+        if (!err) {
+          data.content = html;
+        }
+        res.render('creations.mustache', data, function(err, html2) {
+          res.send(html2);
+        });
+      });
+    }
 
 
   });

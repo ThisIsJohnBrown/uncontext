@@ -6,6 +6,7 @@
   "description": "It's a thing!",
   "twitter": "thisisjohnbrown",
   "assets": {
+    "js": true,
     "threejs": true
   }
 }

@@ -2,11 +2,8 @@
   "creator": "John Brown",
   "dataset": "literature",
   "name": "My Thing",
-  "slug": "ampersand",
+  "slug": "mario",
   "description": "It's a thing!",
   "twitter": "thisisjohnbrown",
-  "assets": {
-    "js": true,
-    "threejs": true
-  }
+  "youtube": "kJALWE-ybwk"
 }
