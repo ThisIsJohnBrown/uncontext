@@ -1,1 +1,1 @@
-web: $WEB
+web: node uncontext-server.js
