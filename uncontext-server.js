@@ -3,7 +3,6 @@ var express = require('express');
 var app = express();
 var port = Number(process.env.PORT || 12097);
 console.log('------------------------------- ' + port);
-var consolidate = require('consolidate');
 var server = http.createServer(app).listen(port);
 var io = require('socket.io').listen(server);
 var fs = require('fs');
