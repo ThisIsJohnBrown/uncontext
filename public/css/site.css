@@ -7,6 +7,11 @@ canvas {
   height: 100%;
 }
 
+canvas#homepage-canvas {
+  width: 400px;
+  height: 400px;
+}
+
 button {
   position: absolute;
   top: 20px;

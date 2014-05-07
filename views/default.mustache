@@ -24,14 +24,15 @@
         </header>
         <script src="/js/vendor/jquery-1.11.0.min.js"></script>
         {{#assets.threejs}}<script src='/js/vendor/three-r67.min.js'></script>
-        <script src="/fonts/helvetiker_regular.typeface.js"></script>{{/assets.threejs}}
+        <script src="/fonts/helvetiker_regular.typeface.js"></script>
+        <script src="/js/vendor/CSS3DRenderer.min.js"></script>{{/assets.threejs}}
         {{#assets.processing}}<script src='/js/vendor/processing-1.4.8.min.js'></script>{{/assets.processing}}
         {{#assets.raphael}}<script src='/js/vendor/raphael-2.1.2.min.js'></script>{{/assets.raphael}}
         {{#assets.toxiclibs}}<script src='/js/vendor/toxiclibs-0.2.7.min.js'></script>{{/assets.toxiclibs}}
         <script src="/socket.io/socket.io.js"></script>
         <script src="/js/site.js"></script>
+        <script src="/js/homepage.js"></script>
         {{#assets.js}}<script src="/js/{{dataset}}/{{slug}}.js"></script>{{/assets.js}}
         <script src="/js/analytics.js"></script>
-        {{content}}
     </body>
 </html>
