@@ -1,1 +1,1 @@
-web: supervisor uncontext-server.js
+web: supervisor -w .,scenes/*/.,views/.,views/*/. -e html,js,json,mustache uncontext-server.js
