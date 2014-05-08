@@ -35,6 +35,7 @@ function addItem(i, iTotal, size, direction, yOffset, now) {
 function init() {
   canvas = document.getElementById('homepage-canvas');
   context = canvas.getContext('2d');
+  window.onresize();
 }
 
 function animate() {
@@ -60,3 +61,8 @@ function animate() {
 
   requestAnimationFrame( animate );
 }
+
+window.onresize = function(event) {
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+};
