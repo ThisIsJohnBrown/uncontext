@@ -1,16 +1,152 @@
-@import "../components/normalize.css/_normalize.css";
+@import url("http://cloud.typography.com/7675692/750644/css/fonts.css");
+@import "normalize";
 @import "mixins";
 
 $purple: #672A9D;
 $orange: #F76B1C;
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   @include linear-gradient($purple, $orange);
 
-  font-family: "Helvetica Neue", "Helvetica", sans-serif;
+  text-rendering: optimizeLegibility;
+  font-family: "Verlag A", "Verlag B", "Helvetica Neue", "Helvetica", sans-serif;
+  font-weight: 300;
 }
 
 #wrapper {
-  max-width: 90%;
+  max-width: 80%;
   margin: 0 auto;
+}
+
+header {
+  margin: 60px auto;
+}
+
+h1 {
+  font-size: 49.333px;
+  color: #fff;
+  text-align: center;
+  font-weight: 800;
+  margin: 0 auto 20px auto;
+  text-transform: uppercase;
+}
+
+h2 {
+  color: #fff;
+  font-size: 20px;
+  margin: 0 auto;
+  font-weight: 200;
+  font-style: italic;
+  text-align: center;
+}
+
+h3 {
+  font-size: 26px;
+  color: #fff;
+  font-weight: 200;
+  font-style: italic;
+  margin: 0 0 40px 0;
+  text-align: center;
+}
+
+.intro {
+  margin: 0 auto 60px auto;
+
+  p {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 26px;
+    text-align: center;
+    width: 50%;
+    margin: 0 auto;
+    padding: 40px 0;
+    border-top: 1px solid rgba(darken($purple, 30%),0.5);
+    border-bottom: 1px solid rgba(darken($purple, 30%),0.5);
+    color: darken($purple, 30%);
+  }
+}
+
+.two-up {
+  @extend %clearfix;
+  margin: 0 0 80px 0;
+
+  .data-group,
+  .canvas-group {
+    width: 48%;
+  }
+
+  .data-group {
+    float: left;
+  }
+
+  .canvas-group {
+    float: right;
+  }
+}
+
+.data-group table {
+  width: 100%;
+
+  td {
+    padding: 0 15px 0 0;
+    margin: 0;
+    width: 16%;
+    height: 36px;
+    line-height: 35px;
+    color: darken($purple, 30%);
+    font-family: monospace;
+    font-size: 14px;
+
+    &:last-child {
+      width: 36%;
+      padding: 0;
+    }
+
+   span {
+      display: inline-block;
+      width: 50%;
+      padding: 0 10% 0 0;
+    }
+  }
+
+  tr:nth-last-child(5) td { opacity: 0.9; }
+  tr:nth-last-child(4) td { opacity: 0.7; }
+  tr:nth-last-child(3) td { opacity: 0.5; }
+  tr:nth-last-child(2) td { opacity: 0.3; }
+  tr:nth-last-child(1) td { opacity: 0.1; }
+
+  thead tr:last-child td {
+    opacity: 1;
+    font-weight: 400;
+    color: #fff;
+  }
+}
+
+#homepage-canvas {
+  border: 1px solid rgba(darken($purple, 30%),0.3);
+  width: 100%;
+  height: 360px;
+}
+
+.explanation {
+  background-color: rgba(darken($purple, 30%), 0.1);
+  border: 1px solid rgba(darken($purple, 30%),0.2);
+  border-top: none;
+
+  ul {
+    margin: 0;
+    padding: 24px 24px 12px 36px;
+
+    li {
+      font-weight: 400;
+      font-size: 18px;
+      margin: 0 0 12px 0;
+      line-height: 24px;
+      color: darken($purple, 30%);
+    }
+  }
 }

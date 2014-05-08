@@ -54,7 +54,7 @@ function animate() {
         item.currSize += speed;
         context.beginPath();
         context.arc(item.position[0] * canvas.width, item.position[1] * canvas.height, item.currSize * 3, 0, 2 * Math.PI, false);
-        context.fillStyle = 'rgba(255, 0, 0, ' + (1 - (item.currSize / item.finalSize)) + ')';
+        context.fillStyle = 'rgba(255, 255, 255, ' + (1 - (item.currSize / item.finalSize)) + ')';
         context.fill();
       } else {
         items_.splice(i, 1);
