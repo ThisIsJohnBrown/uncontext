@@ -1,3 +1,0 @@
-{"name":"newrelic","hostname":"John-Brown-2.local","pid":23458,"level":30,"msg":"Starting New Relic for Node.js connection process.","time":"2014-05-08T04:08:47.802Z","v":0}
-{"name":"newrelic","hostname":"John-Brown-2.local","pid":23458,"component":"new_relic_response","level":30,"msg":"Reporting to: https://rpm.newrelic.com/accounts/676545/applications/4043795","time":"2014-05-08T04:08:48.641Z","v":0}
-{"name":"newrelic","hostname":"John-Brown-2.local","pid":23458,"component":"collector_api","level":30,"msg":"Connected to collector-135.newrelic.com:443 with agent run ID 528303330.","time":"2014-05-08T04:08:48.642Z","v":0}
