@@ -1,1 +1,24 @@
-header.mustache
+<html>
+    <head>
+        <title>uncontext.</title>
+        <link href="/css/vendor/bootstrap-3.1.1.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/css/site.css" rel="stylesheet" type="text/css"/>
+        {{#assets.css}}<script src="/css/{{dataset}}/{{slug}}.css"></script>{{/assets.css}}
+    </head>
+    <body>
+        <button class="toggle">info</button>
+        <header>
+            <div class="data">
+              <ul></ul>
+            </div>
+            
+            {{#datasets}}
+            <h3>{{name}}</h3>
+            <ul class="scenes">
+            {{#slugs}}
+                <li class="scene"><a href="/{{name}}/{{.}}">{{.}}</a></li>
+            {{/slugs}}
+            </ul>
+            <div class="clear"></div>
+            {{/datasets}}
+        </header>
