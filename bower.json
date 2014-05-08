@@ -1,0 +1,21 @@
+{
+  "name": "uncontext",
+  "version": "0.0.0",
+  "homepage": "https://github.com/ThisIsJohnBrown/uncontext",
+  "authors": [
+    "Joshua Jenkins & John Brown"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "normalize.scss": "~2.2.0+normalize.2.1.3"
+  }
+}
