@@ -22,10 +22,3 @@ Uncontext.prototype.init = function() {
 
 var uncontext = new Uncontext();
 uncontext.init();
-
-$(function() {
-  $('.toggle').click(function() {
-    $('header').toggle();
-    $('.data ul li').remove();
-  })
-});

@@ -1,0 +1,16 @@
+@import "../components/normalize.css/_normalize.css";
+@import "mixins";
+
+$purple: #672A9D;
+$orange: #F76B1C;
+
+body {
+  @include linear-gradient($purple, $orange);
+
+  font-family: "Helvetica Neue", "Helvetica", sans-serif;
+}
+
+#wrapper {
+  max-width: 90%;
+  margin: 0 auto;
+}

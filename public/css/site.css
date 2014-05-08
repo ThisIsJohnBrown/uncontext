@@ -1,0 +1,22 @@
+@import url("../components/normalize.css/_normalize.css");
+
+body {
+  background-color: #F76B1C;
+  /* Fallback Color */
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#672A9D), to(#F76B1C));
+  /* Saf4+, Chrome */
+  background-image: -webkit-linear-gradient(top, #672A9D, #F76B1C);
+  /* Chrome 10+, Saf5.1+, iOS 5+ */
+  background-image: -moz-linear-gradient(top, #672A9D, #F76B1C);
+  /* FF3.6 */
+  background-image: -ms-linear-gradient(top, #672A9D, #F76B1C);
+  /* IE10 */
+  background-image: -o-linear-gradient(top, #672A9D, #F76B1C);
+  /* Opera 11.10+ */
+  background-image: linear-gradient(top, #672A9D, #F76B1C);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#672A9D', EndColorStr='#F76B1C');
+  font-family: "Helvetica Neue", "Helvetica", sans-serif; }
+
+#wrapper {
+  max-width: 90%;
+  margin: 0 auto; }
