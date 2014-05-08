@@ -1,1 +1,8 @@
-header.mustache
+<html>
+    <head>
+        <title>uncontext.</title>
+        <link href="/css/vendor/bootstrap-3.1.1.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/css/site.css" rel="stylesheet" type="text/css"/>
+        {{#assets.css}}<script src="/css/{{dataset}}/{{slug}}.css"></script>{{/assets.css}}
+    </head>
+    <body>

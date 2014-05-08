@@ -1,3 +1,4 @@
+require('newrelic');
 var http = require('http');
 var express = require('express');
 var app = express();
@@ -18,7 +19,7 @@ app.engine('mustache', require('hogan-middleware').__express);
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res){
-  return res.render('home.html', {datasets: datasets});
+  return res.render('home.html', {datasets: datasets, homepage: true});
 });
 
 var datasets = [];
