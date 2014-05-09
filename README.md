@@ -40,7 +40,7 @@ The data is in the format:
 
 #### How do I get started?
 
-There's no registration, all you need to do is connect to the current stream (literature.uncontext.com:80). You don't even need to clone or download this repo. If you need a bit of a head start, though, check out the examples folder for code for:
+There's no registration, all you need to do is connect to the current stream (literature.uncontext.com:80). You don't even need to clone or download this repo. If you need a bit of a head start, though, check out the examples folder for code for (coming soon!):
 
 * Javascript
 * Processing
