@@ -20,8 +20,14 @@ body {
 }
 
 #wrapper {
-  max-width: 80%;
-  margin: 0 auto;
+  width: 100%;
+}
+
+@media (min-width: 500px) {
+  #wrapper {
+    width: 80%;
+    margin: 0 auto;
+  }
 }
 
 header {
@@ -59,9 +65,16 @@ h3 {
   text-align: center;
 }
 
+/* ---------------------------------------
+
+  Intro Block
+
+----------------------------------------- */
+
+
 .intro {
   margin: 0 auto 60px auto;
-  width: 50%;
+  width: 80%;
 
   p {
     font-weight: 400;
@@ -76,9 +89,21 @@ h3 {
   }
 }
 
+@media (min-width: 500px) {
+  .intro {
+    width: 50%;
+  }
+}
+
 .section {
   margin: 60px 0;
 }
+
+/* ---------------------------------------
+
+  Data + Viz section
+
+----------------------------------------- */
 
 .two-up {
   @extend %clearfix;
@@ -86,15 +111,8 @@ h3 {
 
   .data-group,
   .canvas-group {
-    width: 48%;
-  }
-
-  .data-group {
-    float: left;
-  }
-
-  .canvas-group {
-    float: right;
+    float: none;
+    width: 100%;
   }
 }
 
@@ -161,17 +179,58 @@ h3 {
   }
 }
 
+@media (min-width: 500px) {
+  .two-up{
+
+    .data-group,
+    .canvas-group {
+      width: 48%;
+    }
+
+    .data-group {
+      float: left;
+    }
+
+    .canvas-group {
+      float: right;
+    }
+  }
+}
+
+/* ---------------------------------------
+
+  Code Section
+
+----------------------------------------- */
+
+.code {
+  font-family: $monospace;
+  font-size: 12px;
+  margin: 0 auto;
+  background-color: rgba(darken($purple, 30%),0.1);
+  padding: 20px;
+}
 pre {
   margin: 0;
   white-space: pre-wrap;
 }
-.code {
-  font-family: $monospace;
-  font-size: 16px;
-  border: 1px solid rgba(darken($purple, 30%),0.3);
-  padding: 50px;
-  color: darken($purple, 30%);
+
+@media (min-width: 500px) {
+  .code {
+    font-size: 14px;
+    background-color: transparent;
+    border: 1px solid rgba(darken($purple, 30%),0.3);
+    color: darken($purple, 30%);
+    width: 80%;
+  }
 }
+
+
+/* ---------------------------------------
+
+  Generic Styles
+
+----------------------------------------- */
 
 .link-list {
   margin: 0;

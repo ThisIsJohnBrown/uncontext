@@ -348,8 +348,12 @@ body {
   font-weight: 300; }
 
 #wrapper {
-  max-width: 80%;
-  margin: 0 auto; }
+  width: 100%; }
+
+@media (min-width: 500px) {
+  #wrapper {
+    width: 80%;
+    margin: 0 auto; } }
 
 header {
   margin: 60px auto; }
@@ -380,9 +384,14 @@ h3 {
   margin: 0 0 40px 0;
   text-align: center; }
 
+/* ---------------------------------------
+
+  Intro Block
+
+----------------------------------------- */
 .intro {
   margin: 0 auto 60px auto;
-  width: 50%; }
+  width: 80%; }
   .intro p {
     font-weight: 400;
     font-size: 20px;
@@ -394,17 +403,23 @@ h3 {
     border-bottom: 1px solid rgba(23, 9, 36, 0.5);
     color: #170a24; }
 
+@media (min-width: 500px) {
+  .intro {
+    width: 50%; } }
+
 .section {
   margin: 60px 0; }
 
+/* ---------------------------------------
+
+  Data + Viz section
+
+----------------------------------------- */
 .two-up {
   margin: 0 0 80px 0; }
   .two-up .data-group, .two-up .canvas-group {
-    width: 48%; }
-  .two-up .data-group {
-    float: left; }
-  .two-up .canvas-group {
-    float: right; }
+    float: none;
+    width: 100%; }
 
 .data-group table {
   width: 100%; }
@@ -458,17 +473,43 @@ h3 {
       line-height: 24px;
       color: #170a24; }
 
+@media (min-width: 500px) {
+  .two-up .data-group, .two-up .canvas-group {
+    width: 48%; }
+  .two-up .data-group {
+    float: left; }
+  .two-up .canvas-group {
+    float: right; } }
+
+/* ---------------------------------------
+
+  Code Section
+
+----------------------------------------- */
+.code {
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+  font-size: 12px;
+  margin: 0 auto;
+  background-color: rgba(23, 9, 36, 0.1);
+  padding: 20px; }
+
 pre {
   margin: 0;
   white-space: pre-wrap; }
 
-.code {
-  font-family: Consolas, "Liberation Mono", Courier, monospace;
-  font-size: 16px;
-  border: 1px solid rgba(23, 9, 36, 0.3);
-  padding: 50px;
-  color: #170a24; }
+@media (min-width: 500px) {
+  .code {
+    font-size: 14px;
+    background-color: transparent;
+    border: 1px solid rgba(23, 9, 36, 0.3);
+    color: #170a24;
+    width: 80%; } }
 
+/* ---------------------------------------
+
+  Generic Styles
+
+----------------------------------------- */
 .link-list {
   margin: 0;
   padding: 0;
