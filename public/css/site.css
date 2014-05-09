@@ -364,11 +364,13 @@ h1 {
 
 h2 {
   color: #fff;
-  font-size: 20px;
+  font-size: 22px;
   margin: 0 auto;
   font-weight: 200;
   font-style: italic;
   text-align: center; }
+  h2 span {
+    text-transform: capitalize; }
 
 h3 {
   font-size: 26px;
@@ -379,18 +381,21 @@ h3 {
   text-align: center; }
 
 .intro {
-  margin: 0 auto 60px auto; }
+  margin: 0 auto 60px auto;
+  width: 50%; }
   .intro p {
     font-weight: 400;
     font-size: 20px;
     line-height: 26px;
     text-align: center;
-    width: 50%;
     margin: 0 auto;
     padding: 40px 0;
     border-top: 1px solid rgba(23, 9, 36, 0.5);
     border-bottom: 1px solid rgba(23, 9, 36, 0.5);
     color: #170a24; }
+
+.section {
+  margin: 60px 0; }
 
 .two-up {
   margin: 0 0 80px 0; }
@@ -410,7 +415,7 @@ h3 {
     height: 36px;
     line-height: 35px;
     color: #170a24;
-    font-family: monospace;
+    font-family: Consolas, "Liberation Mono", Courier, monospace;
     font-size: 14px; }
     .data-group table td:last-child {
       width: 36%;
@@ -452,3 +457,50 @@ h3 {
       margin: 0 0 12px 0;
       line-height: 24px;
       color: #170a24; }
+
+pre {
+  margin: 0;
+  white-space: pre-wrap; }
+
+.code {
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+  font-size: 16px;
+  border: 1px solid rgba(23, 9, 36, 0.3);
+  padding: 50px;
+  color: #170a24; }
+
+.link-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: center; }
+  .link-list li {
+    font-size: 20px;
+    margin: 0 0 10px 0;
+    display: inline-block; }
+    .link-list li:after {
+      font-style: normal;
+      font-weight: 400;
+      opacity: 0.5;
+      content: " / "; }
+    .link-list li:last-child:after {
+      content: none; }
+  .link-list a:link, .link-list a:visited {
+    color: #170a24;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(23, 9, 36, 0.3);
+    font-weight: 700;
+    transition: border-color 0.3s linear; }
+  .link-list a:hover {
+    border-color: #170a24; }
+
+.section.compressed h3 {
+  margin: 0 0 20px 0; }
+
+footer {
+  margin: 0; }
+  footer .link-list {
+    padding: 60px 0;
+    border-top: 1px solid rgba(23, 9, 36, 0.3); }
+    footer .link-list li {
+      font-size: 16px; }

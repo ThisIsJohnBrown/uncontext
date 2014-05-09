@@ -5,6 +5,8 @@
 $purple: #672A9D;
 $orange: #F76B1C;
 
+$monospace: Consolas, "Liberation Mono", Courier, monospace;
+
 * {
   box-sizing: border-box;
 }
@@ -37,11 +39,15 @@ h1 {
 
 h2 {
   color: #fff;
-  font-size: 20px;
+  font-size: 22px;
   margin: 0 auto;
   font-weight: 200;
   font-style: italic;
   text-align: center;
+
+  span {
+    text-transform: capitalize;
+  }
 }
 
 h3 {
@@ -55,19 +61,23 @@ h3 {
 
 .intro {
   margin: 0 auto 60px auto;
+  width: 50%;
 
   p {
     font-weight: 400;
     font-size: 20px;
     line-height: 26px;
     text-align: center;
-    width: 50%;
     margin: 0 auto;
     padding: 40px 0;
     border-top: 1px solid rgba(darken($purple, 30%),0.5);
     border-bottom: 1px solid rgba(darken($purple, 30%),0.5);
     color: darken($purple, 30%);
   }
+}
+
+.section {
+  margin: 60px 0;
 }
 
 .two-up {
@@ -98,7 +108,7 @@ h3 {
     height: 36px;
     line-height: 35px;
     color: darken($purple, 30%);
-    font-family: monospace;
+    font-family: $monospace;
     font-size: 14px;
 
     &:last-child {
@@ -134,7 +144,7 @@ h3 {
 
 .explanation {
   background-color: rgba(darken($purple, 30%), 0.1);
-  border: 1px solid rgba(darken($purple, 30%),0.2);
+  border: 1px solid rgba(darken($purple, 30%), 0.2);
   border-top: none;
 
   ul {
@@ -147,6 +157,72 @@ h3 {
       margin: 0 0 12px 0;
       line-height: 24px;
       color: darken($purple, 30%);
+    }
+  }
+}
+
+pre {
+  margin: 0;
+  white-space: pre-wrap;
+}
+.code {
+  font-family: $monospace;
+  font-size: 16px;
+  border: 1px solid rgba(darken($purple, 30%),0.3);
+  padding: 50px;
+  color: darken($purple, 30%);
+}
+
+.link-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+
+  li {
+    font-size: 20px;
+    margin: 0 0 10px 0;
+    display: inline-block;
+
+    &:after {
+      font-style: normal;
+      font-weight: 400;
+      opacity: 0.5;
+      content: " / ";
+    }
+
+    &:last-child:after {
+      content: none;
+    }
+  }
+
+  a:link, a:visited {
+    color: darken($purple, 30%);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(darken($purple, 30%), 0.3);
+    font-weight: 700;
+    transition: border-color 0.3s linear;
+  }
+  a:hover {
+    border-color: darken($purple, 30%);
+  }
+}
+
+.section.compressed {
+  h3 {
+    margin: 0 0 20px 0;
+  }
+}
+
+footer {
+  margin: 0;
+
+  .link-list {
+    padding: 60px 0;
+    border-top: 1px solid rgba(darken($purple, 30%), 0.3);
+
+    li {
+      font-size: 16px;
     }
   }
 }

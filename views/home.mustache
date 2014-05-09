@@ -3,16 +3,16 @@
     <section id="wrapper">
       <header>
         <h1>Uncontext.</h1>
-        <h2>What could be greater than golf with a gator?</h2>
+        <h2>Session 1&mdash;<span>{{#datasets}}{{name}}{{/datasets}}</span></h2>
       </header>
 
       <div class="intro">
         <p>So what&rsquo;s the fucking deal with shit anyway. Can&rsquo;t help but notice that certain things are a certain way. My expecatations were that things might be a different way. Anyway, that&rsquo;s the rub I guess. Things are ways.</p>
       </div>
 
-      <div class="two-up">
+      <section class="section two-up">
         <div class="data-group">
-          <h3>Data for this session: literature</h3>
+          <h3>Data for this session</h3>
            <div class="data">
              <table>
               <thead>
@@ -43,18 +43,32 @@
             </ul>
           </div>
         </div>
-      </div>
-        
-      {{#datasets}}
-      <h3>{{name}}</h3>
-      <ul class="scenes">
-      {{#slugs}}
-        <li class="scene"><a href="/{{name}}/{{.}}">{{.}}</a></li>
-      {{/slugs}}
-      </ul>
-      <div class="clear"></div>
-      {{/datasets}}
+      </section>
 
-    </section>
+      <section class="section">
+        <h3>Get started by connecting to literature.uncontext.com with socket.io</h3>
+        <div class="code">
+<pre><code>&lt;script src=&quot;//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  self.socket_ = io.connect('literature.uncontext.com:80');
+  self.socket_.on('0', function (data) {
+    console.log(data);
+  });
+&lt;/script&gt;</code></pre>
+        </div>
+      </section>
+
+      <section class="section compressed">
+        <h3>Other examples</h3>
+        {{#datasets}}
+        <ul class="link-list">
+        {{#slugs}}
+          <li><a href="/{{name}}/{{.}}">{{.}}</a></li>
+        {{/slugs}}
+        </ul>
+        {{/datasets}}
+      </section>
+
+    </section><!-- /wrapper -->
 
 {{> footer}}
