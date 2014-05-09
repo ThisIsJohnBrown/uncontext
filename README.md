@@ -1,6 +1,10 @@
 # Uncontext
 ***
 
+## Very much in beta! Updates coming soon.
+
+***
+
 #### What's it all about?
 Uncontext provides the world with a socket that is streaming data in a structured format, 24/7. Built with node.js and socket.io, almost anything can be connected to uncontext: websites, Arduino, Cinder, Unity, iOS, and Android are just the beginning.
 
