@@ -4,6 +4,8 @@
 
 $purple: #672A9D;
 $orange: #F76B1C;
+$purple-light: lighten($purple, 5%);
+$purple-dark: darken($purple, 30%);
 
 $monospace: Consolas, "Liberation Mono", Courier, monospace;
 
@@ -12,7 +14,7 @@ $monospace: Consolas, "Liberation Mono", Courier, monospace;
 }
 
 body {
-  @include linear-gradient($purple, $orange);
+  @include linear-gradient($purple-light, $orange);
 
   text-rendering: optimizeLegibility;
   font-family: "Verlag A", "Verlag B", "Helvetica Neue", "Helvetica", sans-serif;
@@ -35,12 +37,18 @@ header {
 }
 
 h1 {
-  font-size: 49.333px;
+  font-size: 38px;
   color: #fff;
   text-align: center;
   font-weight: 800;
   margin: 0 auto 20px auto;
   text-transform: uppercase;
+}
+
+@media (min-width: 500px) {
+  h1 {
+   font-size: 50px;
+  }
 }
 
 h2 {
@@ -74,7 +82,7 @@ h3 {
 
 .intro {
   margin: 0 auto 60px auto;
-  width: 80%;
+  width: 90%;
 
   p {
     font-weight: 400;
@@ -117,17 +125,18 @@ h3 {
 }
 
 .data-group table {
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
 
   td {
-    padding: 0 15px 0 0;
+    padding: 0 5px 0 0;
     margin: 0;
     width: 16%;
     height: 36px;
     line-height: 35px;
     color: darken($purple, 30%);
     font-family: $monospace;
-    font-size: 14px;
+    font-size: 11px;
 
     &:last-child {
       width: 36%;
@@ -152,6 +161,10 @@ h3 {
     font-weight: 400;
     color: #fff;
   }
+}
+
+.canvas-group {
+  margin: 40px 0 0 0;
 }
 
 #homepage-canvas {
@@ -180,7 +193,7 @@ h3 {
 }
 
 @media (min-width: 500px) {
-  .two-up{
+  .two-up {
 
     .data-group,
     .canvas-group {
@@ -193,7 +206,16 @@ h3 {
 
     .canvas-group {
       float: right;
+      margin: 0;
     }
+  }
+  .data-groupd table {
+    width: 100%;
+    margin: 0;
+  }
+  .data-group table td {
+    padding: 0 15px 0 0;
+    font-size: 14px;
   }
 }
 

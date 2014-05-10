@@ -331,18 +331,18 @@ td, th {
 body {
   background-color: #F76B1C;
   /* Fallback Color */
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#672A9D), to(#F76B1C));
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#722fb1), to(#F76B1C));
   /* Saf4+, Chrome */
-  background-image: -webkit-linear-gradient(top, #672A9D, #F76B1C);
+  background-image: -webkit-linear-gradient(top, #722fb1, #F76B1C);
   /* Chrome 10+, Saf5.1+, iOS 5+ */
-  background-image: -moz-linear-gradient(top, #672A9D, #F76B1C);
+  background-image: -moz-linear-gradient(top, #722fb1, #F76B1C);
   /* FF3.6 */
-  background-image: -ms-linear-gradient(top, #672A9D, #F76B1C);
+  background-image: -ms-linear-gradient(top, #722fb1, #F76B1C);
   /* IE10 */
-  background-image: -o-linear-gradient(top, #672A9D, #F76B1C);
+  background-image: -o-linear-gradient(top, #722fb1, #F76B1C);
   /* Opera 11.10+ */
-  background-image: linear-gradient(top, #672A9D, #F76B1C);
-  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#672A9D', EndColorStr='#F76B1C');
+  background-image: linear-gradient(top, #722fb1, #F76B1C);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#722fb1', EndColorStr='#F76B1C');
   text-rendering: optimizeLegibility;
   font-family: "Verlag A", "Verlag B", "Helvetica Neue", "Helvetica", sans-serif;
   font-weight: 300; }
@@ -359,12 +359,16 @@ header {
   margin: 60px auto; }
 
 h1 {
-  font-size: 49.333px;
+  font-size: 38px;
   color: #fff;
   text-align: center;
   font-weight: 800;
   margin: 0 auto 20px auto;
   text-transform: uppercase; }
+
+@media (min-width: 500px) {
+  h1 {
+    font-size: 50px; } }
 
 h2 {
   color: #fff;
@@ -391,7 +395,7 @@ h3 {
 ----------------------------------------- */
 .intro {
   margin: 0 auto 60px auto;
-  width: 80%; }
+  width: 90%; }
   .intro p {
     font-weight: 400;
     font-size: 20px;
@@ -422,16 +426,17 @@ h3 {
     width: 100%; }
 
 .data-group table {
-  width: 100%; }
+  width: 90%;
+  margin: 0 auto; }
   .data-group table td {
-    padding: 0 15px 0 0;
+    padding: 0 5px 0 0;
     margin: 0;
     width: 16%;
     height: 36px;
     line-height: 35px;
     color: #170a24;
     font-family: Consolas, "Liberation Mono", Courier, monospace;
-    font-size: 14px; }
+    font-size: 11px; }
     .data-group table td:last-child {
       width: 36%;
       padding: 0; }
@@ -453,6 +458,9 @@ h3 {
     opacity: 1;
     font-weight: 400;
     color: #fff; }
+
+.canvas-group {
+  margin: 40px 0 0 0; }
 
 #homepage-canvas {
   border: 1px solid rgba(23, 9, 36, 0.3);
@@ -479,7 +487,14 @@ h3 {
   .two-up .data-group {
     float: left; }
   .two-up .canvas-group {
-    float: right; } }
+    float: right;
+    margin: 0; }
+  .data-groupd table {
+    width: 100%;
+    margin: 0; }
+  .data-group table td {
+    padding: 0 15px 0 0;
+    font-size: 14px; } }
 
 /* ---------------------------------------
 
