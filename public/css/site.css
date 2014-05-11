@@ -372,7 +372,7 @@ h1 {
 
 h2 {
   color: #fff;
-  font-size: 22px;
+  font-size: 23px;
   margin: 0 auto;
   font-weight: 200;
   font-style: italic;
@@ -381,7 +381,7 @@ h2 {
     text-transform: capitalize; }
 
 h3 {
-  font-size: 26px;
+  font-size: 23px;
   color: #fff;
   font-weight: 200;
   font-style: italic;
@@ -398,18 +398,21 @@ h3 {
   width: 90%; }
   .intro p {
     font-weight: 400;
-    font-size: 20px;
-    line-height: 26px;
+    font-size: 19px;
+    line-height: 1.4;
     text-align: center;
     margin: 0 auto;
     padding: 40px 0;
     border-top: 1px solid rgba(23, 9, 36, 0.5);
     border-bottom: 1px solid rgba(23, 9, 36, 0.5);
-    color: #170a24; }
+    color: black; }
 
 @media (min-width: 500px) {
   .intro {
-    width: 50%; } }
+    width: 50%; }
+    .intro p {
+      color: #170a24;
+      font-size: 19px; } }
 
 .section {
   margin: 60px 0; }
@@ -429,16 +432,16 @@ h3 {
   width: 90%;
   margin: 0 auto; }
   .data-group table td {
-    padding: 0 5px 0 0;
+    padding: 0 2px 0 0;
     margin: 0;
-    width: 16%;
+    width: 14%;
     height: 36px;
-    line-height: 35px;
+    line-height: 2;
     color: #170a24;
     font-family: Consolas, "Liberation Mono", Courier, monospace;
-    font-size: 11px; }
+    font-size: 12px; }
     .data-group table td:last-child {
-      width: 36%;
+      width: 44%;
       padding: 0; }
     .data-group table td span {
       display: inline-block;
@@ -463,7 +466,7 @@ h3 {
   margin: 40px 0 0 0; }
 
 #homepage-canvas {
-  border: 1px solid rgba(23, 9, 36, 0.3);
+  border: 1px solid rgba(23, 9, 36, 0.2);
   width: 100%;
   height: 360px; }
 
@@ -473,12 +476,13 @@ h3 {
   border-top: none; }
   .explanation ul {
     margin: 0;
-    padding: 24px 24px 12px 36px; }
+    padding: 24px 24px 12px 36px;
+    list-style: circle; }
     .explanation ul li {
       font-weight: 400;
-      font-size: 18px;
-      margin: 0 0 12px 0;
-      line-height: 24px;
+      font-size: 14px;
+      line-height: 1.4;
+      margin: 0 0 19.6px 0;
       color: #170a24; }
 
 @media (min-width: 500px) {
@@ -501,22 +505,38 @@ h3 {
   Code Section
 
 ----------------------------------------- */
-.code {
+.code .title {
+  background-color: rgba(23, 9, 36, 0.1);
+  border: 1px solid rgba(23, 9, 36, 0.2);
+  border-left: none;
+  border-right: none;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  line-height: 2; }
+
+pre {
+  margin: 0;
+  white-space: pre-wrap;
   font-family: Consolas, "Liberation Mono", Courier, monospace;
   font-size: 12px;
   margin: 0 auto;
   background-color: rgba(23, 9, 36, 0.1);
-  padding: 20px; }
-
-pre {
-  margin: 0;
-  white-space: pre-wrap; }
+  padding: 20px;
+  border-bottom: 1px solid rgba(23, 9, 36, 0.2); }
 
 @media (min-width: 500px) {
-  .code {
+  .code .title {
+    border: 1px solid rgba(23, 9, 36, 0.2);
+    border-bottom: none;
+    width: 80%;
+    margin: 0 auto; }
+  pre {
     font-size: 14px;
     background-color: transparent;
-    border: 1px solid rgba(23, 9, 36, 0.3);
+    border: 1px solid rgba(23, 9, 36, 0.2);
     color: #170a24;
     width: 80%; } }
 
@@ -532,21 +552,14 @@ pre {
   text-align: center; }
   .link-list li {
     font-weight: 400;
-    font-size: 20px;
-    margin: 0 0 10px 0;
+    font-size: 23px;
+    margin: 0 8px;
     display: inline-block; }
-    .link-list li:after {
-      font-style: normal;
-      font-weight: 400;
-      opacity: 0.5;
-      content: " / "; }
-    .link-list li:last-child:after {
-      content: none; }
   .link-list a:link, .link-list a:visited {
     color: #170a24;
     text-decoration: none;
-    border-bottom: 1px solid rgba(23, 9, 36, 0.3);
-    font-weight: 700;
+    border-bottom: 1px solid rgba(23, 9, 36, 0.2);
+    font-weight: 400;
     transition: border-color 0.3s linear; }
   .link-list a:hover {
     border-color: #170a24; }
@@ -560,4 +573,4 @@ footer {
     padding: 60px 0;
     border-top: 1px solid rgba(23, 9, 36, 0.3); }
     footer .link-list li {
-      font-size: 16px; }
+      font-size: 14px; }
