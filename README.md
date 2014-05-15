@@ -49,7 +49,7 @@ There's no registration, all you need to do is connect to the current stream (li
 * Javascript
 * Processing
 * Cinder
-* Unity
+* [Unity](https://github.com/ThisIsJohnBrown/uncontext/tree/master/examples/unity)
 * Cinema4D
 
 You could also go through the submissions from other uncontexters and see what they're doing.
