@@ -30,7 +30,7 @@ The data is in the format:
 ```
 {
   {"name": "0": {
-  	"a": int (1-25),
+  	"a": int (0-25),
   	"b": float (0-25, to two decimal places),
   	"c": int (0 or 1),
   	"d": int (1+),
