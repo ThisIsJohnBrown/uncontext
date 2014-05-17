@@ -1,9 +1,9 @@
 {
   "creator": "John Brown",
   "dataset": "literature",
-  "name": "My Thing",
+  "name": "When Waves Argue",
   "slug": "waves",
-  "description": "It's a thing!",
+  "description": "Visualizing the distress between the well adjusted and the grave.",
   "twitter": "thisisjohnbrown",
   "assets": {
     "js": true,

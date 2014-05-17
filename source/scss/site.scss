@@ -300,7 +300,6 @@ pre {
     font-size: $font-regular;
     margin: 0 8px;
     display: inline-block;
-
   }
 
   a:link, a:visited {
@@ -312,6 +311,13 @@ pre {
   }
   a:hover {
     border-color: $purple-dark;
+  }
+
+  a .thumb {
+    height: 80px;
+    width: 100%;
+    background-size: cover;
+    background-position: 50%;
   }
 }
 
@@ -330,6 +336,51 @@ footer {
 
     li {
       font-size: $font-small;
+    }
+  }
+}
+
+/* ---------------------------------------
+
+  Submission list
+
+----------------------------------------- */
+
+.submission-list {
+  margin: $margin-base auto;
+  padding: 0;
+  text-align: center;
+  @extend %clearfix;
+
+  li {
+    margin: $margin-base/2;
+    display: inline-block;
+    width: 320px;
+    background-color: rgba($purple-dark, 0.2);
+    text-align: center;
+
+    .title {
+      font-size: $font-text;
+
+      a:link,
+      a:visited {
+        color: $purple-dark;
+        font-weight: 500;
+        text-decoration: none;
+        border-bottom: 1px solid rgba($purple-dark, 0.2);
+        transition: border-color 0.3s linear;
+      }
+      a:hover {
+        border-color: $purple-dark;
+      }
+    }
+
+    .thumb {
+      width: 300px;
+      height: 300px;
+      margin: 10px;
+      background-size: 100%;
+      border: 1px solid rgba($purple-dark, 0.7);
     }
   }
 }

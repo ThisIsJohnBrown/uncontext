@@ -320,7 +320,7 @@ table {
 td, th {
   padding: 0; }
 
-.two-up:after {
+.two-up:after, .submission-list:after {
   content: "";
   display: table;
   clear: both; }
@@ -563,6 +563,11 @@ pre {
     transition: border-color 0.3s linear; }
   .link-list a:hover {
     border-color: #170a24; }
+  .link-list a .thumb {
+    height: 80px;
+    width: 100%;
+    background-size: cover;
+    background-position: 50%; }
 
 .section.compressed h3 {
   margin: 0 0 20px 0; }
@@ -574,3 +579,35 @@ footer {
     border-top: 1px solid rgba(23, 9, 36, 0.3); }
     footer .link-list li {
       font-size: 14px; }
+
+/* ---------------------------------------
+
+  Submission list
+
+----------------------------------------- */
+.submission-list {
+  margin: 20px auto;
+  padding: 0;
+  text-align: center; }
+  .submission-list li {
+    margin: 10px;
+    display: inline-block;
+    width: 320px;
+    background-color: rgba(23, 9, 36, 0.2);
+    text-align: center; }
+    .submission-list li .title {
+      font-size: 19px; }
+      .submission-list li .title a:link, .submission-list li .title a:visited {
+        color: #170a24;
+        font-weight: 500;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(23, 9, 36, 0.2);
+        transition: border-color 0.3s linear; }
+      .submission-list li .title a:hover {
+        border-color: #170a24; }
+    .submission-list li .thumb {
+      width: 300px;
+      height: 300px;
+      margin: 10px;
+      background-size: 100%;
+      border: 1px solid rgba(23, 9, 36, 0.7); }
