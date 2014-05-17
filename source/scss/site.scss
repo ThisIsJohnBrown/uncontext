@@ -76,10 +76,11 @@ h2 {
 }
 
 h3 {
-  font-size: $font-regular;
+  font-size: $font-text;
   color: #fff;
-  font-weight: 200;
-  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   margin: 0 0 $margin-base*2 0;
   text-align: center;
 }

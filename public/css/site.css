@@ -381,10 +381,11 @@ h2 {
     text-transform: capitalize; }
 
 h3 {
-  font-size: 23px;
+  font-size: 19px;
   color: #fff;
-  font-weight: 200;
-  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   margin: 0 0 40px 0;
   text-align: center; }
 
