@@ -265,17 +265,6 @@ pre {
     font-size: 20px;
     margin: 0 0 10px 0;
     display: inline-block;
-
-    &:after {
-      font-style: normal;
-      font-weight: 400;
-      opacity: 0.5;
-      content: " / ";
-    }
-
-    &:last-child:after {
-      content: none;
-    }
   }
 
   a:link, a:visited {
@@ -287,6 +276,13 @@ pre {
   }
   a:hover {
     border-color: darken($purple, 30%);
+  }
+
+  a .thumb {
+    height: 80px;
+    width: 100%;
+    background-size: cover;
+    background-position: 50%;
   }
 }
 

@@ -535,13 +535,6 @@ pre {
     font-size: 20px;
     margin: 0 0 10px 0;
     display: inline-block; }
-    .link-list li:after {
-      font-style: normal;
-      font-weight: 400;
-      opacity: 0.5;
-      content: " / "; }
-    .link-list li:last-child:after {
-      content: none; }
   .link-list a:link, .link-list a:visited {
     color: #170a24;
     text-decoration: none;
@@ -550,6 +543,11 @@ pre {
     transition: border-color 0.3s linear; }
   .link-list a:hover {
     border-color: #170a24; }
+  .link-list a .thumb {
+    height: 80px;
+    width: 100%;
+    background-size: cover;
+    background-position: 50%; }
 
 .section.compressed h3 {
   margin: 0 0 20px 0; }

@@ -50,8 +50,8 @@
         <div class="code">
 <pre><code>&lt;script src=&quot;//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
-  self.socket_ = io.connect('literature.uncontext.com:80');
-  self.socket_.on('0', function (data) {
+  socket_ = io.connect('literature.uncontext.com:80');
+  socket_.on('0', function (data) {
     console.log(data);
   });
 &lt;/script&gt;</code></pre>
@@ -59,11 +59,16 @@
       </section>
 
       <section class="section compressed">
-        <h3>More examples</h3>
+        <h3>Submissions for current session</h3>
         {{#datasets}}
         <ul class="link-list">
         {{#slugs}}
-          <li><a href="/{{name}}/{{.}}">{{.}}</a></li>
+          <li>
+            <a href="/{{name}}/{{slug}}">
+              {{title}}</br>
+              <div class="thumb" style="background-image: url('/img/{{name}}/{{slug}}.png')">&nbsp;</div>
+            </a>
+          </li>
         {{/slugs}}
         </ul>
         {{/datasets}}
