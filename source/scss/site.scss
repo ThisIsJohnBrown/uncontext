@@ -85,11 +85,13 @@ h3 {
   padding: 0 $margin-base;
   text-align: center;
   line-height: 1.4;
+
   .small-mono {
     display: block;
     font-size: $font-small;
     font-family: $monospace;
     text-transform: none;
+    letter-spacing: 0;
   }
 }
 

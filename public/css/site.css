@@ -394,7 +394,8 @@ h3 {
     display: block;
     font-size: 14px;
     font-family: Consolas, "Liberation Mono", Courier, monospace;
-    text-transform: none; }
+    text-transform: none;
+    letter-spacing: 0; }
 
 /* ---------------------------------------
 
