@@ -570,11 +570,6 @@ pre {
     transition: border-color 0.3s linear; }
   .link-list a:hover {
     border-color: #170a24; }
-  .link-list a .thumb {
-    height: 80px;
-    width: 100%;
-    background-size: cover;
-    background-position: 50%; }
 
 .section.compressed h3 {
   margin: 0 0 20px 0; }
@@ -612,6 +607,8 @@ footer {
         transition: border-color 0.3s linear; }
       .submission-list li .title a:hover {
         border-color: #170a24; }
+    .submission-list li a.thumb {
+      text-decoration: none; }
     .submission-list li .thumb {
       width: 300px;
       height: 300px;

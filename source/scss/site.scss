@@ -322,12 +322,6 @@ pre {
     border-color: $purple-dark;
   }
 
-  a .thumb {
-    height: 80px;
-    width: 100%;
-    background-size: cover;
-    background-position: 50%;
-  }
 }
 
 .section.compressed {
@@ -383,7 +377,10 @@ footer {
         border-color: $purple-dark;
       }
     }
-
+    
+    a.thumb {
+      text-decoration: none;
+    }
     .thumb {
       width: 300px;
       height: 300px;
