@@ -350,7 +350,7 @@ body {
 #wrapper {
   width: 100%; }
 
-@media (min-width: 500px) {
+@media (min-width: 800px) {
   #wrapper {
     width: 900px;
     margin: 0 auto; } }
@@ -388,7 +388,13 @@ h3 {
   text-transform: uppercase;
   margin: 0 0 40px 0;
   padding: 0 20px;
-  text-align: center; }
+  text-align: center;
+  line-height: 1.4; }
+  h3 .small-mono {
+    display: block;
+    font-size: 14px;
+    font-family: Consolas, "Liberation Mono", Courier, monospace;
+    text-transform: none; }
 
 /* ---------------------------------------
 

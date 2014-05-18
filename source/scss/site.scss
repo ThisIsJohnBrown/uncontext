@@ -36,7 +36,7 @@ body {
   width: 100%;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 800px) {
   #wrapper {
     width: 900px;
     margin: 0 auto;
@@ -84,6 +84,13 @@ h3 {
   margin: 0 0 $margin-base*2 0;
   padding: 0 $margin-base;
   text-align: center;
+  line-height: 1.4;
+  .small-mono {
+    display: block;
+    font-size: $font-small;
+    font-family: $monospace;
+    text-transform: none;
+  }
 }
 
 /* ---------------------------------------
