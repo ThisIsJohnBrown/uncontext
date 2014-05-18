@@ -38,7 +38,7 @@ body {
 
 @media (min-width: 500px) {
   #wrapper {
-    width: 80%;
+    width: 900px;
     margin: 0 auto;
   }
 }
@@ -56,7 +56,7 @@ h1 {
   text-transform: uppercase;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 800px) {
   h1 {
    font-size: $font-extra-large;
   }
@@ -82,6 +82,7 @@ h3 {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin: 0 0 $margin-base*2 0;
+  padding: 0 $margin-base;
   text-align: center;
 }
 
@@ -94,7 +95,8 @@ h3 {
 
 .intro {
   margin: 0 auto $margin-base*3 auto;
-  width: 90%;
+  width: 100%;
+  padding: 0 10px;
 
   p {
     font-weight: 400;
@@ -109,7 +111,7 @@ h3 {
   }
 }
 
-@media (min-width: 500px) {
+@media (min-width: 800px) {
   .intro {
     width: 50%;
 
@@ -210,7 +212,7 @@ h3 {
   }
 }
 
-@media (min-width: 500px) {
+@media (min-width: 800px) {
   .two-up {
 
     .data-group,
@@ -267,11 +269,10 @@ pre {
   border-bottom: 1px solid rgba($purple-dark, 0.2);
 }
 
-@media (min-width: 500px) {
+@media (min-width: 800px) {
   .code .title {
     border: 1px solid rgba($purple-dark, 0.2);
     border-bottom: none;
-    width: 80%;
     margin: 0 auto;
   }
   pre {
@@ -279,7 +280,6 @@ pre {
     background-color: transparent;
     border: 1px solid rgba($purple-dark,0.2);
     color: $purple-dark;
-    width: 80%;
   }
 }
 
@@ -354,10 +354,10 @@ footer {
   @extend %clearfix;
 
   li {
-    margin: $margin-base/2;
+    margin: 0 0 $margin-base/2 0;
     display: inline-block;
     width: 320px;
-    background-color: rgba($purple-dark, 0.2);
+    background-color: #fff;
     text-align: center;
 
     .title {
@@ -381,7 +381,29 @@ footer {
       height: 300px;
       margin: 10px;
       background-size: 100%;
-      border: 1px solid rgba($purple-dark, 0.7);
+      //border: 1px solid rgba($purple-dark, 0.7);
     }
   }
+}
+
+@media (min-width: 800px) {
+
+  .submission-list li {
+    margin: $margin-base/4;
+    width: 291px;
+
+    &:nth-child(3n+1) {
+      margin-left: 0;
+    }
+
+    &:nth-child(3n+3) {
+      margin-right: 0;
+    }
+
+    .thumb {
+      width: 271px;
+      height: 271px;
+    }
+  }
+
 }
