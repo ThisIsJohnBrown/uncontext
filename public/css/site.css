@@ -621,7 +621,7 @@ footer {
     width: 291px; }
     .submission-list li:nth-child(3n+1) {
       margin-left: 0; }
-    .submission-list li:nth-child(3n+3) {
+    .submission-list li:nth-child(3n+3), .submission-list li:last-child {
       margin-right: 0; }
     .submission-list li .thumb {
       width: 271px;

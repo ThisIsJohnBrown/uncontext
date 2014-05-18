@@ -401,7 +401,8 @@ footer {
       margin-left: 0;
     }
 
-    &:nth-child(3n+3) {
+    &:nth-child(3n+3),
+    &:last-child {
       margin-right: 0;
     }
 
