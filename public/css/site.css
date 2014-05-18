@@ -350,9 +350,9 @@ body {
 #wrapper {
   width: 100%; }
 
-@media (min-width: 500px) {
+@media (min-width: 800px) {
   #wrapper {
-    width: 80%;
+    width: 900px;
     margin: 0 auto; } }
 
 header {
@@ -366,7 +366,7 @@ h1 {
   margin: 0 auto 20px auto;
   text-transform: uppercase; }
 
-@media (min-width: 500px) {
+@media (min-width: 800px) {
   h1 {
     font-size: 50px; } }
 
@@ -375,7 +375,6 @@ h2 {
   font-size: 23px;
   margin: 0 auto;
   font-weight: 200;
-  font-style: italic;
   text-align: center; }
   h2 span {
     text-transform: capitalize; }
@@ -387,7 +386,15 @@ h3 {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin: 0 0 40px 0;
-  text-align: center; }
+  padding: 0 20px;
+  text-align: center;
+  line-height: 1.4; }
+  h3 .small-mono {
+    display: block;
+    font-size: 14px;
+    font-family: Consolas, "Liberation Mono", Courier, monospace;
+    text-transform: none;
+    letter-spacing: 0; }
 
 /* ---------------------------------------
 
@@ -396,7 +403,8 @@ h3 {
 ----------------------------------------- */
 .intro {
   margin: 0 auto 60px auto;
-  width: 90%; }
+  width: 100%;
+  padding: 0 10px; }
   .intro p {
     font-weight: 400;
     font-size: 19px;
@@ -408,7 +416,7 @@ h3 {
     border-bottom: 1px solid rgba(23, 9, 36, 0.5);
     color: black; }
 
-@media (min-width: 500px) {
+@media (min-width: 800px) {
   .intro {
     width: 50%; }
     .intro p {
@@ -486,7 +494,7 @@ h3 {
       margin: 0 0 19.6px 0;
       color: #170a24; }
 
-@media (min-width: 500px) {
+@media (min-width: 800px) {
   .two-up .data-group, .two-up .canvas-group {
     width: 48%; }
   .two-up .data-group {
@@ -528,18 +536,16 @@ pre {
   padding: 20px;
   border-bottom: 1px solid rgba(23, 9, 36, 0.2); }
 
-@media (min-width: 500px) {
+@media (min-width: 800px) {
   .code .title {
     border: 1px solid rgba(23, 9, 36, 0.2);
     border-bottom: none;
-    width: 80%;
     margin: 0 auto; }
   pre {
     font-size: 14px;
     background-color: transparent;
     border: 1px solid rgba(23, 9, 36, 0.2);
-    color: #170a24;
-    width: 80%; } }
+    color: #170a24; } }
 
 /* ---------------------------------------
 
@@ -586,10 +592,10 @@ footer {
   padding: 0;
   text-align: center; }
   .submission-list li {
-    margin: 10px;
+    margin: 0 0 10px 0;
     display: inline-block;
     width: 320px;
-    background-color: rgba(23, 9, 36, 0.2);
+    background-color: #fff;
     text-align: center; }
     .submission-list li .title {
       font-size: 19px; }
@@ -607,6 +613,16 @@ footer {
       width: 300px;
       height: 300px;
       margin: 10px;
-      background-size: 100%;
-      border: 1px solid rgba(23, 9, 36, 0.7);
-      text-decoration: none; }
+      background-size: 100%; }
+
+@media (min-width: 800px) {
+  .submission-list li {
+    margin: 5px;
+    width: 291px; }
+    .submission-list li:nth-child(3n+1) {
+      margin-left: 0; }
+    .submission-list li:nth-child(3n+3) {
+      margin-right: 0; }
+    .submission-list li .thumb {
+      width: 271px;
+      height: 271px; } }
