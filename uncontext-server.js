@@ -19,7 +19,7 @@ app.engine('mustache', require('hogan-middleware').__express);
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res){
-  return res.render('home.html', {datasets: datasets, homepage: true});
+  return res.render('home.mustache', {datasets: datasets, homepage: true});
 });
 
 var datasets = [];
@@ -34,7 +34,11 @@ for (var i = 0;i < sets.length; i++) {
     var sceneArray = [];
     for (var j = 0; j < scenes.length; j++) {
       if (scenes[j].substr(0, 1) !== '.') {
-        sceneArray.push(scenes[j].split('.')[0]);
+        var data = JSON.parse(fs.readFileSync(__dirname + '/scenes/' + sets[i] + '/' + scenes[j]).toString());
+        sceneArray.push({
+          'slug': scenes[j].split('.')[0],
+          'title': data.name
+        });
       }
     }
     datasets.push({

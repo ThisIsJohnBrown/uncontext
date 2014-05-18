@@ -36,9 +36,9 @@ body {
   width: 100%;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 800px) {
   #wrapper {
-    width: 80%;
+    width: 900px;
     margin: 0 auto;
   }
 }
@@ -56,7 +56,7 @@ h1 {
   text-transform: uppercase;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 800px) {
   h1 {
    font-size: $font-extra-large;
   }
@@ -67,7 +67,6 @@ h2 {
   font-size: $font-regular;
   margin: 0 auto;
   font-weight: 200;
-  font-style: italic;
   text-align: center;
 
   span {
@@ -76,12 +75,23 @@ h2 {
 }
 
 h3 {
-  font-size: $font-regular;
+  font-size: $font-text;
   color: #fff;
-  font-weight: 200;
-  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   margin: 0 0 $margin-base*2 0;
+  padding: 0 $margin-base;
   text-align: center;
+  line-height: 1.4;
+
+  .small-mono {
+    display: block;
+    font-size: $font-small;
+    font-family: $monospace;
+    text-transform: none;
+    letter-spacing: 0;
+  }
 }
 
 /* ---------------------------------------
@@ -93,7 +103,8 @@ h3 {
 
 .intro {
   margin: 0 auto $margin-base*3 auto;
-  width: 90%;
+  width: 100%;
+  padding: 0 10px;
 
   p {
     font-weight: 400;
@@ -108,7 +119,7 @@ h3 {
   }
 }
 
-@media (min-width: 500px) {
+@media (min-width: 800px) {
   .intro {
     width: 50%;
 
@@ -209,7 +220,7 @@ h3 {
   }
 }
 
-@media (min-width: 500px) {
+@media (min-width: 800px) {
   .two-up {
 
     .data-group,
@@ -266,11 +277,10 @@ pre {
   border-bottom: 1px solid rgba($purple-dark, 0.2);
 }
 
-@media (min-width: 500px) {
+@media (min-width: 800px) {
   .code .title {
     border: 1px solid rgba($purple-dark, 0.2);
     border-bottom: none;
-    width: 80%;
     margin: 0 auto;
   }
   pre {
@@ -278,7 +288,6 @@ pre {
     background-color: transparent;
     border: 1px solid rgba($purple-dark,0.2);
     color: $purple-dark;
-    width: 80%;
   }
 }
 
@@ -300,7 +309,6 @@ pre {
     font-size: $font-regular;
     margin: 0 8px;
     display: inline-block;
-
   }
 
   a:link, a:visited {
@@ -313,6 +321,7 @@ pre {
   a:hover {
     border-color: $purple-dark;
   }
+
 }
 
 .section.compressed {
@@ -332,4 +341,74 @@ footer {
       font-size: $font-small;
     }
   }
+}
+
+/* ---------------------------------------
+
+  Submission list
+
+----------------------------------------- */
+
+.submission-list {
+  margin: $margin-base auto;
+  padding: 0;
+  text-align: center;
+  @extend %clearfix;
+
+  li {
+    margin: 0 0 $margin-base/2 0;
+    display: inline-block;
+    width: 320px;
+    background-color: #fff;
+    text-align: center;
+
+    .title {
+      font-size: $font-text;
+
+      a:link,
+      a:visited {
+        color: $purple-dark;
+        font-weight: 500;
+        text-decoration: none;
+        border-bottom: 1px solid rgba($purple-dark, 0.2);
+        transition: border-color 0.3s linear;
+      }
+      a:hover {
+        border-color: $purple-dark;
+      }
+    }
+    
+    a.thumb {
+      text-decoration: none;
+    }
+    .thumb {
+      width: 300px;
+      height: 300px;
+      margin: 10px;
+      background-size: 100%;
+      //border: 1px solid rgba($purple-dark, 0.7);
+    }
+  }
+}
+
+@media (min-width: 800px) {
+
+  .submission-list li {
+    margin: $margin-base/4;
+    width: 291px;
+
+    &:nth-child(3n+1) {
+      margin-left: 0;
+    }
+
+    &:nth-child(3n+3) {
+      margin-right: 0;
+    }
+
+    .thumb {
+      width: 271px;
+      height: 271px;
+    }
+  }
+
 }

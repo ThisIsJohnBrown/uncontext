@@ -1,9 +1,9 @@
 {
   "creator": "John Brown",
   "dataset": "literature",
-  "name": "My Thing",
+  "name": "Ampersand Becomes A Fighter",
   "slug": "ampersand",
-  "description": "It's a thing!",
+  "description": "A shocking example of what happens when you give a logogram too much caffeine.",
   "twitter": "thisisjohnbrown",
   "assets": {
     "js": true,
