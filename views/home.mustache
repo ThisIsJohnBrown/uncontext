@@ -7,7 +7,9 @@
       </header>
 
       <div class="intro">
-        <p>Uncontext is an art project where any collaborator can access an unending stream of structured&mdash;but seemingly random&mdash;data. They can use it to generate art, write poems, control robots, or anything else.</p>
+        <span class="rule"></span>
+        <p>Uncontext is an art project where any collaborator can access an unending stream of structured&mdash;but seemingly random&mdash;data. Use this data it to generate art, write poems, control robots, or anything else.</p>
+        <span class="rule"></span>
       </div>
 
       <section class="section two-up">
@@ -48,8 +50,10 @@
       <section class="section">
         <h3>Just connect to <span class="small-mono">literature.uncontext.com:80</span></h3>
         <div class="code">
-        <p class="title">Very basic socket.io connection code</p>
-<pre><code>&lt;script src=&quot;//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js&quot;&gt;&lt;/script&gt;
+<pre><code>
+// Look how freaking easy it is to get the data!
+
+&lt;script src=&quot;//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
   socket_ = io.connect('literature.uncontext.com:80');
   socket_.on('0', function (data) {
@@ -60,7 +64,7 @@
       </section>
 
       <section class="section compressed">
-        <h3>Submissions for current session</h3>
+        <h3>Curent submissions</h3>
         {{#datasets}}
         <ul class="submission-list">
         {{#slugs}}
