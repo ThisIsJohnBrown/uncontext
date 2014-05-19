@@ -80,7 +80,7 @@ h3 {
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin: 0 0 $margin-base*2 0;
+  margin: $margin-base*2 0;
   padding: 0 $margin-base;
   text-align: center;
   line-height: 1.4;
@@ -264,15 +264,14 @@ pre {
   font-family: $monospace;
   font-size: 12px;
   margin: 0 auto;
-  padding: 0 $margin-base;
+  padding: $margin-base;
+  color: $purple-dark;
+  background-color: rgba($purple-dark, 0.1);
 }
 
 @media (min-width: 800px) {
   pre {
     font-size: $font-small;
-    background-color: transparent;
-    color: $purple-dark;
-    padding: 0;
   }
 }
 

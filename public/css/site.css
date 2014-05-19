@@ -385,7 +385,7 @@ h3 {
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin: 0 0 40px 0;
+  margin: 40px 0;
   padding: 0 20px;
   text-align: center;
   line-height: 1.4; }
@@ -520,14 +520,13 @@ pre {
   font-family: Consolas, "Liberation Mono", Courier, monospace;
   font-size: 12px;
   margin: 0 auto;
-  padding: 0 20px; }
+  padding: 20px;
+  color: #170a24;
+  background-color: rgba(23, 9, 36, 0.1); }
 
 @media (min-width: 800px) {
   pre {
-    font-size: 14px;
-    background-color: transparent;
-    color: #170a24;
-    padding: 0; } }
+    font-size: 14px; } }
 
 /* ---------------------------------------
 
