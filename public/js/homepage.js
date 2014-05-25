@@ -2,6 +2,10 @@ var socketData = {};
 var canvas = null;
 var context = null;
 var speed = .3;
+var max_rows = 6;
+if (document.documentElement.clientWidth > 500) {
+  max_rows = 17;
+}
 
 var items_ = [];
 
@@ -9,7 +13,20 @@ $(function() {
   init();
   animate();
 
-  uncontext.socket_.on('0', function (data) {
+  uncontext.socket_.onmessage = function (event) {
+    data = JSON.parse(event.data);
+
+    if ($('.data').length) {
+      $('.data table tbody').prepend('<tr>\
+        <td>' + data.a + '</td>\
+        <td>' + data.b + '</td>\
+        <td>' + data.c + '</td>\
+        <td>' + data.d + '</td>\
+        <td><span>f: ' + data.e.f + '</span><span>g: ' + data.e.g + '</span></td>\
+      </tr>');
+    }
+    $('.data table tr:eq(' + max_rows + ')').remove();
+
     if (socketData.a !== data.a) {
       var now = new Date().getTime();
       for (var i = 0; i < data.a; i++) {
@@ -19,7 +36,7 @@ $(function() {
     }
 
     socketData = data;
-  });
+  };
 })
 
 function addItem(i, iTotal, size, direction, yOffset, now) {

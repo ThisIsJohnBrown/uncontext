@@ -1,6 +1,6 @@
-uncontext.socket_.on('0', function (data) {
-    socketData = data;
-});
+uncontext.socket_.onmessage = function (event) {
+  socketData = JSON.parse(event.data);
+};
 
 var socketData = null;
 var forwardPerc = true;

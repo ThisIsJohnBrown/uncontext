@@ -2,12 +2,9 @@ require('newrelic');
 var http = require('http');
 var express = require('express');
 var app = express();
-var port = Number(process.env.PORT || 5000);
-console.log('------------------------------- ' + port);
+var port = Number(process.env.PORT || 5001);
 var server = http.createServer(app).listen(port);
-var io = require('socket.io').listen(server);
 var fs = require('fs');
-io.set('log level', 1);
 
 app.set('views', __dirname + '/views');
 
