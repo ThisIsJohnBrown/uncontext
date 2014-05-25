@@ -7,7 +7,9 @@
       </header>
 
       <div class="intro">
-        <p>Uncontext is an art project where any collaborator can access an unending stream of structured&mdash;but seemingly random&mdash;data. They can use it to generate art, write poems, control robots, or anything else.</p>
+        <span class="rule"></span>
+        <p>Uncontext is an art project where any collaborator can access an unending stream of structured&mdash;but seemingly random&mdash;data. Use this data it to generate art, write poems, control robots, or anything else.</p>
+        <span class="rule"></span>
       </div>
 
       <section class="section two-up">
@@ -37,7 +39,7 @@
             <ul>
               <li>When data.a is updated, a new line of circle is initiated, with that number of circles spaced along the x-axis.</li>
               <li>The size that the circles grows to is whatever data.b is at the time.</li>
-              <li>If data.c === 0, the circles expand towards the right. If data.c === 1, then it's left.</li>
+              <li>If data.c === 0, the circles expand towards the right. If data.c === 1, then it&rsquo;s left.</li>
               <li>data.e.f / data.e.g determines the percentage along the y-axis the line runs along.</li>
               <li>Where's data.d? We don't need to use everything, silly.</li>
             </ul>
@@ -48,8 +50,9 @@
       <section class="section">
         <h3>Just connect to <span class="small-mono">ws://literature.uncontext.com:80</span></h3>
         <div class="code">
-        <p class="title">Very basic javascript connection code</p>
-<pre><code>&lt;script&gt;
+<pre><code>// Look how freaking easy it is to get the data!
+
+&lt;script&gt;
   socket_ = new WebSocket('ws://literature.uncontext.com:80');
   socket_.onmessage = function (data) {
     console.log(data);
@@ -59,7 +62,7 @@
       </section>
 
       <section class="section compressed">
-        <h3>Submissions for current session</h3>
+        <h3>Curent submissions</h3>
         {{#datasets}}
         <ul class="submission-list">
         {{#slugs}}

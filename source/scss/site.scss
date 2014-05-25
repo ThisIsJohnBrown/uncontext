@@ -80,7 +80,7 @@ h3 {
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin: 0 0 $margin-base*2 0;
+  margin: $margin-base*2 0;
   padding: 0 $margin-base;
   text-align: center;
   line-height: 1.4;
@@ -106,6 +106,14 @@ h3 {
   width: 100%;
   padding: 0 10px;
 
+  .rule {
+    width: 30px;
+    height: 1px;
+    display: block;
+    margin: 0 auto;
+    background-color: rgba($purple-dark, 0.5);
+  }
+
   p {
     font-weight: 400;
     font-size: $font-text;
@@ -113,19 +121,17 @@ h3 {
     text-align: center;
     margin: 0 auto;
     padding: $margin-base*2 0;
-    border-top: 1px solid rgba(darken($purple, 30%),0.5);
-    border-bottom: 1px solid rgba(darken($purple, 30%),0.5);
     color: $purple-extra-dark;
   }
 }
 
 @media (min-width: 800px) {
   .intro {
-    width: 50%;
+    width: 600px;
 
     p {
       color: $purple-dark;
-      font-size: $font-text;
+      font-size: $font-regular;
     }
   }
 }
@@ -195,20 +201,16 @@ h3 {
 }
 
 #homepage-canvas {
-  border: 1px solid rgba($purple-dark,0.2);
   width: 100%;
   height: 360px;
 }
 
 .explanation {
-  background-color: rgba($purple-dark, 0.1);
-  border: 1px solid rgba($purple-dark, 0.2);
-  border-top: none;
 
   ul {
     margin: 0;
-    padding: 24px 24px 12px 36px;
-    list-style: circle;
+    padding: $margin-base;
+    list-style: none;
 
     li {
       font-weight: 400;
@@ -245,6 +247,10 @@ h3 {
     padding: 0 15px 0 0;
     font-size: $font-small;
   }
+
+  .explanation ul {
+    padding: $margin-base 0;
+  }
 }
 
 /* ---------------------------------------
@@ -253,41 +259,19 @@ h3 {
 
 ----------------------------------------- */
 
-.code .title {
-  background-color: rgba($purple-dark, 0.1);
-  border: 1px solid rgba($purple-dark, 0.2);
-  border-left: none;
-  border-right: none;
-  margin: 0;
-  padding: 0;
-  font-size: $font-small;
-  font-weight: 400;
-  text-align: center;
-  line-height: 3;
-}
-
 pre {
-  margin: 0;
   white-space: pre-wrap;
   font-family: $monospace;
   font-size: 12px;
   margin: 0 auto;
-  background-color: rgba(darken($purple, 30%),0.1);
   padding: $margin-base;
-  border-bottom: 1px solid rgba($purple-dark, 0.2);
+  color: $purple-dark;
+  background-color: rgba($purple-dark, 0.1);
 }
 
 @media (min-width: 800px) {
-  .code .title {
-    border: 1px solid rgba($purple-dark, 0.2);
-    border-bottom: none;
-    margin: 0 auto;
-  }
   pre {
     font-size: $font-small;
-    background-color: transparent;
-    border: 1px solid rgba($purple-dark,0.2);
-    color: $purple-dark;
   }
 }
 
@@ -331,11 +315,9 @@ pre {
 }
 
 footer {
-  margin: 0;
+  margin: 0 0 $margin-base*3 0;
 
   .link-list {
-    padding: $margin-base*3 0;
-    border-top: 1px solid rgba($purple-dark, 0.3);
 
     li {
       font-size: $font-small;
@@ -356,9 +338,9 @@ footer {
   @extend %clearfix;
 
   li {
-    margin: 0 0 $margin-base/2 0;
+    margin: 0 10px $margin-base/2 10px;
     display: inline-block;
-    width: 320px;
+    width: 300px;
     background-color: #fff;
     text-align: center;
 
@@ -382,8 +364,8 @@ footer {
       text-decoration: none;
     }
     .thumb {
-      width: 300px;
-      height: 300px;
+      width: 280px;
+      height: 280px;
       margin: 10px;
       background-size: 100%;
       //border: 1px solid rgba($purple-dark, 0.7);
