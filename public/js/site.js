@@ -11,7 +11,7 @@ Uncontext.prototype.init = function() {
   }
 
   try {
-    self.socket_ = new WebSocket('ws://uncontext-literature-staging.herokuapp.com:80');
+    self.socket_ = new WebSocket('ws://literature.uncontext.com:80');
   } catch (e) {
     // Sockets not initialized.
   }
