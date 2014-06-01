@@ -332,8 +332,7 @@
 
   loadImages(params, loadBuildings);
 
-  unSocket = new WebSocket('ws://literature.uncontext.com:80');
-  unSocket.onmessage = function (message) {
+  uncontext.socket_.onmessage = function (message) {
     var data = JSON.parse(event.data);
     var bldIndex = data.a;
     var speed = data.b * data.d;
