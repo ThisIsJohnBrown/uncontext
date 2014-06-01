@@ -320,7 +320,7 @@
   });
 
   var params = {
-    assetPath: '/img/literature/',
+    assetPath: '/img/literature/bunny-hop/',
     sources: {
       bike: 'bike.png',
       bunny: 'bunny.png'
