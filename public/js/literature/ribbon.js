@@ -93,7 +93,7 @@
       scene.add(cube);
     }
     
-    var path = '/img/literature/';
+    var path = '/img/literature/ribbon/';
     var chomp1Tex = THREE.ImageUtils.loadTexture(path + 'chomp1face.png');
     var chomp2Tex = THREE.ImageUtils.loadTexture(path + 'chomp2face.png');
 
@@ -213,7 +213,7 @@
     var tubeGeo = new THREE.TubeGeometry(curvePath, maxRibbonLength / 2, 2, 12, false);
 
     if (ribbonTube == null) {
-      var rainbow = THREE.ImageUtils.loadTexture('/img/literature/rainbow.png');
+      var rainbow = THREE.ImageUtils.loadTexture('/img/literature/ribbon/rainbow.png');
       ribbonTube = new THREE.Mesh(tubeGeo,
         new THREE.MeshPhongMaterial({
             color    : 'white',
