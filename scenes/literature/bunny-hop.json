@@ -1,0 +1,13 @@
+{
+  "creator": "Caleb Anderson",
+  "dataset": "literature",
+  "name": "Bunny Hop",
+  "slug": "bunny-hop",
+  "description": "Such parallax. Many hop.",
+  "twitter": "RobotCaleb",
+  "url": "http://robotrising.org",
+  "assets": {
+    "js": true,
+    "kineticjs": true
+  }
+}
