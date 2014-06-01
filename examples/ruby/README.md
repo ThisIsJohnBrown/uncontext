@@ -1,4 +1,4 @@
-# uncontext in Ruby!
+# uncontext. in Ruby!
 
 This example requires the `JSON` and `WebSocket Client` gems, which can be installed as follows:
 
