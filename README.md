@@ -48,10 +48,12 @@ The data is in the format:
 There's no registration, all you need to do is connect to the current stream (ws://literature.uncontext.com:80). You don't even need to clone or download this repo. If you need a bit of a head start, though, check out the examples folder for code for (coming soon!):
 
 * Javascript
-* Processing
+* [Processing](https://github.com/ThisIsJohnBrown/uncontext/tree/master/examples/processing)
 * Cinder
 * [Unity](https://github.com/ThisIsJohnBrown/uncontext/tree/master/examples/unity)
 * Cinema4D
+* [Python](https://github.com/ThisIsJohnBrown/uncontext/tree/master/examples/python)
+* [Ruby](https://github.com/ThisIsJohnBrown/uncontext/tree/master/examples/ruby)
 
 You could also go through the submissions from other uncontexters and see what they're doing.
 
@@ -95,6 +97,7 @@ The following can also be instantiated on the page for you to use by adding this
   "d3": true, // D3 3.4.6
   "raphaeljs": true, // Raphael.js 2.1.2
   "toxiclibsjs": true, // Toxiclibs.js 0.2.7
+  "kineticjs": true, // Kinetic.js 5.1.0
 }
 ```
 
