@@ -96,6 +96,7 @@ The following can also be instantiated on the page for you to use by adding this
   "raphaeljs": true, // Raphael.js 2.1.2
   "toxiclibsjs": true, // Toxiclibs.js 0.2.7
   "kineticjs": true, // Kinetic.js 5.1.0
+  "requirejs": true, // require.js 2.1.14
 }
 ```
 
