@@ -45,13 +45,13 @@ The data is in the format:
 
 #### How do I get started?
 
-There's no registration, all you need to do is connect to the current stream (ws://literature.uncontext.com:80). You don't even need to clone or download this repo. If you need a bit of a head start, though, check out the examples folder for code for (coming soon!):
+There's no registration, all you need to do is connect to the current stream (ws://literature.uncontext.com:80). You don't even need to clone or download this repo. If you need a bit of a head start, though, check out the examples folder for code examples, including:
 
-* Javascript
-* Processing
-* Cinder
+* [Node](https://github.com/ThisIsJohnBrown/uncontext/tree/master/examples/node)
+* [Processing](https://github.com/ThisIsJohnBrown/uncontext/tree/master/examples/processing)
+* [Ruby](https://github.com/ThisIsJohnBrown/uncontext/tree/master/examples/ruby)
 * [Unity](https://github.com/ThisIsJohnBrown/uncontext/tree/master/examples/unity)
-* Cinema4D
+* [Python](https://github.com/ThisIsJohnBrown/uncontext/tree/master/examples/python)
 
 You could also go through the submissions from other uncontexters and see what they're doing.
 
