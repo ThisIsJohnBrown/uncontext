@@ -3,7 +3,7 @@
   "dataset"    : "literature",
   "name"       : "Fire the Works",
   "slug"       : "fireworks",
-  "description": "Fire. It works.<b />Starfield from <a href="http://paulbourke.net/miscellaneous/starfield/">Paul Bourke</a>",
+  "description": "Fire. It works.<b />Starfield from <a href='http://paulbourke.net/miscellaneous/starfield/'>Paul Bourke</a>",
   "twitter"    : "RobotCaleb",
   "url"        : "http://robotrising.org",
   "assets": {
