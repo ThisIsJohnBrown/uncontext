@@ -219,7 +219,7 @@
     particleUniforms = {
       texture: {
         type: 't',
-        value: THREE.ImageUtils.loadTexture('/img/literature/worksParticle.png')
+        value: THREE.ImageUtils.loadTexture('/img/literature/fireworks/worksParticle.png')
       }
     }
 
@@ -291,7 +291,7 @@
     }
 
     var skyGeo  = new THREE.SphereGeometry(50000, 16, 16);
-    var texture = THREE.ImageUtils.loadTexture('/img/literature/paulbourke.net-starfield-4096x2048.png');
+    var texture = THREE.ImageUtils.loadTexture('/img/literature/fireworks/paulbourke.net-starfield-4096x2048.png');
     var skyMat  = new THREE.MeshBasicMaterial({
       color: 'white',
       map: texture,
