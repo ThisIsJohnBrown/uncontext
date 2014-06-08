@@ -1,397 +1,86 @@
 @import url("http://cloud.typography.com/7675692/750644/css/fonts.css");
+@import "toast";
 @import "normalize";
 @import "mixins";
+@import "base";
 
-$purple: #672A9D;
-$orange: #F76B1C;
-$purple-light: lighten($purple, 5%);
-$purple-dark: darken($purple, 30%);
-$purple-extra-dark: darken($purple, 40%);
-
-$monospace: Consolas, "Liberation Mono", Courier, monospace;
-
-// Adapted from http://modularscale.com/scale/?px1=50&px2=38&ra1=1.618&ra2=0
-$font-extra-large: 50px;
-$font-large: 38px;
-$font-regular: 23px;
-$font-text: 19px;
-$font-small: 14px;
-$font-extra-small: 12px;
-
-$margin-base: 20px;
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  @include linear-gradient($purple-light, $orange);
-
-  text-rendering: optimizeLegibility;
-  font-family: "Verlag A", "Verlag B", "Helvetica Neue", "Helvetica", sans-serif;
-  font-weight: 300;
-}
-
-#wrapper {
-  width: 100%;
-}
-
-@media (min-width: 800px) {
-  #wrapper {
-    width: 900px;
-    margin: 0 auto;
+#hero {
+  header {
+    margin: $baseline*8 auto;
   }
-}
 
-header {
-  margin: $margin-base*3 auto;
-}
-
-h1 {
-  font-size: $font-large;
-  color: #fff;
-  text-align: center;
-  font-weight: 800;
-  margin: 0 auto $margin-base auto;
-  text-transform: uppercase;
-}
-
-@media (min-width: 800px) {
   h1 {
-   font-size: $font-extra-large;
+    margin-bottom: $baseline*2;
+  }
+
+  #session {
+    text-transform: uppercase;
+    font-weight: 200;
+    margin-bottom: -$baseline;
   }
 }
 
-h2 {
-  color: #fff;
-  font-size: $font-regular;
-  margin: 0 auto;
-  font-weight: 200;
-  text-align: center;
-
-  span {
-    text-transform: capitalize;
-  }
-}
-
-h3 {
-  font-size: $font-text;
-  color: #fff;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin: $margin-base*2 0;
-  padding: 0 $margin-base;
-  text-align: center;
-  line-height: 1.4;
-
-  .small-mono {
-    display: block;
-    font-size: $font-small;
-    font-family: $monospace;
-    text-transform: none;
-    letter-spacing: 0;
-  }
-}
-
-/* ---------------------------------------
-
-  Intro Block
-
------------------------------------------ */
-
-
-.intro {
-  margin: 0 auto $margin-base*3 auto;
-  width: 100%;
-  padding: 0 10px;
-
-  .rule {
-    width: 30px;
-    height: 1px;
-    display: block;
-    margin: 0 auto;
-    background-color: rgba($purple-dark, 0.5);
-  }
-
-  p {
-    font-weight: 400;
-    font-size: $font-text;
-    line-height: 1.4;
-    text-align: center;
-    margin: 0 auto;
-    padding: $margin-base*2 0;
-    color: $purple-extra-dark;
-  }
-}
-
-@media (min-width: 800px) {
-  .intro {
-    width: 600px;
-
-    p {
-      color: $purple-dark;
-      font-size: $font-regular;
-    }
-  }
-}
-
-.section {
-  margin: $margin-base*3 0;
-}
-
-/* ---------------------------------------
-
-  Data + Viz section
-
------------------------------------------ */
-
-.two-up {
-  @extend %clearfix;
-  margin: 0 0 $margin-base*4 0;
-
-  .data-group,
-  .canvas-group {
-    float: none;
-    width: 100%;
-  }
-}
-
-.data-group table {
-  width: 90%;
-  margin: 0 auto;
+#demo-table {
+  margin-top: $baseline*4;
+  margin-bottom: $baseline*2;
 
   td {
-    padding: 0 2px 0 0;
-    margin: 0;
-    width: 14%;
-    height: 36px;
-    line-height: 2;
-    color: $purple-dark;
-    font-family: $monospace;
-    font-size: $font-extra-small;
-
-    &:last-child {
-      width: 44%;
-      padding: 0;
-    }
-
-   span {
-      display: inline-block;
-      width: 50%;
-      padding: 0 10% 0 0;
-    }
+    height: $baseline*4;
+    font-size: 18px;
+    line-height: $baseline*4;
+    border-bottom: 1px solid rgba($black, 0.05);
   }
 
-  tr:nth-last-child(5) td { opacity: 0.9; }
-  tr:nth-last-child(4) td { opacity: 0.7; }
-  tr:nth-last-child(3) td { opacity: 0.5; }
-  tr:nth-last-child(2) td { opacity: 0.3; }
-  tr:nth-last-child(1) td { opacity: 0.1; }
-
-  thead tr:last-child td {
-    opacity: 1;
+  thead td {
+    font-family: $serif;
+    text-transform: uppercase;
+    font-size: 14px;
     font-weight: 400;
-    color: #fff;
   }
-}
 
-.canvas-group {
-  margin: $margin-base*2 0 0 0;
-}
-
-#homepage-canvas {
-  width: 100%;
-  height: 360px;
-}
-
-.explanation {
-
-  ul {
+  td span {
+    display: inline-block;
+    padding: 0;
     margin: 0;
-    padding: $margin-base;
-    list-style: none;
-
-    li {
-      font-weight: 400;
-      font-size: $font-small;
-      line-height: 1.4;
-      margin: 0 0 ($font-small*1.4) 0;
-      color: $purple-dark;
-    }
+    width: 20px;
   }
-}
 
-@media (min-width: 800px) {
-  .two-up {
-
-    .data-group,
-    .canvas-group {
-      width: 48%;
-    }
-
-    .data-group {
-      float: left;
-    }
-
-    .canvas-group {
-      float: right;
-      margin: 0;
-    }
-  }
-  .data-groupd table {
+  td .demo-viz-cell {
     width: 100%;
-    margin: 0;
-  }
-  .data-group table td {
-    padding: 0 15px 0 0;
-    font-size: $font-small;
-  }
-
-  .explanation ul {
-    padding: $margin-base 0;
+    height: 48px;
+    background-color: $purple;
   }
 }
 
-/* ---------------------------------------
-
-  Code Section
-
------------------------------------------ */
-
-pre {
-  white-space: pre-wrap;
-  font-family: $monospace;
-  font-size: 12px;
-  margin: 0 auto;
-  padding: $margin-base;
-  color: $purple-dark;
-  background-color: rgba($purple-dark, 0.1);
-}
-
-@media (min-width: 800px) {
-  pre {
-    font-size: $font-small;
+// Evenly distribute opacity from 0 to 1 over the course of num datas
+$num-datas: 8;
+@for $i from 1 through $num-datas {
+  $opacity: (1/$num-datas) * $i;
+  td span:nth-child(#{$i}) {
+    opacity: $opacity;
   }
 }
 
+#code-sample {
+  margin-top: $baseline*4;
+  background-color: rgba($black, 0.9);
+  color: $cream;
+  padding: $baseline*2;
+  font-famiy: $code;
+  font-size: 14px;
+  line-height: $baseline*1.5;
+}
 
-/* ---------------------------------------
-
-  Generic Styles
-
------------------------------------------ */
-
-.link-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+#gallery-cta {
   text-align: center;
 
-  li {
-    font-weight: 400;
-    font-size: $font-regular;
-    margin: 0 8px;
-    display: inline-block;
-  }
-
-  a:link, a:visited {
-    color: $purple-dark;
-    text-decoration: none;
-    border-bottom: 1px solid rgba($purple-dark, 0.2);
-    font-weight: 400;
-    transition: border-color 0.3s linear;
-  }
-  a:hover {
-    border-color: $purple-dark;
-  }
-
-}
-
-.section.compressed {
-  h3 {
-    margin: 0 0 $margin-base 0;
+  .button {
+    margin: $baseline*4 auto;
   }
 }
 
-footer {
-  margin: 0 0 $margin-base*3 0;
-
-  .link-list {
-
-    li {
-      font-size: $font-small;
-    }
-  }
-}
-
-/* ---------------------------------------
-
-  Submission list
-
------------------------------------------ */
-
-.submission-list {
-  margin: $margin-base auto;
-  padding: 0;
+#hero p,
+#demo p,
+#code p {
   text-align: center;
-  @extend %clearfix;
-
-  li {
-    margin: 0 10px $margin-base/2 10px;
-    display: inline-block;
-    width: 300px;
-    background-color: #fff;
-    text-align: center;
-
-    .title {
-      font-size: $font-text;
-
-      a:link,
-      a:visited {
-        color: $purple-dark;
-        font-weight: 500;
-        text-decoration: none;
-        border-bottom: 1px solid rgba($purple-dark, 0.2);
-        transition: border-color 0.3s linear;
-      }
-      a:hover {
-        border-color: $purple-dark;
-      }
-    }
-    
-    a.thumb {
-      text-decoration: none;
-    }
-    .thumb {
-      width: 280px;
-      height: 280px;
-      margin: 10px;
-      background-size: 100%;
-      //border: 1px solid rgba($purple-dark, 0.7);
-    }
-  }
-}
-
-@media (min-width: 800px) {
-
-  .submission-list li {
-    margin: $margin-base/4;
-    width: 291px;
-
-    &:nth-child(3n+1) {
-      margin-left: 0;
-    }
-
-    &:nth-child(3n+3),
-    &:last-child {
-      margin-right: 0;
-    }
-
-    .thumb {
-      width: 271px;
-      height: 271px;
-    }
-  }
-
 }

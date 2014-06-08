@@ -1,88 +1,169 @@
 {{> header}}
 
-    <section id="wrapper">
-      <header>
-        <h1>Uncontext.</h1>
-        <h2>Session 1&mdash;<span>{{#datasets}}{{name}}{{/datasets}}</span></h2>
+<div id="wrap">
+
+  <section class="section section-cream" id="hero">
+    <div class="grid grid--no-gutter">
+      
+      <nav class="grid__col grid__col--1-of-2 grid__col--centered">
+        <ul>
+          <li id="logo"><a href="#">Uncontext.</a></li>
+          <li><a href="#">Submit</a></li>
+          <li><a href="#">Submissions</a></li>
+          <li><a href="#" class="active">Information</a></li>    
+        </ul>
+      </nav>
+
+      <header class="grid__col grid__col--1-of-2 grid__col--centered">
+        <p id="session">Session 1</p>
+        <h1 class="as-h1">Literature</h1>
+        <div class="divider"></div>
+        <p>Uncontext is an art project where any collaborator can access an unending stream of structured&mdash;but seemingly random&mdash;data. Use this data it to generate art, write poems, control robots, or anything else.</p>
       </header>
+    
+    </div><!-- /grid -->
+  </section><!-- /hero -->
 
-      <div class="intro">
-        <span class="rule"></span>
-        <p>Uncontext is an art project where any collaborator can access an unending stream of structured&mdash;but seemingly random&mdash;data. Use this data to generate art, write poems, control robots, or anything else.</p>
-        <span class="rule"></span>
-      </div>
+  <section class="section" id="demo">
+    <div class="grid grid--no-gutter">
+      
+      <h2 class="as-h2">Live data</h2>
+      <div class="divider"></div>
+      <p class="grid__col grid__col--1-of-2 grid__col--centered">The source of this session’s data is derived from &ldquo;literature.&rdquo; More details will be revealead at the end of the session, before Session 2. It’s a mystery! Don’t let the source dictate your exploration (unless you want it to).</p>
+      <table id="demo-table" class="grid__col grid__col--3-of-4 grid__col--centered">
+        <thead>
+          <tr class="grid grid--no-gutter">
+            <td class="grid__col grid__col--1-of-8">Key</td>
+            <td class="grid__col grid__col--2-of-8">Value stream</td>
+            <td class="grid__col grid__col--3-of-8">Visualization example</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>a</td>
+            <td>
+              <span>9</span>
+              <span>8</span>
+              <span>12</span>
+              <span>15</span>
+              <span>6</span>
+              <span>22</span>
+              <span>11</span>
+              <span>2</span>
+            </td>
+            <td>
+              <div id="viz-a" class="demo-viz-cell"></div>
+            </td>
+          </tr>
+          <tr>
+            <td>b</td>
+            <td>
+              <span>9</span>
+              <span>8</span>
+              <span>12</span>
+              <span>15</span>
+              <span>6</span>
+              <span>22</span>
+              <span>11</span>
+              <span>2</span>
+            </td>
+            <td>
+              <div id="viz-b" class="demo-viz-cell"></div>
+            </td>
+          </tr>
+          <tr>
+            <td>c</td>
+            <td>
+              <span>9</span>
+              <span>8</span>
+              <span>12</span>
+              <span>15</span>
+              <span>6</span>
+              <span>22</span>
+              <span>11</span>
+              <span>2</span>
+            </td>
+            <td>
+              <div id="viz-c" class="demo-viz-cell"></div>
+            </td>
+          </tr>
+          <tr>
+            <td>d</td>
+            <td>
+              <span>9</span>
+              <span>8</span>
+              <span>12</span>
+              <span>15</span>
+              <span>6</span>
+              <span>22</span>
+              <span>11</span>
+              <span>2</span>
+            </td>
+            <td>
+              <div id="viz-d" class="demo-viz-cell"></div>
+            </td>
+          </tr>
+          <tr>
+            <td>e.f</td>
+            <td>
+              <span>9</span>
+              <span>8</span>
+              <span>12</span>
+              <span>15</span>
+              <span>6</span>
+              <span>22</span>
+              <span>11</span>
+              <span>2</span>
+            </td>
+            <td>
+              <div id="viz-ef" class="demo-viz-cell"></div>
+            </td>
+          </tr>
+          <tr>
+            <td>e.g</td>
+            <td>
+              <span>9</span>
+              <span>8</span>
+              <span>12</span>
+              <span>15</span>
+              <span>6</span>
+              <span>22</span>
+              <span>11</span>
+              <span>2</span>
+            </td>
+            <td>
+              <div id="viz-eg" class="demo-viz-cell"></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+    </div><!-- /grid -->
+  </section><!-- /demo -->
 
-      <section class="section two-up">
-        <div class="data-group">
-          <h3>Data for this session</h3>
-           <div class="data">
-             <table>
-              <thead>
-                <tr>
-                  <td>a</td>
-                  <td>b</td>
-                  <td>c</td>
-                  <td>d</td>
-                  <td>e</td>
-                </tr>
-              </thead>
-              <tbody>
-              </tbody>
-             </table>
-          </div>
-        </div>
+  <section id="code" class="section section-cream">
+    <div class="grid grid--no-gutter">
 
-        <div class="canvas-group">
-          <h3>Example visualization</h3>
-          <canvas id="homepage-canvas" width="400px" height="400px"></canvas>
-          <div class="explanation">
-            <ul>
-              <li>When data.a is updated, a new line of circle is initiated, with that number of circles spaced along the x-axis.</li>
-              <li>The size that the circles grows to is whatever data.b is at the time.</li>
-              <li>If data.c === 0, the circles expand towards the right. If data.c === 1, then it&rsquo;s left.</li>
-              <li>data.e.f / data.e.g determines the percentage along the y-axis the line runs along.</li>
-              <li>Where's data.d? We don't need to use everything, silly.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <h3>Just connect to <span class="small-mono">ws://literature.uncontext.com:80</span></h3>
-        <div class="code">
-<pre><code>// Look how freaking easy it is to get the data!
-
+      <h2 class="as-h2">It&rsquo;s easy as shit</h2>
+      <div class="divider"></div>
+      <p class="grid__col grid__col--1-of-2 grid__col--centered">Do whatever you want with Uncontext’s data stream. 3D print a piece of toast, kill your friends, hell, microwave your dad. If you want to get a quick and easy taste for the power, just play with this example code using Socket.io and D3.</p>
+      <pre id="code-sample" class="grid__col grid__col--1-of-2 grid__col--centered">
 &lt;script&gt;
   socket_ = new WebSocket('ws://literature.uncontext.com:80');
   socket_.onmessage = function (data) {
     console.log(data);
   };
-&lt;/script&gt;</code></pre>
-        </div>
-      </section>
+&lt;/script&gt;</pre>
 
-      <section class="section compressed">
-        <h3>Current submissions</h3>
-        {{#datasets}}
-        <ul class="submission-list">
-        {{#slugs}}
-          <li>
-            <p class="title"><a href="/{{name}}/{{slug}}">{{title}}</p></a>
-            <a href="/{{name}}/{{slug}}"><div class="thumb" style="background-image: url('/img/{{name}}/{{slug}}.gif')">&nbsp;</div></a>
-          </li>
-        {{/slugs}}
-        </ul>
-        {{/datasets}}
-      </section>
+    </div><!-- /grid -->
+  </section><!-- /code -->
 
-    </section><!-- /wrapper -->
+  <section id="gallery-cta" class="section section-black">
 
-    <footer>
-      <ul class="link-list">
-        <li><a href="http://twitter.com/uncontext">@uncontext</a></li>
-        <li><a href="http://github.com/thisisjohnbrown/uncontext">Github</a></li>
-        <li>By <a href="http://thisisjohnbrown.com">John Brown</a></li>
-      </ul>
-    </footer>
+    <a href="#" class="button button-cream">View current submissions</a>
+
+  </section>
+
+</div>
 
 {{> footer}}
