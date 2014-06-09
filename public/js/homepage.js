@@ -49,7 +49,7 @@ function addItem(i, iTotal, size, direction, yOffset, now) {
 }
 
 function init() {
-  var dividerNames = ['divider1', 'divider2'];
+  var dividerNames = ['divider1', 'divider2', 'divider3'];
   for (var i = 0; i < dividerNames.length; i++) {
     var canvas = document.getElementById(dividerNames[i]);
     var context = canvas.getContext('2d');
@@ -141,7 +141,6 @@ headerAnimationSteps = function(canvas, context) {
 
     if (socketData.b && this.ticks % 30 === 0) {
       this.currLine++;
-      console.log(socketData.b);
       this.lines[this.currLine % this.lines.length].seek += socketData.b / 20.33;
     }
 
@@ -160,6 +159,48 @@ headerAnimationSteps = function(canvas, context) {
       var drawY = Math.floor((this.lines[i].curr % 1) * 10) + .5;
       this.context.moveTo(i * 20, drawY);
       this.context.lineTo((i + 1) * 20, drawY);
+      this.context.stroke();
+    }
+  }
+}
+
+//  This is an animation for the third header on the homepage
+headerAnimationWide = function(canvas, context) {
+  this.canvas = canvas;
+  this.context = context;
+  this.lines = [];
+
+  for (var i = 0; i < 3; i++) {
+    this.lines.push({
+      'curr': 1,
+      'seek': .5
+    })
+  }
+
+  this.animate = function() {
+    this.ticks++;
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    if (socketData.b) {
+      this.lines[0].seek = socketData.b / 20.33;
+      this.lines[1].seek = socketData.b / 14;
+      this.lines[2].seek = socketData.e.f / socketData.e.g;
+    }
+
+    for (var i = 0; i < this.lines.length; i++) {
+      var diff = this.lines[i].curr - this.lines[i].seek;
+      if (Math.abs(diff) < .01) {
+        this.lines[i].curr = this.lines[i].seek;
+      } else if (diff < 0) {
+        this.lines[i].curr += .01;
+      } else {
+        this.lines[i].curr -= .01;
+      }
+      this.context.beginPath();
+      this.context.lineWidth = 2;
+      var drawWidth = this.lines[i].curr * canvas.width;
+      this.context.moveTo((canvas.width - drawWidth) / 2, i * 5 + 1);
+      this.context.lineTo((canvas.width - drawWidth) / 2 + drawWidth, i * 5 + 1);
       this.context.stroke();
     }
   }
