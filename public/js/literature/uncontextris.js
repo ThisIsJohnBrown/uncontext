@@ -27,10 +27,10 @@ var BLOCK_EMPTY = 0,
     BLOCK_FULL = 1,
     BLOCK_ACTIVE = 2;
 
-var crazyLevel = 2;
+var crazyLevel = 0;
 
 // keys
-var UP = 38, DOWN = 40, LEFT = 37, RIGHT = 39;
+var UP = 38, DOWN = 40, LEFT = 37, RIGHT = 39, SPACE = 32;
 
 baseColors = ['#39f044', '#00ff00', '#0000ff'];
 currColors = baseColors;
@@ -240,6 +240,23 @@ function moveDown() {
   return true;
 }
 
+function slamPiece() {
+  var collision = false;
+  var ticks = 0;
+  while (!collision || ticks < 20) {
+    activeShape.y++;
+    ticks++;
+    if (checkBottom() || isCollision(activeShape)) {
+      activeShape.y--;
+      shapeToBoard();
+      activeShape.y = 0;
+      addShape();
+      collision = true;
+      return false;
+    }
+  }
+}
+
 function outOfBounds() {
   if (activeShape.x + activeShape.leftEdge() < 0)
     return true;
@@ -323,34 +340,20 @@ function movePiece(motion) {
     rotateShape();
   else if (motion == DOWN)
     moveDown();
+  else if (motion == SPACE)
+    slamPiece();
 }
 
 function drawGameBoard() {
   context.clearRect(0, 0, window.innerWidth, window.innerHeight);
   context.fillStyle = "#000";
-  if (crazyLevel !== 2) {
+  if (crazyLevel < 2) {
     context.fillRect(window.innerWidth / 2 - calculatedWidth / 2 - blockSize * 3.5,
       window.innerHeight / 2 - calculatedHeight / 2,
       calculatedWidth, calculatedHeight);
   }
 
-  if (crazyLevel === 0) {
-    context.fillRect(window.innerWidth / 2 + calculatedWidth / 2 - blockSize * 2.5 ,
-      window.innerHeight / 2 - calculatedHeight / 2  + blockSize * 2,
-      blockSize * 6, blockSize * 5);
-  }
-
-  context.font = "bold 16px sans-serif";
-  context.fillText('Level: ' + (level || 1),
-    window.innerWidth / 2 + calculatedWidth / 2 - blockSize * 2,
-    window.innerHeight / 2 - calculatedHeight / 2  + blockSize);
-
-  context.font = "bold 16px sans-serif";
-  context.fillText('uncontext',
-    window.innerWidth / 2 - calculatedWidth / 2 - blockSize * 3,
-    window.innerHeight / 2 + calculatedHeight / 2 + blockSize);
-
-  if (crazyLevel === 2) {
+  if (crazyLevel >= 2) {
     for (var y = 0; y < fullBlockHeight; y++) {
       for (var x = 0; x < fullBlockWidth; x++) {
         if (crazyColors[y]) {
@@ -359,6 +362,13 @@ function drawGameBoard() {
         }
       }
     }
+  }
+
+  context.fillStyle = "#000";
+  if (crazyLevel === 0 || crazyLevel === 2) {
+    context.fillRect(window.innerWidth / 2 + calculatedWidth / 2 - blockSize * 2.5 ,
+      window.innerHeight / 2 - calculatedHeight / 2  + blockSize,
+      blockSize * 6, blockSize * 5);
   }
 
   context.fillStyle = "#0f0";
@@ -392,16 +402,61 @@ function drawGameBoard() {
     }
   }
 
-  if (crazyLevel === 0) {
+  if (crazyLevel === 0 || crazyLevel === 2) {
     for (var y = 0; y < 4; y++) {
       for (var x = 0; x < 4; x++) {
         if (nextShape.shape[y][x] == BLOCK_FULL) {
           context.fillStyle = nextShape.color;
-          drawBlock(x + 16 + nextShape.offsetX, y + 3 + nextShape.offsetY);
+          drawBlock(x + 16 + nextShape.offsetX, y + 2 + nextShape.offsetY);
         }
       }
     }
   }
+
+
+  context.fillStyle = '#000000';
+
+  context.font = "bold 16px sans-serif";
+  context.fillText('level: ' + (level || 1),
+    window.innerWidth / 2 + calculatedWidth / 2 - blockSize * 2.5,
+    window.innerHeight / 2 - calculatedHeight / 2  + blockSize * .5);
+
+  context.font = "normal 16px sans-serif";
+  context.fillText('difficulties:',
+    window.innerWidth / 2 + calculatedWidth / 2 - blockSize * 2.5 ,
+    window.innerHeight / 2 - calculatedHeight / 2  + blockSize * 8);
+
+  for (var i = 0; i < buttons.length; i++) {
+    var weight = crazyLevel === i ? 'bold 20px' : 'normal 16px';
+    context.fillStyle = crazyLevel === i ? '#999999' : '#cccccc';
+    // console.log(i, context.fillStyle);
+    var leftEdge = window.innerWidth / 2 + calculatedWidth / 2 - blockSize * 2.5;
+    var topEdge = window.innerHeight / 2 - calculatedHeight / 2  + blockSize * (10 + (i * 2.5));
+    var buttonLeftEdge = leftEdge - blockSize * .5;
+    var buttonTopEdge = topEdge - blockSize * 1.75;
+    var buttonWidth = 130;
+    var buttonHeight = blockSize * 2;
+    context.font =  weight + " sans-serif";
+    context.beginPath();
+    context.moveTo(buttonLeftEdge + 20, buttonTopEdge + 10);
+    context.lineTo(buttonLeftEdge + buttonWidth, buttonTopEdge + 10);
+    context.quadraticCurveTo(buttonLeftEdge + buttonWidth + 10, buttonTopEdge + 10, buttonLeftEdge + buttonWidth + 10, buttonTopEdge + 20);
+    context.lineTo(buttonLeftEdge + buttonWidth + 10, buttonTopEdge + buttonHeight);
+    context.quadraticCurveTo(buttonLeftEdge + buttonWidth + 10, buttonTopEdge + buttonHeight + 10, buttonLeftEdge + buttonWidth, buttonTopEdge + buttonHeight + 10);
+    context.lineTo(buttonLeftEdge + 20, buttonTopEdge + buttonHeight + 10);
+    context.quadraticCurveTo(buttonLeftEdge + 10, buttonTopEdge + buttonHeight + 10, buttonLeftEdge + 10, buttonTopEdge + buttonHeight);
+    context.lineTo(buttonLeftEdge + 10, buttonTopEdge + 20);
+    context.quadraticCurveTo(buttonLeftEdge + 10, buttonTopEdge + 10, buttonLeftEdge + 20, buttonTopEdge + 10);
+    context.stroke();
+    context.fill();
+    context.fillStyle = '#000000';
+    context.fillText(buttons[i].level, leftEdge + blockSize / 2, topEdge);
+  }
+
+  context.font = "bold 16px sans-serif";
+  context.fillText('reset!',
+    window.innerWidth / 2 + calculatedWidth / 2 - blockSize * 2.5,
+    window.innerHeight / 2 + calculatedHeight / 2);
 
   t = setTimeout(function() { drawGameBoard(); }, 30);
 }
@@ -411,16 +466,12 @@ function drawBlock(x, y, full) {
     context.fillRect(
       window.innerWidth / 2 - calculatedWidth / 2 - blockSize * 3.5 + x * blockSize,
       window.innerHeight / 2 - calculatedHeight / 2 + y * blockSize,
-      blockSize + .5, blockSize);
+      blockSize, blockSize);
   } else {
-    // context.fillRect(
-    //   x * blockSize + (window.innerWidth / 2 - calculatedWidth / 2) % blockSize,
-    //   y * blockSize - (window.innerHeight / 2 - calculatedHeight / 2) % blockSize,
-    //   blockSize + .5, blockSize);
     context.fillRect(
       (window.innerWidth / 2 - calculatedWidth / 2) % blockSize + (x - 1.5) * blockSize,
       (window.innerHeight / 2 - calculatedHeight / 2) % blockSize + (y - 1) * blockSize,
-      blockSize + .5, blockSize);
+      blockSize, blockSize);
   }
 }
 
@@ -430,7 +481,7 @@ function handleKeys(e) {
 
   k = (evt.charCode) ?
     evt.charCode : evt.keyCode;
-  if (k > 36 && k < 41) {
+  if ((k > 36 && k < 41) || k === 32) {
     movePiece(k);
     return false;
   };
@@ -449,7 +500,7 @@ function initialize() {
   context = canvas.getContext('2d');
 
   // create handlers
-  document.onkeyup = function(e) { return handleKeys(e) };
+  document.onkeydown = function(e) { return handleKeys(e) };
 
   reset();
   tempCrazyColors = randomColor({
@@ -602,28 +653,24 @@ uncontext.socket_.onmessage = function(message) {
   if (socketData) {
     if (tempData.c !== socketData.c) {
       if (activeShape) {
-        if (crazyLevel === 0) {
+        if (crazyLevel === 0 || crazyLevel === 2) {
           nextShape.reset(tempData);
         } else {
           activeShape.reset(tempData);
-          if (crazyLevel === 2) {
-            for (var y = 0; y < fullBlockHeight; y++) {
-              var tempColors = randomColor({
-                 count: parseInt(innerWidth / blockSize, 10) + 2
-              });
-              var tempArray = {};
-              for (var i = 0; i < tempColors.length; i++) {
-                tempArray[i] = tempColors[i];
-              }
-              if (crazyColors[y]) {
-                TweenLite.to(crazyColors[y], 3, {colorProps:tempArray});
-                // for (var x = 0; x < width; x++) {
-                //   TweenMax.to(crazyColors[y], '#00ff00', {x:100}); 
-                // }
-              } else {
-                console.log('NEW! ', y);
-                crazyColors[y] = tempArray;
-              }
+        }
+        if (crazyLevel >= 2) {
+          for (var y = 0; y < fullBlockHeight; y++) {
+            var tempColors = randomColor({
+               count: parseInt(innerWidth / blockSize, 10) + 2
+            });
+            var tempArray = {};
+            for (var i = 0; i < tempColors.length; i++) {
+              tempArray[i] = tempColors[i];
+            }
+            if (crazyColors[y]) {
+              TweenMax.to(crazyColors[y], 3, {colorProps:tempArray});
+            } else {
+              crazyColors[y] = tempArray;
             }
           }
         }
@@ -641,7 +688,8 @@ uncontext.socket_.onmessage = function(message) {
   socketData = tempData;
 }
 
-window.addEventListener( 'resize', onWindowResize, false );
+window.addEventListener('resize', onWindowResize, false );
+window.addEventListener('mousemove', onMouseMove, false );
 
 function onWindowResize() {
   canvas.width = window.innerWidth;
@@ -651,8 +699,50 @@ function onWindowResize() {
   drawGameBoard();
 }
 
+var buttons = [
+  {x: 0, width: 130, level: 'regular'},
+  {x: 160, width: 130, level: 'crazy'},
+  {x: 320, width: 130, level: 'i can\'t'},
+  {x: 320, width: 130, level: 'fuck this'}
+]
+
 function onMouseDown(e) {
-  console.log(e);
+  var leftEdge = window.innerWidth / 2 + calculatedWidth / 2 - blockSize * 2.5;
+  var rightEdge = leftEdge + blockSize * 6;
+  var topEdge = window.innerHeight / 2 - calculatedHeight / 2  + blockSize * 9;
+  if (e.offsetX > leftEdge && e.offsetX < rightEdge) {
+    for (var i = 0; i < buttons.length; i++) {
+      if (e.offsetY > topEdge + blockSize * (i * 2.5) && e.offsetY < topEdge + blockSize * ((i + 1) * 2.5)) {
+        crazyLevel = i;
+      }
+    }
+  }
+  var resetLeftEdge = window.innerWidth / 2 + calculatedWidth / 2 - blockSize * 2.5;
+  var resetRightEdge = resetLeftEdge + blockSize * 6;
+  var resetTopEdge = window.innerHeight / 2 + calculatedHeight / 2 - blockSize;
+  var resetBottomEdge = resetTopEdge + blockSize;
+  if (e.offsetX > resetLeftEdge && e.offsetX < resetRightEdge) {
+    if (e.offsetY > resetTopEdge && e.offsetY < resetBottomEdge) {
+      reset();
+    }
+  }
+}
+
+function onMouseMove(e) {
+  var leftEdge = window.innerWidth / 2 + calculatedWidth / 2 - blockSize * 2.5;
+  var rightEdge = leftEdge + blockSize * 6;
+  var topEdge = window.innerHeight / 2 - calculatedHeight / 2  + blockSize * 9;
+  var check = 0;
+  if (e.offsetX > leftEdge && e.offsetX < rightEdge) {
+    if (e.offsetY > topEdge && e.offsetY < topEdge + blockSize * ((buttons.length + 1) * 2.5)) {
+      check++;
+    }
+  }
+  if (check) {
+    canvas.style.cursor='pointer';
+  } else {
+    canvas.style.cursor='auto';
+  }
 }
 
 initialize();
