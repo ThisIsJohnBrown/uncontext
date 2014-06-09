@@ -49,7 +49,7 @@ function addItem(i, iTotal, size, direction, yOffset, now) {
 }
 
 function init() {
-  var dividerNames = ['divider1'];
+  var dividerNames = ['divider1', 'divider2'];
   for (var i = 0; i < dividerNames.length; i++) {
     var canvas = document.getElementById(dividerNames[i]);
     var context = canvas.getContext('2d');
@@ -76,8 +76,6 @@ window.onresize = function(event) {
 headerAnimationLines = function(canvas, context) {
   this.canvas = canvas;
   this.context = context;
-  this.type = 'tris';
-  this.count = 0;
   this.lines = [];
   this.missingLines = [];
   this.previousMissing = -1;
@@ -117,6 +115,51 @@ headerAnimationLines = function(canvas, context) {
       this.context.strokeStyle = 'rgba(0, 0, 0, ' + this.lines[i].opacity + ')';
       this.context.moveTo(i * 10, 10 * this.lines[i].direction);
       this.context.lineTo((i + 1) * 10, 10 * (this.lines[i].direction ? 0 : 1));
+      this.context.stroke();
+    }
+  }
+}
+
+//  This is an animation for the second header on the homepage
+headerAnimationSteps = function(canvas, context) {
+  this.canvas = canvas;
+  this.context = context;
+  this.lines = [];
+  this.currLine = 0;
+  this.ticks = 0;
+
+  for (var i = 0; i < 5; i++) {
+    this.lines.push({
+      'curr': .5,
+      'seek': .5
+    })
+  }
+
+  this.animate = function() {
+    this.ticks++;
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    if (socketData.b && this.ticks % 30 === 0) {
+      this.currLine++;
+      console.log(socketData.b);
+      this.lines[this.currLine % this.lines.length].seek += socketData.b / 20.33;
+    }
+
+    for (var i = 0; i < this.lines.length; i++) {
+      if (this.lines[i].curr !== this.lines[i].seek) {
+        var diff = this.lines[i].curr - this.lines[i].seek;
+        if (Math.abs(diff) < .02) {
+          this.lines[i].curr = this.lines[i].seek;
+        } else if (diff < 0) {
+          this.lines[i].curr += .02;
+        } else {
+          this.lines[i].curr -= .02;
+        }
+      }
+      this.context.beginPath();
+      var drawY = Math.floor((this.lines[i].curr % 1) * 10) + .5;
+      this.context.moveTo(i * 20, drawY);
+      this.context.lineTo((i + 1) * 20, drawY);
       this.context.stroke();
     }
   }
