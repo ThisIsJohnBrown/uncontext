@@ -1,13 +1,12 @@
 var socketData = {};
 var speed = .3;
-var max_rows = 6;
+var maxRows = 6;
 if (document.documentElement.clientWidth > 500) {
-  max_rows = 17;
+  maxRows = 8;
 }
 
-var items_ = [];
 var dividers = [];
-
+$trs = null;
 $(function() {
   init();
   animate();
@@ -15,23 +14,19 @@ $(function() {
   uncontext.socket_.onmessage = function (event) {
     data = JSON.parse(event.data);
 
-    if ($('.data').length) {
-      $('.data table tbody').prepend('<tr>\
-        <td>' + data.a + '</td>\
-        <td>' + data.b + '</td>\
-        <td>' + data.c + '</td>\
-        <td>' + data.d + '</td>\
-        <td><span>f: ' + data.e.f + '</span><span>g: ' + data.e.g + '</span></td>\
-      </tr>');
-    }
-    $('.data table tr:eq(' + max_rows + ')').remove();
-
-    if (socketData.a !== data.a) {
-      var now = new Date().getTime();
-      for (var i = 0; i < data.a; i++) {
-        var item = addItem(i, data.a, data.b, data.c, data.e.f / data.e.g, now);
-        items_.push(item);
-      }
+    if ($('#demo-table').length && socketData.a) {
+      // console.log($(this).find('tr').length);
+      $trs = $('#demo-table tbody tr');
+      $($trs[0]).find('td:eq(1)').append('<span>' + socketData.a + '</span>');
+      $($trs[1]).find('td:eq(1)').append('<span>' + socketData.b + '</span>');
+      $($trs[2]).find('td:eq(1)').append('<span>' + socketData.c + '</span>');
+      $($trs[3]).find('td:eq(1)').append('<span>' + socketData.d + '</span>');
+      $($trs[4]).find('td:eq(1)').append('<span>' + socketData.e.f + '</span>');
+      $($trs[5]).find('td:eq(1)').append('<span>' + socketData.e.g + '</span>');
+      $trs.each(function() {
+        // console.log($(this));
+        $(this).find('td:eq(1) span:eq(0)').remove();
+      })
     }
 
     socketData = data;
