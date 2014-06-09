@@ -522,7 +522,8 @@ nav ul:after {
 
 html, body {
   font-family: "Verlag A", "Verlag B", "Helvetica Neue", "Helvetica", sans-serif;
-  text-rendering: optimizeLegibility; }
+  text-rendering: optimizeLegibility;
+  background-color: #fff3e7; }
 
 .as-h1 {
   margin: 12px 0;
@@ -553,7 +554,8 @@ p {
 
 .section {
   width: 100%;
-  padding: 48px; }
+  padding: 48px;
+  background-color: #fff; }
   .section.section-cream {
     background-color: #fff3e7; }
   .section.section-black {
@@ -654,28 +656,28 @@ nav {
     height: 48px;
     background-color: #6e1db5; }
 
-td span:nth-child(1) {
+#demo-table td span:nth-child(1) {
   opacity: 0.125; }
 
-td span:nth-child(2) {
+#demo-table td span:nth-child(2) {
   opacity: 0.25; }
 
-td span:nth-child(3) {
+#demo-table td span:nth-child(3) {
   opacity: 0.375; }
 
-td span:nth-child(4) {
+#demo-table td span:nth-child(4) {
   opacity: 0.5; }
 
-td span:nth-child(5) {
+#demo-table td span:nth-child(5) {
   opacity: 0.625; }
 
-td span:nth-child(6) {
+#demo-table td span:nth-child(6) {
   opacity: 0.75; }
 
-td span:nth-child(7) {
+#demo-table td span:nth-child(7) {
   opacity: 0.875; }
 
-td span:nth-child(8) {
+#demo-table td span:nth-child(8) {
   opacity: 1; }
 
 #code-sample {
@@ -687,10 +689,52 @@ td span:nth-child(8) {
   font-size: 14px;
   line-height: 18px; }
 
+#submit header {
+  margin: 96px auto; }
+
 #gallery-cta {
   text-align: center; }
   #gallery-cta .button {
     margin: 48px auto; }
+
+#github-cta {
+  background-color: #6e1db5;
+  color: #fff3e7;
+  text-align: center;
+  padding: 48px 216px; }
+  #github-cta svg {
+    zoom: 1.6; }
+  #github-cta p {
+    margin: 24px auto; }
+
+#submission-form {
+  margin-top: 96px;
+  margin-bottom: 48px; }
+  #submission-form input[type=text] {
+    display: block;
+    width: 100%;
+    border: 2px solid black;
+    outline: none;
+    font-family: 'Mercury Text G1 A', 'Mercury Text G1 B', serif;
+    font-size: 16px;
+    color: black;
+    height: 36px;
+    background: transparent;
+    margin: 0 0 12px 0;
+    padding: 0 12px; }
+  #submission-form textarea {
+    border: 2px solid black;
+    outline: 0;
+    padding: 6px 12px;
+    font-family: 'Mercury Text G1 A', 'Mercury Text G1 B', serif;
+    color: black;
+    background: transparent;
+    width: 100%;
+    height: 276px; }
+  #submission-form #submit {
+    margin-top: 24px;
+    display: block;
+    text-align: center; }
 
 #hero p, #demo p, #code p {
   text-align: center; }

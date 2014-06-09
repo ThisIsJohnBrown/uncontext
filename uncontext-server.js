@@ -19,6 +19,10 @@ app.get('/', function(req, res){
   return res.render('home.mustache', {datasets: datasets, homepage: true});
 });
 
+app.get('/submit/', function(req, res) {
+  return res.render('submit.mustache')
+});
+
 var datasets = [];
 var sets = fs.readdirSync(__dirname + '/scenes/');
 for (var i = 0;i < sets.length; i++) {

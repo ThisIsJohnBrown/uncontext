@@ -56,7 +56,7 @@
 $num-datas: 8;
 @for $i from 1 through $num-datas {
   $opacity: (1/$num-datas) * $i;
-  td span:nth-child(#{$i}) {
+  #demo-table td span:nth-child(#{$i}) {
     opacity: $opacity;
   }
 }
@@ -71,11 +71,66 @@ $num-datas: 8;
   line-height: $baseline*1.5;
 }
 
+#submit header {
+  margin: $baseline*8 auto;
+}
+
 #gallery-cta {
   text-align: center;
 
   .button {
     margin: $baseline*4 auto;
+  }
+}
+
+#github-cta {
+  background-color: $purple;
+  color: $cream;
+  text-align: center;
+  padding: $baseline*4 $baseline*18;
+
+  svg {
+    zoom: 1.6;
+  }
+
+  p {
+    margin: $baseline*2 auto;
+  }
+}
+
+#submission-form {
+  margin-top: $baseline*8;
+  margin-bottom: $baseline*4;
+
+  input[type=text] {
+    display: block;
+    width: 100%;
+    border: 2px solid $black;
+    outline: none;
+    font-family: $serif;
+    font-size: 16px;
+    color: $black;
+    height: $baseline*3;
+    background: transparent;
+    margin: 0 0 $baseline 0;
+    padding: 0 $baseline;
+  }
+
+  textarea {
+    border: 2px solid $black;
+    outline: 0;
+    padding: $baseline/2 $baseline;
+    font-family: $serif;
+    color: $black;
+    background: transparent;
+    width: 100%;
+    height: 276px;
+  }
+
+  #submit {
+    margin-top: $baseline*2;
+    display: block;
+    text-align: center;
   }
 }
 
