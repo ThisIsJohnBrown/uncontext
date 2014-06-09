@@ -7,6 +7,8 @@
   "twitter": "thisisjohnbrown",
   "assets": {
     "js": true,
-    "css": true
+    "css": true,
+    "tweenmax": true,
+    "randomcolor": true
   }
 }

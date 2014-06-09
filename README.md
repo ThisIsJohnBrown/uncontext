@@ -91,11 +91,13 @@ The following can also be instantiated on the page for you to use by adding this
 ```
 "assets": {
   "threejs": true, // Three.js r67
+  "tweenmax": true, // TweenMax 1.11.8
   "processingjs": true, // Processing.js 1.4.8
   "d3": true, // D3 3.4.6
   "raphaeljs": true, // Raphael.js 2.1.2
   "toxiclibsjs": true, // Toxiclibs.js 0.2.7
-  "kineticjs": true, // Kinetic.js 5.1.0
+  "kineticjs": true, // Kinetic.js 5.1.0,
+  "randomcolor": true, // RandomColor - https://github.com/davidmerfield/randomColor
 }
 ```
 

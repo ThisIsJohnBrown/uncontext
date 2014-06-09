@@ -1,11 +1,17 @@
+(window._gsQueue||(window._gsQueue=[])).push(function(){"use strict";var e=/(\d|\.)+/g,t={aqua:[0,255,255],lime:[0,255,0],silver:[192,192,192],black:[0,0,0],maroon:[128,0,0],teal:[0,128,128],blue:[0,0,255],navy:[0,0,128],white:[255,255,255],fuchsia:[255,0,255],olive:[128,128,0],yellow:[255,255,0],orange:[255,165,0],gray:[128,128,128],purple:[128,0,128],green:[0,128,0],red:[255,0,0],pink:[255,192,203],cyan:[0,255,255],transparent:[255,255,255,0]},n=function(e,t,n){e=e<0?e+1:e>1?e-1:e;return(e*6<1?t+(n-t)*e*6:e<.5?n:e*3<2?t+(n-t)*(2/3-e)*6:t)*255+.5|0},r=function(r){if(r===""||r==null||r==="none"){return t.transparent}if(t[r]){return t[r]}if(typeof r==="number"){return[r>>16,r>>8&255,r&255]}if(r.charAt(0)==="#"){if(r.length===4){r="#"+r.charAt(1)+r.charAt(1)+r.charAt(2)+r.charAt(2)+r.charAt(3)+r.charAt(3)}r=parseInt(r.substr(1),16);return[r>>16,r>>8&255,r&255]}if(r.substr(0,3)==="hsl"){r=r.match(e);var i=Number(r[0])%360/360,s=Number(r[1])/100,o=Number(r[2])/100,u=o<=.5?o*(s+1):o+s-o*s,a=o*2-u;if(r.length>3){r[3]=Number(r[3])}r[0]=n(i+1/3,a,u);r[1]=n(i,a,u);r[2]=n(i-1/3,a,u);return r}return r.match(e)||t.transparent};window._gsDefine.plugin({propName:"colorProps",priority:-1,API:2,init:function(e,t,n){this._target=e;var i,s,o,u;for(i in t){o=r(t[i]);this._firstPT=u={_next:this._firstPT,p:i,f:typeof e[i]==="function",n:i,r:false};s=r(!u.f?e[i]:e[i.indexOf("set")||typeof e["get"+i.substr(3)]!=="function"?i:"get"+i.substr(3)]());u.s=Number(s[0]);u.c=Number(o[0])-u.s;u.gs=Number(s[1]);u.gc=Number(o[1])-u.gs;u.bs=Number(s[2]);u.bc=Number(o[2])-u.bs;if(u.rgba=s.length>3||o.length>3){u.as=s.length<4?1:Number(s[3]);u.ac=(o.length<4?1:Number(o[3]))-u.as}if(u._next){u._next._prev=u}}return true},set:function(e){var t=this._firstPT,n;while(t){n=(t.rgba?"rgba(":"rgb(")+(t.s+e*t.c>>0)+", "+(t.gs+e*t.gc>>0)+", "+(t.bs+e*t.bc>>0)+(t.rgba?", "+(t.as+e*t.ac):"")+")";if(t.f){this._target[t.p](n)}else{this._target[t.p]=n}t=t._next}}})});if(window._gsDefine){window._gsQueue.pop()()}
+
 var width = 14,
     height = 20,
     canvasId = 'uncontextris',
     blockSize = 20,
     calculatedWidth = width * blockSize,
     calculatedHeight = height * blockSize,
+    fullBlockWidth = parseInt(window.innerWidth / blockSize, 10) + 2,
+    fullBlockHeight = parseInt(window.innerHeight / blockSize, 10) + 2,
     board,
     colors,
+    oldCrazyColors = [],
+    crazyColors = {},
     baseColors,
     currColors,
     pendingShape,
@@ -21,7 +27,7 @@ var BLOCK_EMPTY = 0,
     BLOCK_FULL = 1,
     BLOCK_ACTIVE = 2;
 
-var crazyLevel = 1;
+var crazyLevel = 2;
 
 // keys
 var UP = 38, DOWN = 40, LEFT = 37, RIGHT = 39;
@@ -322,10 +328,11 @@ function movePiece(motion) {
 function drawGameBoard() {
   context.clearRect(0, 0, window.innerWidth, window.innerHeight);
   context.fillStyle = "#000";
-  var midWidth = 
-  context.fillRect(window.innerWidth / 2 - calculatedWidth / 2 - blockSize * 3.5,
-    window.innerHeight / 2 - calculatedHeight / 2,
-    calculatedWidth, calculatedHeight);
+  if (crazyLevel !== 2) {
+    context.fillRect(window.innerWidth / 2 - calculatedWidth / 2 - blockSize * 3.5,
+      window.innerHeight / 2 - calculatedHeight / 2,
+      calculatedWidth, calculatedHeight);
+  }
 
   if (crazyLevel === 0) {
     context.fillRect(window.innerWidth / 2 + calculatedWidth / 2 - blockSize * 2.5 ,
@@ -337,6 +344,22 @@ function drawGameBoard() {
   context.fillText('Level: ' + (level || 1),
     window.innerWidth / 2 + calculatedWidth / 2 - blockSize * 2,
     window.innerHeight / 2 - calculatedHeight / 2  + blockSize);
+
+  context.font = "bold 16px sans-serif";
+  context.fillText('uncontext',
+    window.innerWidth / 2 - calculatedWidth / 2 - blockSize * 3,
+    window.innerHeight / 2 + calculatedHeight / 2 + blockSize);
+
+  if (crazyLevel === 2) {
+    for (var y = 0; y < fullBlockHeight; y++) {
+      for (var x = 0; x < fullBlockWidth; x++) {
+        if (crazyColors[y]) {
+          context.fillStyle = crazyColors[y][x];
+          drawBlock(x, y, true);
+        }
+      }
+    }
+  }
 
   context.fillStyle = "#0f0";
 
@@ -383,11 +406,22 @@ function drawGameBoard() {
   t = setTimeout(function() { drawGameBoard(); }, 30);
 }
 
-function drawBlock(x, y) {
-  context.fillRect(
-    window.innerWidth / 2 - calculatedWidth / 2 - blockSize * 3.5 + x * blockSize,
-    window.innerHeight / 2 - calculatedHeight / 2 + y * blockSize,
-    blockSize + .5, blockSize);
+function drawBlock(x, y, full) {
+  if (!full) {
+    context.fillRect(
+      window.innerWidth / 2 - calculatedWidth / 2 - blockSize * 3.5 + x * blockSize,
+      window.innerHeight / 2 - calculatedHeight / 2 + y * blockSize,
+      blockSize + .5, blockSize);
+  } else {
+    // context.fillRect(
+    //   x * blockSize + (window.innerWidth / 2 - calculatedWidth / 2) % blockSize,
+    //   y * blockSize - (window.innerHeight / 2 - calculatedHeight / 2) % blockSize,
+    //   blockSize + .5, blockSize);
+    context.fillRect(
+      (window.innerWidth / 2 - calculatedWidth / 2) % blockSize + (x - 1.5) * blockSize,
+      (window.innerHeight / 2 - calculatedHeight / 2) % blockSize + (y - 1) * blockSize,
+      blockSize + .5, blockSize);
+  }
 }
 
 function handleKeys(e) {
@@ -405,7 +439,6 @@ function handleKeys(e) {
 
 function updateBoard() {
   moveDown();
-  console.log(activeShape.level);
   t = setTimeout(function() { updateBoard(); }, 1000 - (90 * (level || 1)));
 }
 
@@ -419,8 +452,20 @@ function initialize() {
   document.onkeyup = function(e) { return handleKeys(e) };
 
   reset();
+  tempCrazyColors = randomColor({
+     luminosity: 'light',
+     count: (fullBlockWidth) * (fullBlockHeight)
+  });
+  for (var y = 0; y < fullBlockHeight; y++) {
+    crazyColors[y] = {};
+    for (var x = 0; x < fullBlockWidth; x++) {
+      crazyColors[y][x] = tempCrazyColors[y * width + x];
+    }
+  }
   drawGameBoard();
   updateBoard();
+
+  canvas.addEventListener( 'mousedown', onMouseDown, false );
 }
 
 function shiftColors(degree) {
@@ -558,9 +603,29 @@ uncontext.socket_.onmessage = function(message) {
     if (tempData.c !== socketData.c) {
       if (activeShape) {
         if (crazyLevel === 0) {
-
+          nextShape.reset(tempData);
         } else {
           activeShape.reset(tempData);
+          if (crazyLevel === 2) {
+            for (var y = 0; y < fullBlockHeight; y++) {
+              var tempColors = randomColor({
+                 count: parseInt(innerWidth / blockSize, 10) + 2
+              });
+              var tempArray = {};
+              for (var i = 0; i < tempColors.length; i++) {
+                tempArray[i] = tempColors[i];
+              }
+              if (crazyColors[y]) {
+                TweenLite.to(crazyColors[y], 3, {colorProps:tempArray});
+                // for (var x = 0; x < width; x++) {
+                //   TweenMax.to(crazyColors[y], '#00ff00', {x:100}); 
+                // }
+              } else {
+                console.log('NEW! ', y);
+                crazyColors[y] = tempArray;
+              }
+            }
+          }
         }
       }
     }
@@ -581,7 +646,13 @@ window.addEventListener( 'resize', onWindowResize, false );
 function onWindowResize() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+  fullBlockWidth = parseInt(window.innerWidth / blockSize, 10) + 2;
+  fullBlockHeight = parseInt(window.innerHeight / blockSize, 10) + 2;
   drawGameBoard();
+}
+
+function onMouseDown(e) {
+  console.log(e);
 }
 
 initialize();
