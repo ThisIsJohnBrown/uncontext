@@ -1,6 +1,4 @@
 var socketData = {};
-var canvas = null;
-var context = null;
 var speed = .3;
 var max_rows = 6;
 if (document.documentElement.clientWidth > 500) {
@@ -8,6 +6,7 @@ if (document.documentElement.clientWidth > 500) {
 }
 
 var items_ = [];
+var dividers = [];
 
 $(function() {
   init();
@@ -50,36 +49,75 @@ function addItem(i, iTotal, size, direction, yOffset, now) {
 }
 
 function init() {
-  canvas = document.getElementById('homepage-canvas');
-  context = canvas.getContext('2d');
+  var dividerNames = ['divider1'];
+  for (var i = 0; i < dividerNames.length; i++) {
+    var canvas = document.getElementById(dividerNames[i]);
+    var context = canvas.getContext('2d');
+    dividers.push(new window[canvas.getAttribute('data-divider-type')](canvas, context));
+  }
+  
   window.onresize();
 }
 
 function animate() {
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  var now = new Date().getTime();
-
-  for (var i = items_.length - 1; i >= 0; i--) {
-    var item = items_[i];
-    if (item.start + item.delay + 1000 < now) {
-      items_.splice(i, 1);
-    } else if (item.start + item.delay < now) {
-      if (item.currSize < item.finalSize) {
-        item.currSize += speed;
-        context.beginPath();
-        context.arc(item.position[0] * canvas.width, item.position[1] * canvas.height, item.currSize * 3, 0, 2 * Math.PI, false);
-        context.fillStyle = 'rgba(255, 255, 255, ' + (1 - (item.currSize / item.finalSize)) + ')';
-        context.fill();
-      } else {
-        items_.splice(i, 1);
-      }
-    }
+  for (var i = 0; i < dividers.length; i++) {
+    dividers[i].animate();
   }
-
   requestAnimationFrame( animate );
 }
 
 window.onresize = function(event) {
-  canvas.width = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
+  // canvas.width = canvas.offsetWidth;
+  // canvas.height = canvas.offsetHeight;
 };
+
+
+//  This is an animation for the first header on the homepage
+headerAnimationLines = function(canvas, context) {
+  this.canvas = canvas;
+  this.context = context;
+  this.type = 'tris';
+  this.count = 0;
+  this.lines = [];
+  this.missingLines = [];
+  this.previousMissing = -1;
+  for (var i = 0; i < 26; i++) {
+    this.lines.push({
+      'direction': i % 2,
+      'opacity': 1
+    });
+  }
+
+  this.animate = function() {
+    if (socketData.a) {
+      if (socketData.a !== this.previousMissing && this.missingLines.indexOf(socketData.a) === -1) {
+        this.previousMissing = socketData.a;
+        this.missingLines.push(socketData.a);
+        if (this.missingLines.length >= socketData.d) {
+          this.missingLines.shift();
+        }
+      }
+    }
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    for (var i = 0; i < this.lines.length; i++) {
+      if (this.missingLines.indexOf(i) === -1) {
+        if (this.lines[i].opacity < 1) {
+          this.lines[i].opacity += .02;
+        }
+      } else {
+        if (this.lines[i].opacity > 0) {
+          this.lines[i].opacity -= .02;
+        }
+        if (this.lines[i].opacity < 0) {
+          this.lines[i].opacity = 0;
+        }
+      }
+      this.context.beginPath();
+      this.context.strokeStyle = 'rgba(0, 0, 0, ' + this.lines[i].opacity + ')';
+      this.context.moveTo(i * 10, 10 * this.lines[i].direction);
+      this.context.lineTo((i + 1) * 10, 10 * (this.lines[i].direction ? 0 : 1));
+      this.context.stroke();
+    }
+  }
+}
