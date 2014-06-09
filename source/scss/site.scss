@@ -4,6 +4,11 @@
 @import "mixins";
 @import "base";
 
+#wrap {
+  min-width: 1050px;
+  margin: 0 auto;
+}
+
 #hero,
 #submissions-hero {
   header {
