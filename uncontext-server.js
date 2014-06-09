@@ -19,6 +19,14 @@ app.get('/', function(req, res){
   return res.render('home.mustache', {datasets: datasets, homepage: true});
 });
 
+app.get('/submit/', function(req, res) {
+  return res.render('submit.mustache')
+});
+
+app.get('/literature/', function(req, res) {
+  return res.render('submissions.mustache', {datasets: datasets});
+});
+
 var datasets = [];
 var sets = fs.readdirSync(__dirname + '/scenes/');
 for (var i = 0;i < sets.length; i++) {
@@ -70,6 +78,15 @@ app.get('/:dataset/:slug', function(req, res){
       res.render(req.params.dataset + '/' + req.params.slug + '.mustache', function(err, html) {
         if (!err) {
           data.content = html;
+        }
+        if (!data.assets) {
+          data.assets = {};
+        }
+        if (fs.existsSync(__dirname + '/public/js/' + req.params.dataset + '/' + req.params.slug + '.js')) {
+          data.assets.js = true;
+        }
+        if (fs.existsSync(__dirname + '/public/css/' + req.params.dataset + '/' + req.params.slug + '.css')) {
+          data.assets.css = true;
         }
         res.render('creations.mustache', data, function(err, html2) {
           res.send(html2);

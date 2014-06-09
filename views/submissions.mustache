@@ -1,0 +1,50 @@
+{{> header}}
+
+<div id="wrap">
+
+  <section class="section section-cream" id="submissions-hero">
+    <div class="grid grid--no-gutter">
+      
+      <nav class="grid__col grid__col--1-of-2 grid__col--centered">
+        <ul>
+          <li id="logo"><a href="#">Uncontext.</a></li>
+          <li><a href="/submit/">Submit</a></li>
+          <li><a href="/literature/" class="active">Submissions</a></li>
+          <li><a href="/">Information</a></li>    
+        </ul>
+      </nav>
+
+      <header class="grid__col grid__col--1-of-2 grid__col--centered">
+        <p id="session">Session 1</p>
+        <h1 class="as-h1">Literature</h1>
+        <div class="divider"></div>
+      </header>
+    
+    </div><!-- /grid -->
+  </section><!-- /hero -->
+
+  <div class="grid">
+
+    <section id="submission-list" class="grid__col grid__col--3-of-4 grid__col--centered">
+      <ul class="grid grid--no-gutter">
+        {{#datasets}}
+          {{#slugs}}
+            <li class="submission-container grid__col grid__col--1-of-4">
+              <img src="/img/{{name}}/{{slug}}.gif">
+              <div class="submission-info">
+                <div class="info-block">
+                  <p class="title">{{title}}</p>
+                </div>
+                <a href="#" class="button button-cream">View project</a>
+              </div>
+            </li>
+          {{/slugs}}
+        {{/datasets}}
+      </ul>
+    </section>
+
+  </div>
+
+</div><!-- /wrap -->
+
+{{> footer}}
