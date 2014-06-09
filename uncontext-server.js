@@ -53,7 +53,7 @@ for (var i = 0;i < sets.length; i++) {
   }
 }
 
-app.get('/:dataset/:creator/:slug', function(req, res){
+app.get('/:dataset/:slug', function(req, res){
 
   var file = __dirname + '/scenes/' + req.params.dataset + '/' + req.params.slug + '.json';
   fs.readFile(file, 'utf8', function (err, data) {
@@ -63,9 +63,6 @@ app.get('/:dataset/:creator/:slug', function(req, res){
       data = {};
     }
     if (!data.slug) {
-      return res.render('404.mustache');
-    }
-    if (req.params.creator !== data.creator.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'')) {
       return res.render('404.mustache');
     }
     data.datasets = datasets;
