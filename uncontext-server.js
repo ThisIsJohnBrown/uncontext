@@ -23,6 +23,10 @@ app.get('/submit/', function(req, res) {
   return res.render('submit.mustache')
 });
 
+app.get('/literature/', function(req, res) {
+  return res.render('submissions.mustache', {datasets: datasets});
+});
+
 var datasets = [];
 var sets = fs.readdirSync(__dirname + '/scenes/');
 for (var i = 0;i < sets.length; i++) {

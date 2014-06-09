@@ -4,7 +4,8 @@
 @import "mixins";
 @import "base";
 
-#hero {
+#hero,
+#submissions-hero {
   header {
     margin: $baseline*8 auto;
   }
@@ -18,6 +19,10 @@
     font-weight: 200;
     margin-bottom: -$baseline;
   }
+}
+
+#submissions-hero header {
+  margin-bottom: 0;
 }
 
 #demo-table {
@@ -134,8 +139,58 @@ $num-datas: 8;
   }
 }
 
+#submission-list {
+  & > ul {
+    padding: 0;
+
+    .submission-container {
+      margin-bottom: $baseline*2;
+      position: relative;
+      padding: 0 $baseline;
+
+      img {
+        max-width: 100%;
+        -webkit-filter: #{"grayscale(1)"} #{"brightness(0.5)"}; // Hacky shit because of Sass filter conflict
+      }
+
+      .submission-info {
+        position: absolute;
+        top: $baseline;
+        padding: $baseline;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        color: $cream;
+        text-align: center;
+
+        .title {
+          font-family: $sans;
+          font-size: 16px;
+        }
+
+        .info-block {
+          height: 60%;
+        }
+
+        .button {
+          opacity: 0;
+          transition: opacity 0.3s linear;
+        }
+      }
+
+      &:hover {
+        .button {
+          opacity: 1;
+        }
+    }
+    
+    }
+  }
+}
+
 #hero p,
 #demo p,
-#code p {
+#code p,
+#submissions-hero p {
   text-align: center;
 }

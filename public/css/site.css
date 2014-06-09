@@ -624,14 +624,17 @@ nav {
       nav li:first-child a, nav li:first-child a:link, nav li:first-child a:visited {
         color: #6e1db5; }
 
-#hero header {
+#hero header, #submissions-hero header {
   margin: 96px auto; }
-#hero h1 {
+#hero h1, #submissions-hero h1 {
   margin-bottom: 24px; }
-#hero #session {
+#hero #session, #submissions-hero #session {
   text-transform: uppercase;
   font-weight: 200;
   margin-bottom: -12px; }
+
+#submissions-hero header {
+  margin-bottom: 0; }
 
 #demo-table {
   margin-top: 48px;
@@ -736,5 +739,34 @@ nav {
     display: block;
     text-align: center; }
 
-#hero p, #demo p, #code p {
+#submission-list > ul {
+  padding: 0; }
+  #submission-list > ul .submission-container {
+    margin-bottom: 24px;
+    position: relative;
+    padding: 0 12px; }
+    #submission-list > ul .submission-container img {
+      max-width: 100%;
+      -webkit-filter: grayscale(1) brightness(0.5); }
+    #submission-list > ul .submission-container .submission-info {
+      position: absolute;
+      top: 12px;
+      padding: 12px;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      color: #fff3e7;
+      text-align: center; }
+      #submission-list > ul .submission-container .submission-info .title {
+        font-family: "Verlag A", "Verlag B", "Helvetica Neue", "Helvetica", sans-serif;
+        font-size: 16px; }
+      #submission-list > ul .submission-container .submission-info .info-block {
+        height: 60%; }
+      #submission-list > ul .submission-container .submission-info .button {
+        opacity: 0;
+        transition: opacity 0.3s linear; }
+    #submission-list > ul .submission-container:hover .button {
+      opacity: 1; }
+
+#hero p, #demo p, #code p, #submissions-hero p {
   text-align: center; }
