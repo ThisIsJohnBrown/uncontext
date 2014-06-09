@@ -7,7 +7,6 @@
   "twitter": "RobotCaleb",
   "url": "http://robotrising.org",
   "assets": {
-    "js": true,
     "kineticjs": true
   }
 }

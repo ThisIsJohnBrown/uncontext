@@ -79,6 +79,15 @@ app.get('/:dataset/:slug', function(req, res){
         if (!err) {
           data.content = html;
         }
+        if (!data.assets) {
+          data.assets = {};
+        }
+        if (fs.existsSync(__dirname + '/public/js/' + req.params.dataset + '/' + req.params.slug + '.js')) {
+          data.assets.js = true;
+        }
+        if (fs.existsSync(__dirname + '/public/css/' + req.params.dataset + '/' + req.params.slug + '.css')) {
+          data.assets.css = true;
+        }
         res.render('creations.mustache', data, function(err, html2) {
           res.send(html2);
         });

@@ -6,7 +6,6 @@
   "description": "A shocking example of what happens when you give a logogram too much caffeine.",
   "twitter": "thisisjohnbrown",
   "assets": {
-    "js": true,
     "threejs": true
   }
 }

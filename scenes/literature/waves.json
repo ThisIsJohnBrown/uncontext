@@ -6,7 +6,6 @@
   "description": "Visualizing the distress between the well adjusted and the grave.",
   "twitter": "thisisjohnbrown",
   "assets": {
-    "js": true,
     "threejs": true
   }
 }
