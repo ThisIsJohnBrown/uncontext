@@ -9,6 +9,7 @@
     "js": true,
     "css": true,
     "tweenmax": true,
+    "tweenmaxPlugins": ["ColorPropsPlugin"],
     "randomcolor": true
   }
 }
