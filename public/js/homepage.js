@@ -1,9 +1,6 @@
 var socketData = {};
 var speed = .3;
-var maxRows = 6;
-if (document.documentElement.clientWidth > 500) {
-  maxRows = 8;
-}
+var maxRows = 5;
 
 var dividers = [];
 $trs = null;
@@ -17,15 +14,15 @@ $(function() {
     if ($('#demo-table').length && socketData.a) {
       // console.log($(this).find('tr').length);
       $trs = $('#demo-table tbody tr');
-      $($trs[0]).find('td:eq(1)').append('<span>' + socketData.a + '</span>');
-      $($trs[1]).find('td:eq(1)').append('<span>' + socketData.b + '</span>');
-      $($trs[2]).find('td:eq(1)').append('<span>' + socketData.c + '</span>');
-      $($trs[3]).find('td:eq(1)').append('<span>' + socketData.d + '</span>');
-      $($trs[4]).find('td:eq(1)').append('<span>' + socketData.e.f + '</span>');
-      $($trs[5]).find('td:eq(1)').append('<span>' + socketData.e.g + '</span>');
+      $($trs[0]).find('td:eq(1)').prepend('<span>' + socketData.a + '</span>');
+      $($trs[1]).find('td:eq(1)').prepend('<span>' + socketData.b + '</span>');
+      $($trs[2]).find('td:eq(1)').prepend('<span>' + socketData.c + '</span>');
+      $($trs[3]).find('td:eq(1)').prepend('<span>' + socketData.d + '</span>');
+      $($trs[4]).find('td:eq(1)').prepend('<span>' + socketData.e.f + '</span>');
+      $($trs[5]).find('td:eq(1)').prepend('<span>' + socketData.e.g + '</span>');
       $trs.each(function() {
         // console.log($(this));
-        $(this).find('td:eq(1) span:eq(0)').remove();
+        $(this).find('td:eq(1) span:eq(5)').remove();
       })
     }
 
