@@ -30,18 +30,18 @@ You don’t have to, but it’s easier.</p>
         <h2 class="as-h2">Not about that Github lifestyle? Fill out this form</h2>
 
         <div class="divider"></div>
-        <form id="submit-project" class="grid">
+        <form id="submit-project" class="grid" action="/submit-project">
           <div class="grid__col grid__col--3-of-8 grid__col--push-1-of-8">
-            <input type="text" placeholder="Project title">
-            <input type="text" placeholder="Link to project (video, image, code, etc)">
-            <input type="text" placeholder="Your name">
-            <input type="text" placeholder="Email">
-            <input type="text" placeholder="Twitter (optional)">
-            <input type="text" placeholder="Website (optional)">
+            <input type="text" name="title" placeholder="Project title">
+            <input type="text" name="link" placeholder="Link to project (video, image, code, etc)">
+            <input type="text" name="name" placeholder="Your name">
+            <input type="text" name="email" placeholder="Email">
+            <input type="text" name="twitter" placeholder="Twitter (optional)">
+            <input type="text" name="website" placeholder="Your website (optional)">
           </div>
 
           <div class="grid__col grid__col--3-of-8">
-            <textarea placeholder="Project description"></textarea>
+            <textarea name="description" placeholder="Project description"></textarea>
           </div>
             
           <a href="#" class="button grid__col grid__col--1-of-4 grid__col--centered" id="submit">Submit project</a>
