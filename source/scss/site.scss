@@ -36,7 +36,7 @@
 
   td {
     height: $baseline*4;
-    font-size: 18px;
+    font-size: 16px;
     line-height: $baseline*4;
     border-bottom: 1px solid rgba($black, 0.05);
   }
@@ -52,7 +52,7 @@
     display: inline-block;
     padding: 0;
     margin: 0;
-    width: 20px;
+    width: 40px;
   }
 
   td .demo-viz-cell {
@@ -63,10 +63,10 @@
 }
 
 // Evenly distribute opacity from 0 to 1 over the course of num datas
-$num-datas: 8;
+$num-datas: 5;
 @for $i from 1 through $num-datas {
   $opacity: (1/$num-datas) * $i;
-  #demo-table td span:nth-child(#{$i}) {
+  #demo-table td span:nth-last-child(#{$i}) {
     opacity: $opacity;
   }
 }

@@ -1,8 +1,5 @@
 var speed = .3;
-var maxRows = 6;
-if (document.documentElement.clientWidth > 500) {
-  maxRows = 8;
-}
+var maxRows = 5;
 
 var dividers = [];
 $trs = null;
@@ -22,7 +19,7 @@ $(function() {
       $($trs[5]).find('td:eq(1)').append('<span>' + uncontext.socketData_.e.g + '</span>');
       $trs.each(function() {
         // console.log($(this));
-        $(this).find('td:eq(1) span:eq(0)').remove();
+        $(this).find('td:eq(1) span:eq(5)').remove();
       })
     }
 

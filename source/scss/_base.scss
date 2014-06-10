@@ -119,9 +119,8 @@ p {
 //
 
 .divider {
-  height: $baseline/3;
-  background-color: $black;
-  width: 100px;
+  display: block;
+  height: 12px;
   margin: $baseline*3 auto;
 }
 

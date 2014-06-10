@@ -160,15 +160,9 @@ Uncontext.prototype.headerAnimationWide = function(canvas, context) {
 }
 
 Uncontext.prototype.animate = function() {
-  // try {
-    if (uncontext.socketData_.a) {
-      for (var i = 0; i < uncontext.dividers_.length; i++) {
-        uncontext.dividers_[i].animate();
-      }
-    }
-  // } catch (e) {
-
-  // }
+  for (var i = 0; i < uncontext.dividers_.length; i++) {
+    uncontext.dividers_[i].animate();
+  }
   requestAnimationFrame( uncontext.animate );
 }
 
