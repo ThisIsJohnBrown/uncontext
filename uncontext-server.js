@@ -6,11 +6,11 @@ var port = Number(process.env.PORT || 5001);
 var server = http.createServer(app).listen(port);
 var fs = require('fs');
 
-var redis = require('redis');
-var url = require('url');
-var redisURL = url.parse(process.env.REDISCLOUD_URL);
-var client = redis.createClient(redisURL.port, redisURL.hostname, {no_ready_check: true});
-client.auth(redisURL.auth.split(":")[1]);
+// var redis = require('redis');
+// var url = require('url');
+// var redisURL = url.parse(process.env.REDISCLOUD_URL);
+// var client = redis.createClient(redisURL.port, redisURL.hostname, {no_ready_check: true});
+// client.auth(redisURL.auth.split(":")[1]);
 
 // client.keys('*', function (err, keys) {
 //   if (err) return console.log(err);

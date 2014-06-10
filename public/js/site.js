@@ -14,7 +14,7 @@ Uncontext.prototype.init = function() {
   }
 
   try {
-    self.socket_ = new WebSocket('ws://literature.uncontext.com:80');
+    self.socket_ = new WebSocket('ws://localhost:5001');
   } catch (e) {
     // Sockets not initialized.
   }
