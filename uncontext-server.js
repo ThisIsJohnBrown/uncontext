@@ -6,6 +6,26 @@ var port = Number(process.env.PORT || 5001);
 var server = http.createServer(app).listen(port);
 var fs = require('fs');
 
+// var redis = require('redis');
+// var url = require('url');
+// var redisURL = url.parse(process.env.REDISCLOUD_URL);
+// var client = redis.createClient(redisURL.port, redisURL.hostname, {no_ready_check: true});
+// client.auth(redisURL.auth.split(":")[1]);
+
+// client.set("a1", JSON.stringify({'a': 2, 'time': new Date().getTime()}), redis.print);
+// client.get('a1', function(e, r) {
+//   console.log(e);
+//   console.log(r);
+// })
+
+// client.keys('*', function (err, keys) {
+//   if (err) return console.log(err);
+
+//   for(var i = 0, len = keys.length; i < len; i++) {
+//     console.log(keys[i]);
+//   }
+// });
+
 app.set('views', __dirname + '/views');
 
 app.set('view engine', 'html');

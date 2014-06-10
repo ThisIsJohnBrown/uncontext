@@ -3,3 +3,4 @@ node_modules
 newrelic_agent.log
 .sublime-project
 .sublime-workspace
+dev.env
