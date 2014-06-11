@@ -61,26 +61,29 @@ function addItem(i, iTotal, size, direction, yOffset, now) {
 }
 
 function animate() {
-  context.clearRect(0, 0, canvas.width, canvas.height);
+  // context.clearRect(0, 0, canvas.width, canvas.height);
   var now = new Date().getTime();
 
-  for (var i = items_.length - 1; i >= 0; i--) {
-    var item = items_[i];
-    if (item.start + item.delay + 1000 < now) {
-      items_.splice(i, 1);
-    } else if (item.start + item.delay < now) {
-      if (item.currSize < item.finalSize) {
-        item.currSize += speed;
-        context.beginPath();
-        context.arc(item.position[0] * canvas.width, item.position[1] * canvas.height, item.currSize * 3, 0, 2 * Math.PI, false);
-        context.strokeStyle = 'rgba(110, 29, 181, ' + (1 - (item.currSize / item.finalSize)) + ')';
-        context.stroke();
-        context.closePath();
-      } else {
-        items_.splice(i, 1);
-      }
-    }
-  }
+  // for (var i = items_.length - 1; i >= 0; i--) {
+  //   var item = items_[i];
+  //   if (item.start + item.delay + 1000 < now) {
+  //     items_.splice(i, 1);
+  //   } else if (item.start + item.delay < now) {
+  //     if (item.currSize < item.finalSize) {
+  //       item.currSize += speed;
+  //       context.beginPath();
+  //       context.arc(item.position[0] * canvas.width, item.position[1] * canvas.height, item.currSize * 3, 0, 2 * Math.PI, false);
+  //       context.strokeStyle = 'rgba(240, 208, 176, ' + (1 - (item.currSize / item.finalSize)) + ')';
+  //       context.fillStyle = 'rgba(0,0,0, ' + (1 - (item.currSize / item.finalSize)) + ')';
+  //       // context.lineWidth = 2;
+  //       context.fill();
+  //       // context.stroke();
+  //       context.closePath();
+  //     } else {
+  //       items_.splice(i, 1);
+  //     }
+  //   }
+  // }
 
   for (var i = 0; i < examples_.length; i++) {
     examples_[i].animate();
@@ -140,11 +143,10 @@ var examplea = function(canvas, context, letter) {
         this.seekNum = uncontext.socketData_.a;
       }
       var radius = parseInt(this.canvas.width / 13, 10);
-      this.context.fillStyle = "#fff3e7";
+      this.context.fillStyle = "#6E1DB5";
       for (var i = 0; i < this.currNum; i++) {
         this.context.beginPath();
         this.context.arc(radius/2 + (i * radius) / 2, radius/2, radius/2, 0, 2 * Math.PI, false);
-        this.context.stroke();
         this.context.fill();
       }
     }
@@ -192,7 +194,7 @@ var exampleb = function(canvas, context, letter) {
 
         this.context.rect(-width / 2, -height / 2, width, height);
 
-        this.context.fillStyle = "#fff3e7";
+        this.context.fillStyle = "#6E1DB5";
         this.context.fill();
 
         this.context.restore();
@@ -226,7 +228,7 @@ var examplec = function(canvas, context, letter) {
       if (uncontext.socketData_.c !== this.seekOpac) {
         this.seekOpac = uncontext.socketData_.c;
       }
-      this.context.fillStyle = 'rgba(255, 243, 231, ' + this.currOpac + ')';
+      this.context.fillStyle = 'rgba(110, 29, 181, ' + this.currOpac + ')';
       this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
   }
@@ -268,7 +270,7 @@ var exampled = function(canvas, context, letter) {
         this.context.lineTo(currOffset + size, size);
         this.context.closePath();
         this.context.clip();
-        this.context.strokeStyle = '#fff3e7';
+        this.context.strokeStyle = '#6E1DB5';
         this.context.lineWidth = this.currStroke * 2;
         this.context.beginPath();
         this.context.moveTo(currOffset + 0, size);
@@ -309,7 +311,7 @@ var exampleef = function(canvas, context, letter) {
       for (var h = 0; h < 2; h++) {
         for (var i = 0; i < this.currNum / 2; i++) {
           this.context.beginPath();
-          this.context.strokeStyle = '#fff3e7';
+          this.context.strokeStyle = '#6E1DB5';
           this.context.moveTo(.5 + i * 2, (h * this.canvas.height / 2) + (i % 2) * (this.canvas.height / 4));
           this.context.lineTo(.5 + i * 2, (h * this.canvas.height / 2) + (this.canvas.height / 4) + (i % 2) * (this.canvas.height / 4));
           this.context.stroke();
@@ -347,7 +349,7 @@ var exampleeg = function(canvas, context, letter) {
       for (var h = 0; h < 2; h++) {
         for (var i = 0; i < this.currNum / 2; i++) {
           this.context.beginPath();
-          this.context.strokeStyle = '#fff3e7';
+          this.context.strokeStyle = '#6E1DB5';
           this.context.moveTo(.5 + i * 2, (h * this.canvas.height / 2) + (i % 2) * (this.canvas.height / 4));
           this.context.lineTo(.5 + i * 2, (h * this.canvas.height / 2) + (this.canvas.height / 4) + (i % 2) * (this.canvas.height / 4));
           this.context.stroke();
