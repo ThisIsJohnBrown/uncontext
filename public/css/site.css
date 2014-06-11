@@ -517,8 +517,9 @@ p {
 
 .section {
   width: 100%;
-  padding: 48px;
-  background-color: #fff; }
+  padding: 48px; }
+  .section.section-white {
+    background-color: #fff; }
   .section.section-cream {
     background-color: #fff3e7; }
   .section.section-black {
@@ -671,8 +672,7 @@ nav {
     margin: 24px auto; }
 
 #submission-form {
-  margin-top: 96px;
-  margin-bottom: 48px; }
+  margin-top: 96px; }
   #submission-form input[type=text] {
     display: block;
     width: 100%;
@@ -736,3 +736,29 @@ nav {
 
 #hero p, #demo p, #code p, #submissions-hero p {
   text-align: center; }
+
+footer {
+  margin-top: 96px;
+  background-color: #6e1db5;
+  padding: 24px 0; }
+  footer.home {
+    margin-top: 0;
+    border: 0; }
+  footer .roll-the-credits {
+    color: #fff3e7;
+    font-family: "Verlag A", "Verlag B", "Helvetica Neue", "Helvetica", sans-serif;
+    font-size: 16px; }
+    footer .roll-the-credits a:link, footer .roll-the-credits a:visited {
+      color: #fff3e7;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s linear; }
+    footer .roll-the-credits a:hover {
+      border-color: #fff3e7; }
+  footer .dingus-town {
+    text-align: right; }
+  footer .dingus {
+    display: inline-block;
+    margin: 0 0 0 12px; }
+    footer .dingus.dingus-github {
+      margin-right: -12px; }

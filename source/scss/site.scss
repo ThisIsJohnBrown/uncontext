@@ -114,7 +114,6 @@ $num-datas: 5;
 
 #submission-form {
   margin-top: $baseline*8;
-  margin-bottom: $baseline*4;
 
   input[type=text] {
     display: block;
@@ -210,4 +209,51 @@ $num-datas: 5;
 #code p,
 #submissions-hero p {
   text-align: center;
+}
+
+//
+// Footer
+//
+footer {
+  margin-top: $baseline*8;
+  background-color: $purple;
+  // border-top: 1px solid $black;
+  padding: $baseline*2 0;
+
+  &.home {
+    margin-top: 0;
+    border: 0;
+  }
+
+  .roll-the-credits {
+    color: $cream;
+    font-family: $sans;
+    font-size: 16px;
+
+    a:link,
+    a:visited {
+      color: $cream;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+
+      transition: border-color 0.2s linear;
+    }
+
+    a:hover {
+      border-color: $cream;
+    }
+  }
+
+  .dingus-town {
+    text-align: right;
+  }
+
+  .dingus {
+    display: inline-block;
+    margin: 0 0 0 $baseline;
+
+    &.dingus-github {
+      margin-right: -12px;
+    }
+  }
 }

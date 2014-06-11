@@ -72,7 +72,10 @@ p {
 .section {
   width: 100%;
   padding: $baseline*4;
-  background-color: #fff;
+
+  &.section-white {
+    background-color: #fff;
+  }
 
   &.section-cream {
     background-color: $cream;
