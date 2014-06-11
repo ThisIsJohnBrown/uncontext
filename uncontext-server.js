@@ -41,7 +41,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/submit/', function(req, res) {
-  return res.render('submit.mustache')
+  return res.render('submit.mustache', {submit: true})
 });
 
 app.get('/submit-project/', function(req, res) {
