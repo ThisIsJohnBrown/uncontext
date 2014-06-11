@@ -591,6 +591,9 @@ nav {
   min-width: 1050px;
   margin: 0 auto; }
 
+.grid {
+  min-width: 1050px; }
+
 #hero header, #submissions-hero header {
   margin: 96px auto; }
 #hero h1, #submissions-hero h1 {
