@@ -34,7 +34,12 @@
               <div class="submission-info">
                 <div class="info-block">
                   <p class="title">{{title}}</p>
-                  <p class="author">{{author}}</p>
+                  {{^link}}
+                    <p class="author">{{author}}</p>
+                  {{/link}}
+                  {{#link}}
+                    <p class="author"><a href="{{link}}">{{author}}</a></p>
+                  {{/link}}
                 </div>
                 <a href="{{slug}}" class="button button-cream">View project</a>
               </div>
