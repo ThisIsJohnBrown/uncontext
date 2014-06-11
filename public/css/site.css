@@ -720,6 +720,12 @@ nav {
       #submission-list > ul .submission-container .submission-info .title {
         font-family: "Verlag A", "Verlag B", "Helvetica Neue", "Helvetica", sans-serif;
         font-size: 16px; }
+      #submission-list > ul .submission-container .submission-info .author {
+        margin-top: 0.5em;
+        font-family: "Verlag A", "Verlag B", "Helvetica Neue", "Helvetica", sans-serif;
+        text-transform: uppercase;
+        font-size: 12px;
+        font-weight: 700; }
       #submission-list > ul .submission-container .submission-info .info-block {
         height: 60%; }
       #submission-list > ul .submission-container .submission-info .button {

@@ -70,6 +70,7 @@ for (var i = 0;i < sets.length; i++) {
         var data = JSON.parse(fs.readFileSync(__dirname + '/scenes/' + sets[i] + '/' + scenes[j]).toString());
         sceneArray.push({
           'slug': scenes[j].split('.')[0],
+          'author': data.creator,
           'title': data.name
         });
       }
