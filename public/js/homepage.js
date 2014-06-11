@@ -142,11 +142,12 @@ var examplea = function(canvas, context, letter) {
       if (uncontext.socketData_.b !== this.seekNum) {
         this.seekNum = uncontext.socketData_.a;
       }
-      var radius = parseInt(this.canvas.width / 13, 10);
+      var radius = parseInt(this.canvas.width / 26, 10);
+      var topOffset = this.canvas.height / 2;
       this.context.fillStyle = "#6E1DB5";
       for (var i = 0; i < this.currNum; i++) {
         this.context.beginPath();
-        this.context.arc(radius/2 + (i * radius) / 2, radius/2, radius/2, 0, 2 * Math.PI, false);
+        this.context.arc(radius/2 + (i * radius), topOffset, radius/2, 0, 2 * Math.PI, false);
         this.context.fill();
       }
     }
@@ -244,7 +245,7 @@ var exampled = function(canvas, context, letter) {
 
   this.animate = function() {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    var size = this.canvas.height;
+    var size = this.canvas.height * Math.sqrt(3) * .5;
     if (this.currStroke !== this.seekStroke) {
       var diff = this.currStroke - this.seekStroke;
       if (Math.abs(diff) < .03) {
@@ -260,7 +261,7 @@ var exampled = function(canvas, context, letter) {
         this.seekStroke = uncontext.socketData_.d;
       }
       var numTriangles = Math.floor(this.canvas.width / (size + 10));
-      var offset = (this.canvas.width - (numTriangles * (size + 10)) - 10) / 2;
+      var offset = (this.canvas.width - (numTriangles * (size + 10) - 10)) / 2;
       for (var i = 0; i < numTriangles; i++) {
         var currOffset = (i * (size + 10) + offset);
         this.context.save();
