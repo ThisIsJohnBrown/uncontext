@@ -1,0 +1,14 @@
+{
+  "creator"    : "Caleb Anderson",
+  "dataset"    : "literature",
+  "name"       : "Fire the Works",
+  "slug"       : "fireworks",
+  "description": "Fire. It works.<b />Starfield from <a href='http://paulbourke.net/miscellaneous/starfield/'>Paul Bourke</a>",
+  "twitter"    : "RobotCaleb",
+  "url"        : "http://robotrising.org",
+  "assets": {
+    "js"       : true,
+    "threejs"  : true,
+    "requirejs": true
+  }
+}
