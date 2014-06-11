@@ -14,7 +14,8 @@
 }
 
 #hero,
-#submissions-hero {
+#submissions-hero,
+#submit {
   header {
     margin: $baseline*8 auto;
   }
@@ -233,6 +234,7 @@ $num-datas: 5;
 #hero p,
 #demo p,
 #code p,
+#submit p,
 #submissions-hero p {
   text-align: center;
 }

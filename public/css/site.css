@@ -594,11 +594,11 @@ nav {
 .grid {
   min-width: 900px; }
 
-#hero header, #submissions-hero header {
+#hero header, #submissions-hero header, #submit header {
   margin: 96px auto; }
-#hero h1, #submissions-hero h1 {
+#hero h1, #submissions-hero h1, #submit h1 {
   margin-bottom: 24px; }
-#hero #session, #submissions-hero #session {
+#hero #session, #submissions-hero #session, #submit #session {
   text-transform: uppercase;
   font-weight: 200;
   margin-bottom: -12px; }
@@ -754,7 +754,7 @@ nav {
     #submission-list > ul .submission-container:hover .button {
       opacity: 1; }
 
-#hero p, #demo p, #code p, #submissions-hero p {
+#hero p, #demo p, #code p, #submit p, #submissions-hero p {
   text-align: center; }
 
 footer {
