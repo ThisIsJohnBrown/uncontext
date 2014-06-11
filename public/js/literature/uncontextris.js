@@ -1,16 +1,20 @@
 var width = 14,
     height = 20,
-    canvas_id = 'uncontextris',
-    block_size = 20,
-    calculated_width = width * block_size,
-    calculated_height = height * block_size,
+    canvasId = 'uncontextris',
+    blockSize = 20,
+    calculatedWidth = width * blockSize,
+    calculatedHeight = height * blockSize,
+    fullBlockWidth = parseInt(window.innerWidth / blockSize, 10) + 2,
+    fullBlockHeight = parseInt(window.innerHeight / blockSize, 10) + 2,
     board,
     colors,
-    base_colors,
-    current_colors,
-    pending_shape,
-    active_shape,
-    next_shape,
+    oldCrazyColors = [],
+    crazyColors = {},
+    baseColors,
+    currColors,
+    pendingShape,
+    activeShape,
+    nextShape,
     canvas,
     context,
     level,
@@ -21,11 +25,13 @@ var BLOCK_EMPTY = 0,
     BLOCK_FULL = 1,
     BLOCK_ACTIVE = 2;
 
-// keys
-var UP = 38, DOWN = 40, LEFT = 37, RIGHT = 39;
+var crazyLevel = 0;
 
-base_colors = ['#39f044', '#00ff00', '#0000ff'];
-current_colors = base_colors;
+// keys
+var UP = 38, DOWN = 40, LEFT = 37, RIGHT = 39, SPACE = 32;
+
+baseColors = ['#39f044', '#00ff00', '#0000ff'];
+currColors = baseColors;
 
 function Shape() {
   var self = this;
@@ -50,51 +56,51 @@ function Shape() {
   var yOffsets = [0, -1, 0, -1, -1, -1, -1];
 
   this.rotate = function() {
-    var new_shape = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
+    var newShape = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
 
     for (var j = 0; j < 4; j++)
       for (var i = 0; i < 4; i++) {
-        new_shape[i][j] = self.shape[4 - j - 1][i];
+        newShape[i][j] = self.shape[4 - j - 1][i];
       }
 
-    self.shape = new_shape;
+    self.shape = newShape;
   }
 
   this.reset = function(data) {
-    var new_shape = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
-    var shape_num = parseInt(Math.random() * shapes.length);
+    var newShape = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
+    var shapeNum = parseInt(Math.random() * shapes.length);
     if (data) {
-      shape_num = ~~((data.a / 26) * shapes.length);
+      shapeNum = ~~((data.a / 26) * shapes.length);
     }
-    self.shape = shapes[shape_num];
-    self.offsetX = xOffsets[shape_num];
-    self.offsetY = yOffsets[shape_num];
+    self.shape = shapes[shapeNum];
+    self.offsetX = xOffsets[shapeNum];
+    self.offsetY = yOffsets[shapeNum];
 
     for (var j = 0; j < 4; j++)
       for (var i = 0; i < 4; i++) {
-        new_shape[i][j] = self.shape[4 - j - 1][i];
+        newShape[i][j] = self.shape[4 - j - 1][i];
       }
-    self.shape = new_shape;
+    self.shape = newShape;
     // for (var h = 0; h < 3; h++)
     //   self.rotate();
-    self.color = current_colors[0];
+    self.color = currColors[0];
   }
 
-  this.left_edge = function() {
+  this.leftEdge = function() {
     for (var x = 0; x < 4; x++)
       for (var y = 0; y < 4; y++)
         if (self.shape[y][x] == BLOCK_FULL)
           return x;
   }
 
-  this.right_edge = function() {
+  this.rightEdge = function() {
     for (var x = 3; x >= 0; x--)
       for (var y = 0; y < 4; y++)
         if (self.shape[y][x] == BLOCK_FULL)
           return x;
   }
 
-  this.bottom_edge = function() {
+  this.bottomEdge = function() {
     for (var y = 3; y >= 0; y--)
       for (var x = 0; x < 4; x++)
         if (self.shape[y][x] == BLOCK_FULL)
@@ -103,11 +109,11 @@ function Shape() {
 
   this.initialize = function() {
     var rotations = parseInt(Math.random() * 4),
-        shape_idx = parseInt(Math.random() * shapes.length);
+        shapeIdx = parseInt(Math.random() * shapes.length);
 
     // grab a random shape
-    self.shape = shapes[shape_idx];
-    self.color = current_colors[0];
+    self.shape = shapes[shapeIdx];
+    self.color = currColors[0];
 
     // rotate it a couple times
     for (var i = 0; i < rotations; i++)
@@ -125,7 +131,7 @@ function Shape() {
   }
 }
 
-function score_callback() {
+function scoreCallback() {
   // passthru
 }
 
@@ -146,105 +152,122 @@ function reset() {
   score = 0;
   lines = 0;
   level = 1;
-  if (score_callback)
-    score_callback(score, lines, level);
+  if (scoreCallback)
+    scoreCallback(score, lines, level);
 
-  pending_shape = new Shape();
-  pending_shape.initialize();
+  pendingShape = new Shape();
+  pendingShape.initialize();
 
-  next_shape = pending_shape.clone();
+  nextShape = pendingShape.clone();
 
-  add_shape();
+  addShape();
 }
 
-function add_shape() {
-  active_shape = next_shape.clone();
-  active_shape.x = width / 2 - 2;
-  active_shape.y = -1;
+function addShape() {
+  activeShape = nextShape.clone();
+  activeShape.x = width / 2 - 2;
+  activeShape.y = -1;
 
-  pending_shape = new Shape();
-  pending_shape.initialize();
+  pendingShape = new Shape();
+  pendingShape.initialize();
 
-  if (is_collision(active_shape))
+  if (isCollision(activeShape))
     reset();
 
-  // next_shape.reset();
+  // nextShape.reset();
 }
 
-function rotate_shape() {
-  rotated_shape = active_shape.clone();
-  rotated_shape.rotate();
+function rotateShape() {
+  rotatedShape = activeShape.clone();
+  rotatedShape.rotate();
 
-  if (rotated_shape.left_edge() + rotated_shape.x < 0)
-    rotated_shape.x = -rotated_shape.left_edge();
-  else if (rotated_shape.right_edge() + rotated_shape.x >= width)
-    rotated_shape.x = width - rotated_shape.right_edge() - 1;
+  if (rotatedShape.leftEdge() + rotatedShape.x < 0)
+    rotatedShape.x = -rotatedShape.leftEdge();
+  else if (rotatedShape.rightEdge() + rotatedShape.x >= width)
+    rotatedShape.x = width - rotatedShape.rightEdge() - 1;
 
-  if (rotated_shape.bottom_edge() + rotated_shape.y > height)
+  if (rotatedShape.bottomEdge() + rotatedShape.y > height)
     return false;
 
-  if (!is_collision(rotated_shape))
-    active_shape = rotated_shape;
+  if (!isCollision(rotatedShape))
+    activeShape = rotatedShape;
 }
 
-function reset_shape() {
-  rotated_shape = active_shape.clone();
-  rotated_shape.reset();
+function resetShape() {
+  rotatedShape = activeShape.clone();
+  rotatedShape.reset();
 
-  if (rotated_shape.left_edge() + rotated_shape.x < 0)
-    rotated_shape.x = -rotated_shape.left_edge();
-  else if (rotated_shape.right_edge() + rotated_shape.x >= width)
-    rotated_shape.x = width - rotated_shape.right_edge() - 1;
+  if (rotatedShape.leftEdge() + rotatedShape.x < 0)
+    rotatedShape.x = -rotatedShape.leftEdge();
+  else if (rotatedShape.rightEdge() + rotatedShape.x >= width)
+    rotatedShape.x = width - rotatedShape.rightEdge() - 1;
 
-  if (rotated_shape.bottom_edge() + rotated_shape.y > height)
+  if (rotatedShape.bottomEdge() + rotatedShape.y > height)
     return false;
 
-  if (!is_collision(rotated_shape))
-    active_shape = rotated_shape;
+  if (!isCollision(rotatedShape))
+    activeShape = rotatedShape;
 }
 
-function move_left() {
-  active_shape.x--;
-  if (out_of_bounds() || is_collision(active_shape)) {
-    active_shape.x++;
-    return false;
-  }
-  return true;
-}
-
-function move_right() {
-  active_shape.x++;
-  if (out_of_bounds() || is_collision(active_shape)) {
-    active_shape.x--;
+function moveLeft() {
+  activeShape.x--;
+  if (outOfBounds() || isCollision(activeShape)) {
+    activeShape.x++;
     return false;
   }
   return true;
 }
 
-function move_down() {
-  active_shape.y++;
-  if (check_bottom() || is_collision(active_shape)) {
-    active_shape.y--;
-    shape_to_board();
-    add_shape();
+function moveRight() {
+  activeShape.x++;
+  if (outOfBounds() || isCollision(activeShape)) {
+    activeShape.x--;
     return false;
   }
   return true;
 }
 
-function out_of_bounds() {
-  if (active_shape.x + active_shape.left_edge() < 0)
+function moveDown() {
+  activeShape.y++;
+  if (checkBottom() || isCollision(activeShape)) {
+    activeShape.y--;
+    shapeToBoard();
+    addShape();
+    return false;
+  }
+  return true;
+}
+
+function slamPiece() {
+  var collision = false;
+  var ticks = 0;
+  while (!collision || ticks < 20) {
+    activeShape.y++;
+    ticks++;
+    if (checkBottom() || isCollision(activeShape)) {
+      activeShape.y--;
+      shapeToBoard();
+      activeShape.y = 0;
+      addShape();
+      collision = true;
+      return false;
+    }
+  }
+}
+
+function outOfBounds() {
+  if (activeShape.x + activeShape.leftEdge() < 0)
     return true;
-  else if (active_shape.x + active_shape.right_edge() >= width)
+  else if (activeShape.x + activeShape.rightEdge() >= width)
     return true;
   return false;
 }
 
-function check_bottom() {
-  return (active_shape.y + active_shape.bottom_edge() >= height);
+function checkBottom() {
+  return (activeShape.y + activeShape.bottomEdge() >= height);
 }
 
-function is_collision(shape) {
+function isCollision(shape) {
   for (var y = 0; y < 4; y++)
     for (var x = 0; x < 4; x++) {
       if (y + shape.y < 0)
@@ -255,93 +278,116 @@ function is_collision(shape) {
   return false;
 }
 
-function test_for_line() {
+function testForLine() {
   for (var y = height - 1; y >= 0; y--) {
     var counter = 0;
     for (var x = 0; x < width; x++)
       if (board[y][x] == BLOCK_FULL)
         counter++;
     if (counter == width) {
-      process_line(y);
+      processLine(y);
       return true;
     }
   }
   return false;
 }
 
-function process_line(y_to_remove) {
+function processLine(yToRemove) {
   lines++;
   score += level;
   if (lines % 10 == 0)
     level++;
 
-  for (var y = y_to_remove - 1; y >= 0; y--)
+  for (var y = yToRemove - 1; y >= 0; y--)
     for (var x = 0; x < width; x++) {
       board[y + 1][x] = board[y][x];
       colors[y + 1][x] = colors[y][x];
     }
 
-  if (score_callback)
-    score_callback(score, lines, level);
+  if (scoreCallback)
+    scoreCallback(score, lines, level);
 }
 
-function shape_to_board() {
+function shapeToBoard() {
   // transpose onto board
   for (var y = 0; y < 4; y++)
     for (var x = 0; x < 4; x++) {
-      var dx = x + active_shape.x,
-          dy = y + active_shape.y;
+      var dx = x + activeShape.x,
+          dy = y + activeShape.y;
       if (dx < 0 || dx >= width || dy < 0 || dy >=height)
         continue;
-      if (active_shape.shape[y][x] == BLOCK_FULL) {
+      if (activeShape.shape[y][x] == BLOCK_FULL) {
         board[dy][dx] = BLOCK_FULL;
-        colors[dy][dx] = active_shape.color;
+        colors[dy][dx] = activeShape.color;
       }
     }
 
-  var lines_found = 0;
-  while (test_for_line())
-    lines_found++;
+  var linesFound = 0;
+  while (testForLine())
+    linesFound++;
 
-  return lines_found;
+  return linesFound;
 }
 
-function move_piece(motion) {
+function movePiece(motion) {
   if (motion == LEFT)
-    move_left();
+    moveLeft();
   else if (motion == RIGHT)
-    move_right();
+    moveRight();
   else if (motion == UP)
-    rotate_shape();
+    rotateShape();
   else if (motion == DOWN)
-    move_down();
+    moveDown();
+  else if (motion == SPACE)
+    slamPiece();
 }
 
-function draw_game_board() {
+function drawGameBoard() {
   context.clearRect(0, 0, window.innerWidth, window.innerHeight);
   context.fillStyle = "#000";
-  var midWidth = 
-  context.fillRect(window.innerWidth / 2 - calculated_width / 2 - block_size * 3.5,
-    window.innerHeight / 2 - calculated_height / 2,
-    calculated_width, calculated_height);
+  if (crazyLevel < 2) {
+    context.fillRect(window.innerWidth / 2 - calculatedWidth / 2 - blockSize * 3.5,
+      window.innerHeight / 2 - calculatedHeight / 2,
+      calculatedWidth, calculatedHeight);
+  }
 
-  context.fillRect(window.innerWidth / 2 + calculated_width / 2 - block_size * 2.5 ,
-    window.innerHeight / 2 - calculated_height / 2  + block_size,
-    block_size * 6, block_size * 5);
+  if (crazyLevel === 2) {
+    for (var y = 0; y < height; y++) {
+      for (var x = 0; x < width; x++) {
+        if (crazyColors[y]) {
+          context.fillStyle = crazyColors[y][x];
+          drawBlock(x, y);
+        }
+      }
+    }
+  }
 
-  context.font = "bold 16px sans-serif";
-  context.fillText('Level: ' + (level || 1),
-    window.innerWidth / 2 + calculated_width / 2 + block_size,
-    window.innerHeight / 2 - calculated_height / 2  + block_size * 7);
+  if (crazyLevel === 3) {
+    for (var y = 0; y < fullBlockHeight; y++) {
+      for (var x = 0; x < fullBlockWidth; x++) {
+        if (crazyColors[y]) {
+          context.fillStyle = crazyColors[y][x];
+          drawBlock(x, y, true);
+        }
+      }
+    }
+  }
+
+  context.fillStyle = "#000";
+  if (crazyLevel === 0 || crazyLevel === 2) {
+    context.fillRect(window.innerWidth / 2 + calculatedWidth / 2 - blockSize * 2.5 ,
+      window.innerHeight / 2 - calculatedHeight / 2  + blockSize,
+      blockSize * 6, blockSize * 5);
+  }
 
   context.fillStyle = "#0f0";
 
   for (var y = 0; y < height; y++)
     for (var x = 0; x < width; x++)
       if (board[y][x] == BLOCK_FULL) {
-        // context.fillStyle = current_colors[colors[y][x]];
+        // context.fillStyle = currColors[colors[y][x]];
         context.fillStyle = colors[y][x];
-        draw_block(x, y);
+        drawBlock(x, y);
       }
 
   context.fillStyle = "#f00";
@@ -349,37 +395,93 @@ function draw_game_board() {
   for (var y = 0; y < height; y++)
     for (var x = 0; x < width; x++)
       if (board[y][x] == BLOCK_ACTIVE)
-        draw_block(x, y);
+        drawBlock(x, y);
 
   context.fillStyle = "#fff";
 
-  for (var y = 0; y < 4; y++)
+  for (var y = 0; y < 4; y++) {
     for (var x = 0; x < 4; x++) {
-      var dx = x + active_shape.x,
-          dy = y + active_shape.y;
-      if (active_shape.shape[y][x] == BLOCK_FULL) {
-        // context.fillStyle = current_colors[active_shape.color];
-        context.fillStyle = active_shape.color;
-        draw_block(dx, dy);
+      var dx = x + activeShape.x,
+          dy = y + activeShape.y;
+      if (activeShape.shape[y][x] == BLOCK_FULL) {
+        // context.fillStyle = currColors[activeShape.color];
+        context.fillStyle = activeShape.color;
+        drawBlock(dx, dy);
       }
     }
+  }
 
-  for (var y = 0; y < 4; y++)
-    for (var x = 0; x < 4; x++) {
-      if (next_shape.shape[y][x] == BLOCK_FULL) {
-        context.fillStyle = next_shape.color;
-        draw_block(x + 16 + next_shape.offsetX, y + 2 + next_shape.offsetY);
+  if (crazyLevel === 0 || crazyLevel === 2) {
+    for (var y = 0; y < 4; y++) {
+      for (var x = 0; x < 4; x++) {
+        if (nextShape.shape[y][x] == BLOCK_FULL) {
+          context.fillStyle = nextShape.color;
+          drawBlock(x + 16 + nextShape.offsetX, y + 2 + nextShape.offsetY);
+        }
       }
     }
+  }
 
-  t = setTimeout(function() { draw_game_board(); }, 30);
+
+  context.fillStyle = '#000000';
+
+  context.font = "bold 16px sans-serif";
+  context.fillText('level: ' + (level || 1),
+    window.innerWidth / 2 + calculatedWidth / 2 - blockSize * 2.5,
+    window.innerHeight / 2 - calculatedHeight / 2  + blockSize * .5);
+
+  context.font = "normal 16px sans-serif";
+  context.fillText('difficulties:',
+    window.innerWidth / 2 + calculatedWidth / 2 - blockSize * 2.5 ,
+    window.innerHeight / 2 - calculatedHeight / 2  + blockSize * 8);
+
+  for (var i = 0; i < buttons.length; i++) {
+    var weight = crazyLevel === i ? 'bold 20px' : 'normal 16px';
+    context.fillStyle = crazyLevel === i ? '#999999' : '#cccccc';
+    // console.log(i, context.fillStyle);
+    var leftEdge = window.innerWidth / 2 + calculatedWidth / 2 - blockSize * 2.5;
+    var topEdge = window.innerHeight / 2 - calculatedHeight / 2  + blockSize * (10 + (i * 2.5));
+    var buttonLeftEdge = leftEdge - blockSize * .5;
+    var buttonTopEdge = topEdge - blockSize * 1.75;
+    var buttonWidth = 130;
+    var buttonHeight = blockSize * 2;
+    context.font =  weight + " sans-serif";
+    context.beginPath();
+    context.moveTo(buttonLeftEdge + 20, buttonTopEdge + 10);
+    context.lineTo(buttonLeftEdge + buttonWidth, buttonTopEdge + 10);
+    context.quadraticCurveTo(buttonLeftEdge + buttonWidth + 10, buttonTopEdge + 10, buttonLeftEdge + buttonWidth + 10, buttonTopEdge + 20);
+    context.lineTo(buttonLeftEdge + buttonWidth + 10, buttonTopEdge + buttonHeight);
+    context.quadraticCurveTo(buttonLeftEdge + buttonWidth + 10, buttonTopEdge + buttonHeight + 10, buttonLeftEdge + buttonWidth, buttonTopEdge + buttonHeight + 10);
+    context.lineTo(buttonLeftEdge + 20, buttonTopEdge + buttonHeight + 10);
+    context.quadraticCurveTo(buttonLeftEdge + 10, buttonTopEdge + buttonHeight + 10, buttonLeftEdge + 10, buttonTopEdge + buttonHeight);
+    context.lineTo(buttonLeftEdge + 10, buttonTopEdge + 20);
+    context.quadraticCurveTo(buttonLeftEdge + 10, buttonTopEdge + 10, buttonLeftEdge + 20, buttonTopEdge + 10);
+    context.stroke();
+    context.fill();
+    context.fillStyle = '#000000';
+    context.fillText(buttons[i].level, leftEdge + blockSize / 2, topEdge);
+  }
+
+  context.font = "bold 16px sans-serif";
+  context.fillText('reset!',
+    window.innerWidth / 2 + calculatedWidth / 2 - blockSize * 2.5,
+    window.innerHeight / 2 + calculatedHeight / 2);
+
+  t = setTimeout(function() { drawGameBoard(); }, 30);
 }
 
-function draw_block(x, y) {
-  context.fillRect(
-    window.innerWidth / 2 - calculated_width / 2 - block_size * 3.5 + x * block_size,
-    window.innerHeight / 2 - calculated_height / 2 + y * block_size,
-    block_size + .5, block_size);
+function drawBlock(x, y, full) {
+  if (!full) {
+    context.fillRect(
+      window.innerWidth / 2 - calculatedWidth / 2 - blockSize * 3.5 + x * blockSize,
+      window.innerHeight / 2 - calculatedHeight / 2 + y * blockSize,
+      blockSize, blockSize);
+  } else {
+    context.fillRect(
+      (window.innerWidth / 2 - calculatedWidth / 2) % blockSize + (x - 1.5) * blockSize,
+      (window.innerHeight / 2 - calculatedHeight / 2) % blockSize + (y - 1) * blockSize,
+      blockSize, blockSize);
+  }
 }
 
 function handleKeys(e) {
@@ -388,38 +490,49 @@ function handleKeys(e) {
 
   k = (evt.charCode) ?
     evt.charCode : evt.keyCode;
-  if (k > 36 && k < 41) {
-    move_piece(k);
+  if ((k > 36 && k < 41) || k === 32) {
+    movePiece(k);
     return false;
   };
   return true;
 }
 
-function update_board() {
-  move_down();
-  console.log(active_shape.level);
-  t = setTimeout(function() { update_board(); }, 1000 - (90 * (level || 1)));
+function updateBoard() {
+  moveDown();
+  t = setTimeout(function() { updateBoard(); }, 1000 - (90 * (level || 1)));
 }
 
 function initialize() {
-  canvas = document.getElementById(canvas_id);
+  canvas = document.getElementById(canvasId);
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   context = canvas.getContext('2d');
 
   // create handlers
-  document.onkeyup = function(e) { return handleKeys(e) };
+  document.onkeydown = function(e) { return handleKeys(e) };
 
   reset();
-  draw_game_board();
-  update_board();
+  tempCrazyColors = randomColor({
+     luminosity: 'light',
+     count: (fullBlockWidth) * (fullBlockHeight)
+  });
+  for (var y = 0; y < fullBlockHeight; y++) {
+    crazyColors[y] = {};
+    for (var x = 0; x < fullBlockWidth; x++) {
+      crazyColors[y][x] = tempCrazyColors[y * width + x];
+    }
+  }
+  drawGameBoard();
+  updateBoard();
+
+  canvas.addEventListener( 'mousedown', onMouseDown, false );
 }
 
 function shiftColors(degree) {
-  current_colors = [
-    changeHue(base_colors[0], degree),
-    changeHue(base_colors[1], degree),
-    changeHue(base_colors[2], degree)
+  currColors = [
+    changeHue(baseColors[0], degree),
+    changeHue(baseColors[1], degree),
+    changeHue(baseColors[2], degree)
   ]
 }
 
@@ -523,14 +636,14 @@ function hslToRGB(hsl) {
         b = x;
     }
 
-    r = normalize_rgb_value(r, m);
-    g = normalize_rgb_value(g, m);
-    b = normalize_rgb_value(b, m);
+    r = normalizeRGBValue(r, m);
+    g = normalizeRGBValue(g, m);
+    b = normalizeRGBValue(b, m);
 
     return rgbToHex(r,g,b);
 }
 
-function normalize_rgb_value(color, m) {
+function normalizeRGBValue(color, m) {
     color = Math.floor((color + m) * 255);
     if (color < 0) {
         color = 0;
@@ -548,28 +661,97 @@ uncontext.socket_.onmessage = function(message) {
   var tempData = JSON.parse(message.data);
   if (socketData) {
     if (tempData.c !== socketData.c) {
-      if (active_shape) {
-        next_shape.reset(tempData);
+      if (activeShape) {
+        if (crazyLevel === 0 || crazyLevel === 2) {
+          nextShape.reset(tempData);
+        } else {
+          activeShape.reset(tempData);
+        }
+        if (crazyLevel >= 2) {
+          for (var y = 0; y < fullBlockHeight; y++) {
+            var tempColors = randomColor({
+               count: parseInt(innerWidth / blockSize, 10) + 2
+            });
+            var tempArray = {};
+            for (var i = 0; i < tempColors.length; i++) {
+              tempArray[i] = tempColors[i];
+            }
+            if (crazyColors[y]) {
+              TweenMax.to(crazyColors[y], 3, {colorProps:tempArray});
+            } else {
+              crazyColors[y] = tempArray;
+            }
+          }
+        }
       }
     }
     if (tempData.d !== socketData.d) {
-      if (active_shape) {
+      if (activeShape) {
         level = Math.ceil(tempData.d / 14 * 1.3 * 10);
         level = level > 10 ? 10 : level;
       }
     }
   }
   shiftColors(tempData.e.f / tempData.e.g * 360);
-  next_shape.color = current_colors[0];
+  nextShape.color = currColors[0];
   socketData = tempData;
 }
 
-window.addEventListener( 'resize', onWindowResize, false );
+window.addEventListener('resize', onWindowResize, false );
+window.addEventListener('mousemove', onMouseMove, false );
 
 function onWindowResize() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-  draw_game_board();
+  fullBlockWidth = parseInt(window.innerWidth / blockSize, 10) + 2;
+  fullBlockHeight = parseInt(window.innerHeight / blockSize, 10) + 2;
+  drawGameBoard();
+}
+
+var buttons = [
+  {x: 0, width: 130, level: 'regular'},
+  {x: 160, width: 130, level: 'crazy'},
+  {x: 320, width: 130, level: 'i can\'t'},
+  {x: 320, width: 130, level: 'fuck this'}
+]
+
+function onMouseDown(e) {
+  var leftEdge = window.innerWidth / 2 + calculatedWidth / 2 - blockSize * 2.5;
+  var rightEdge = leftEdge + blockSize * 6;
+  var topEdge = window.innerHeight / 2 - calculatedHeight / 2  + blockSize * 9;
+  if (e.offsetX > leftEdge && e.offsetX < rightEdge) {
+    for (var i = 0; i < buttons.length; i++) {
+      if (e.offsetY > topEdge + blockSize * (i * 2.5) && e.offsetY < topEdge + blockSize * ((i + 1) * 2.5)) {
+        crazyLevel = i;
+      }
+    }
+  }
+  var resetLeftEdge = window.innerWidth / 2 + calculatedWidth / 2 - blockSize * 2.5;
+  var resetRightEdge = resetLeftEdge + blockSize * 6;
+  var resetTopEdge = window.innerHeight / 2 + calculatedHeight / 2 - blockSize;
+  var resetBottomEdge = resetTopEdge + blockSize;
+  if (e.offsetX > resetLeftEdge && e.offsetX < resetRightEdge) {
+    if (e.offsetY > resetTopEdge && e.offsetY < resetBottomEdge) {
+      reset();
+    }
+  }
+}
+
+function onMouseMove(e) {
+  var leftEdge = window.innerWidth / 2 + calculatedWidth / 2 - blockSize * 2.5;
+  var rightEdge = leftEdge + blockSize * 6;
+  var topEdge = window.innerHeight / 2 - calculatedHeight / 2  + blockSize * 9;
+  var check = 0;
+  if (e.offsetX > leftEdge && e.offsetX < rightEdge) {
+    if (e.offsetY > topEdge && e.offsetY < topEdge + blockSize * ((buttons.length + 1) * 2.5)) {
+      check++;
+    }
+  }
+  if (check) {
+    canvas.style.cursor='pointer';
+  } else {
+    canvas.style.cursor='auto';
+  }
 }
 
 initialize();
