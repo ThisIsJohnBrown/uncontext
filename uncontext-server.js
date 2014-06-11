@@ -46,9 +46,10 @@ app.get('/submit/', function(req, res) {
 
 app.get('/submit-project/', function(req, res) {
   var key = req.query.title + '-' + new Date().getTime();
-  console.log(key);
-  client.set(key, JSON.stringify(req.query), redis.print);
-  return res.render('submit.mustache')
+  console.log(key, req.query);
+  // client.set(key, JSON.stringify(req.query), redis.print);
+
+  return res.send('success!');
 });
 
 app.get('/literature/', function(req, res) {

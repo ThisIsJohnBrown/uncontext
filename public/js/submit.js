@@ -1,7 +1,9 @@
-// $(function() {
-//   console.log($( "#submit-project" ));
-//   $( "#submit-project" ).submit(function( event ) {
-//     alert( "Handler for .submit() called." );
-//     event.preventDefault();
-//   });
-// });
+$(function() {
+  $('.submission-success').hide();
+  $('#submit-button').click(function(e) {
+    $.get('/submit-project/', $('#submit-project').serialize());
+    $('#submit-project').hide();
+    $('.submission-success').show();
+    e.preventDefault();
+  });
+});
