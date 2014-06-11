@@ -591,6 +591,9 @@ nav {
   min-width: 1050px;
   margin: 0 auto; }
 
+.grid {
+  min-width: 900px; }
+
 #hero header, #submissions-hero header {
   margin: 96px auto; }
 #hero h1, #submissions-hero h1 {
@@ -657,9 +660,25 @@ nav {
   margin: 96px auto; }
 
 #gallery-cta {
-  text-align: center; }
+  position: relative;
+  text-align: center;
+  height: 240px;
+  overflow: hidden; }
+  #gallery-cta .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    -webkit-filter: grayscale(1) brightness(0.4);
+    filter: grayscale(1) brightness(0.4); }
+  #gallery-cta .button-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center; }
   #gallery-cta .button {
-    margin: 48px auto; }
+    margin: 96px auto; }
 
 #github-cta {
   background-color: #6e1db5;
@@ -704,6 +723,7 @@ nav {
   #submission-list > ul .submission-container {
     margin-bottom: 24px;
     position: relative;
+    width: 25%;
     padding: 0 12px; }
     #submission-list > ul .submission-container img {
       max-width: 100%;
@@ -739,11 +759,10 @@ nav {
 
 footer {
   margin-top: 96px;
-  background-color: #6e1db5;
+  background-color: black;
   padding: 24px 0; }
   footer.home {
-    margin-top: 0;
-    border: 0; }
+    margin-top: 0; }
   footer .roll-the-credits {
     color: #fff3e7;
     font-family: "Verlag A", "Verlag B", "Helvetica Neue", "Helvetica", sans-serif;
