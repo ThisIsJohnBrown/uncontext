@@ -592,7 +592,7 @@ nav {
   margin: 0 auto; }
 
 .grid {
-  min-width: 1050px; }
+  min-width: 900px; }
 
 #hero header, #submissions-hero header {
   margin: 96px auto; }
@@ -723,6 +723,7 @@ nav {
   #submission-list > ul .submission-container {
     margin-bottom: 24px;
     position: relative;
+    width: 25%;
     padding: 0 12px; }
     #submission-list > ul .submission-container img {
       max-width: 100%;

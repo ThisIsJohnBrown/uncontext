@@ -10,7 +10,7 @@
 }
 
 .grid {
-  min-width: 1050px;
+  min-width: 900px;
 }
 
 #hero,
@@ -172,12 +172,14 @@ $num-datas: 5;
 }
 
 #submission-list {
+
   & > ul {
     padding: 0;
 
     .submission-container {
       margin-bottom: $baseline*2;
       position: relative;
+      width: 25%;
       padding: 0 $baseline;
 
       img {
