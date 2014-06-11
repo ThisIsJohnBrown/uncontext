@@ -19,10 +19,18 @@ Uncontext.prototype.init = function() {
     // Sockets not initialized.
   }
 
+
   $('.divider').each(function(divider) {
-    self.dividers_.push(new self[this.getAttribute('data-divider-type')](this, this.getContext('2d')));
+    if (this.getAttribute('data-divider-type')) {
+      self.dividers_.push(new self[this.getAttribute('data-divider-type')](this, this.getContext('2d')));
+    }
   })
   this.animate();
+
+  self.socket_.onmessage = function (event) {
+    data = JSON.parse(event.data);
+    uncontext.socketData_ = data;
+  };
 }
 
 //  This is an animation for the first header on the homepage
