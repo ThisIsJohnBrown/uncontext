@@ -29,7 +29,7 @@
       
       <h2 class="as-h2">Live data</h2>
       <canvas class="divider" width="100px" height="12px" data-divider-type="headerAnimationSteps"></canvas>
-      <p class="grid__col grid__col--1-of-2 grid__col--centered">The source of this session’s data is derived from &ldquo;literature.&rdquo; More details will be revealead at the end of the session, before Session 2. It’s a mystery! Don’t let the source dictate your exploration (unless you want it to).</p>
+      <p class="grid__col grid__col--1-of-2 grid__col--centered">The theme of the current session is Literature, because that is the source of the session’s data. More details will be revealead at the end of the session, before Session 2. It’s a mystery! Don’t let the source dictate your exploration (unless you want it to).</p>
       <table id="demo-table" class="grid__col grid__col--3-of-4 grid__col--centered">
         <thead>
           <tr class="grid grid--no-gutter">
@@ -140,12 +140,13 @@
 
       <h2 class="as-h2">It&rsquo;s easy to use (relatively speaking)</h2>
       <canvas class="divider" width="100px" height="12px" data-divider-type="headerAnimationWide"></canvas>
-      <p class="grid__col grid__col--1-of-2 grid__col--centered">Do whatever you want with Uncontext’s data stream, it doesn&rsquo;t have to be constrained to the browser (e.g. make a very bad self driving car, shoot non-toxic paint at a Denny&rsquo;s, or make an Arduino go bleep beep boop). But, if you want to get a quick and easy taste of the power, just play with this example code using Socket.io and D3.</p>
+      <p class="grid__col grid__col--1-of-2 grid__col--centered">Do whatever you want with Uncontext’s data stream, it doesn&rsquo;t have to be constrained to the browser (e.g. make a very bad self driving car, shoot non-toxic paint at a Denny&rsquo;s, or make an Arduino go bleep beep boop). But, if you want to get a quick and easy taste of the power, just play with this example code using your browser and a websocket.</p>
       <pre id="code-sample" class="grid__col grid__col--1-of-2 grid__col--centered">
 &lt;script&gt;
   socket_ = new WebSocket('ws://literature.uncontext.com:80');
   socket_.onmessage = function (data) {
     console.log(data);
+    generateBanana(data);
   };
 &lt;/script&gt;</pre>
 
