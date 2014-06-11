@@ -90,10 +90,30 @@ $num-datas: 5;
 }
 
 #gallery-cta {
+  position: relative;
   text-align: center;
+  height: $baseline*20;
+  overflow: hidden;
+
+  .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    -webkit-filter: #{"grayscale(1)"} #{"brightness(0.4)"};
+    filter: #{"grayscale(1)"} #{"brightness(0.4)"};
+  }
+
+  .button-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+  }
 
   .button {
-    margin: $baseline*4 auto;
+    margin: $baseline*8 auto;
   }
 }
 
@@ -216,13 +236,11 @@ $num-datas: 5;
 //
 footer {
   margin-top: $baseline*8;
-  background-color: $purple;
-  // border-top: 1px solid $black;
+  background-color: $black;
   padding: $baseline*2 0;
 
   &.home {
     margin-top: 0;
-    border: 0;
   }
 
   .roll-the-credits {
