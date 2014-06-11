@@ -19,7 +19,7 @@ Uncontext.prototype.init = function() {
     // Sockets not initialized.
   }
 
-  $('.unc-divider').each(function(divider) {
+  $('.divider').each(function(divider) {
     self.dividers_.push(new self[this.getAttribute('data-divider-type')](this, this.getContext('2d')));
   })
   this.animate();
