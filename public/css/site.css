@@ -713,10 +713,13 @@ nav {
     background: transparent;
     width: 100%;
     height: 276px; }
-  #submission-form #submit {
+  #submission-form #submit-button {
     margin-top: 24px;
     display: block;
-    text-align: center; }
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 25%; }
 
 #submission-list > ul {
   padding: 0; }
@@ -746,13 +749,13 @@ nav {
         text-transform: uppercase;
         font-size: 12px;
         font-weight: 700; }
-      #submission-list > ul .submission-container .submission-info .author a {
-        color: #fff3e7;
-        text-decoration: none;
-        border-bottom: 2px solid transparent;
-        transition: border-color 0.2s linear; }
-      #submission-list > ul .submission-container .submission-info .author a:hover {
-        border-color: #fff3e7; }
+        #submission-list > ul .submission-container .submission-info .author a:link, #submission-list > ul .submission-container .submission-info .author a:visited {
+          color: #fff3e7;
+          text-decoration: none;
+          border-bottom: 2px solid transparent;
+          transition: border-color 0.2s linear; }
+        #submission-list > ul .submission-container .submission-info .author a:hover {
+          border-color: #fff3e7; }
       #submission-list > ul .submission-container .submission-info .info-block {
         height: 60%; }
       #submission-list > ul .submission-container .submission-info .button {

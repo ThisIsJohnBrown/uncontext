@@ -165,10 +165,13 @@ $num-datas: 5;
     height: 276px;
   }
 
-  #submit {
+  #submit-button {
     margin-top: $baseline*2;
     display: block;
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 25%;
   }
 }
 
