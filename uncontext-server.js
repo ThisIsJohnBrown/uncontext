@@ -5,12 +5,15 @@ var app = express();
 var port = Number(process.env.PORT || 5001);
 var server = http.createServer(app).listen(port);
 var fs = require('fs');
+var client;
 
-var redis = require('redis');
-var url = require('url');
-var redisURL = url.parse(process.env.REDISCLOUD_URL);
-var client = redis.createClient(redisURL.port, redisURL.hostname, {no_ready_check: true});
-client.auth(redisURL.auth.split(":")[1]);
+// if (process.env.REDISCLOUD_URL) {
+  var redis = require('redis');
+  var url = require('url');
+  var redisURL = url.parse(process.env.REDISCLOUD_URL);
+  client = redis.createClient(redisURL.port, redisURL.hostname, {no_ready_check: true});
+  client.auth(redisURL.auth.split(":")[1]);
+// }
 
 app.set('views', __dirname + '/views');
 
@@ -30,9 +33,10 @@ app.get('/submit/', function(req, res) {
 });
 
 app.get('/submit-project/', function(req, res) {
-  var key = req.query.title + '-' + new Date().getTime();
-  console.log(key, req.query);
-  client.set(key, JSON.stringify(req.query), redis.print);
+  if (client) {
+    var key = req.query.title + '-' + new Date().getTime();
+    client.set(key, JSON.stringify(req.query), redis.print);
+  }
 
   return res.send('success!');
 });
