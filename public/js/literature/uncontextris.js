@@ -1,3 +1,5 @@
+(function(e){"use strict";var t;var n={$these:[],touchstartInit:false,touchmoveInit:false};e(".nonbounce").each(function(){n.$these.push(e(this))});var r=function(){if(!n.touchstartInit){n.touchstartInit=true;e(window).on("touchstart",o)}if(!n.touchmoveInit){n.touchmoveInit=true;e(window).on("touchmove",u)}};var i=function(t,n,r){return!!e(r).closest(t).length};var s=function(n){var r=n.originalEvent.touches?n.originalEvent.touches[0].screenY:n.originalEvent.screenY;var i=e(n.target).closest(".nonbounce")[0];if(!i){return true}if(i.scrollTop===0&&t<=r){return false}if(i.scrollHeight-i.offsetHeight===i.scrollTop&&t>=r){return false}return true};var o=function(e){e=e.originalEvent||e;t=e.touches?e.touches[0].screenY:e.screenY};var u=function(t){if(!(t.originalEvent.touches&&t.originalEvent.touches.length>1)){if(!~e.inArray(true,e.map(n.$these,i,t.target))){t.preventDefault()}if(!s(t)){t.preventDefault()}}};e.fn.nonbounce=function(){r();return this.each(function(){n.$these.push(e(this))})};e.nonbounce=function(){r()}})(jQuery)
+
 var width = 14,
     height = 20,
     canvasId = 'uncontextris',
@@ -375,7 +377,7 @@ function drawGameBoard() {
 
   context.fillStyle = "#000";
   if (crazyLevel === 0 || crazyLevel === 2) {
-    context.fillRect(window.innerWidth / 2 + calculatedWidth / 2 - blockSize * 2.5 ,
+    context.fillRect(window.innerWidth / 2 + calculatedWidth / 2 - blockSize * 2.5,
       window.innerHeight / 2 - calculatedHeight / 2  + blockSize,
       blockSize * 6, blockSize * 5);
   }
@@ -467,6 +469,11 @@ function drawGameBoard() {
     window.innerWidth / 2 + calculatedWidth / 2 - blockSize * 2.5,
     window.innerHeight / 2 + calculatedHeight / 2);
 
+  context.font = "normal 16px sans-serif";
+  context.fillText('Arrows to move and rotate, space to drop.',
+    window.innerWidth / 2 - calculatedWidth / 2 - blockSize * 3.5,
+    window.innerHeight / 2 + calculatedHeight / 2  + blockSize * 1);
+
   t = setTimeout(function() { drawGameBoard(); }, 30);
 }
 
@@ -525,7 +532,25 @@ function initialize() {
   drawGameBoard();
   updateBoard();
 
-  canvas.addEventListener( 'mousedown', onMouseDown, false );
+  canvas.addEventListener('mousedown', onMouseDown, false);
+
+  Hammer(window).on("swipeleft", function() {
+    moveLeft();
+  });
+
+  Hammer(window).on("swiperight", function() {
+    moveRight();
+  });
+
+  Hammer(window).on("swipedown", function() {
+    slamPiece();
+  });
+
+  Hammer(window).on("tap", function() {
+    rotateShape();
+  });
+
+  $.nonbounce();
 }
 
 function shiftColors(degree) {

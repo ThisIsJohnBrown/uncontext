@@ -10,6 +10,7 @@
     "css": true,
     "tweenmax": true,
     "tweenmaxPlugins": ["ColorPropsPlugin"],
-    "randomcolor": true
+    "randomcolor": true,
+    "hammerjs": true
   }
 }
