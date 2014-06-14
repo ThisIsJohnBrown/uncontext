@@ -4,3 +4,4 @@ newrelic_agent.log
 dev.env
 *.sublime-project
 *.sublime-workspace
+.idea*
