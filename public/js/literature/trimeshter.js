@@ -12,6 +12,8 @@ var materialsSolid = [];       // Solid material array, used by default
 var materialsWire = [];        // Wireframe material array
 var canvas = canvas;
 var starfield = {};
+var socket = {}                // Connection to Uncontext
+
 
 // Trimeshter is self-initializing!
 init();
@@ -24,7 +26,56 @@ function init() {
     initThree();
     initMaterials();
     initStarfield();
+    initInput();
     animate();
+}
+
+/**
+ * Setup the Uncontext connection
+ */
+function initInput(){
+    socket = new WebSocket('ws://literature.uncontext.com:80');
+
+    // track high numbers for a, b, f and g
+    var maxA = 25;
+    var maxB = 20;
+    var maxF = 400;
+    var maxG = 467;
+
+    // Start with no drift
+    config.drift.x = config.drift.y = config.drift.z = 0;
+
+    socket.onmessage = function (message) {
+
+        var data = JSON.parse(message.data);
+
+        // Convert A and B to X and Y
+        var aDiff = window.innerWidth / maxA;
+        var bDiff = window.innerHeight / maxB;
+
+        var x = aDiff * data.a;
+        var y = bDiff * data.b;
+
+        var event = {x: x, y: y, z: 0, id: 0};
+
+        // Convert F and G to Drifts
+        var fDiff = 1 / maxF;
+        var gDiff = 1 / maxG;
+        var yDrift = fDiff * data.e.f;
+        var zDrift = gDiff * data.e.g;
+        yDrift -= 0.5;
+        zDrift *= -0.5;
+
+        // Apply new drift amounts
+        config.drift.y = yDrift;
+        config.drift.z = zDrift;
+
+        // Call all three events to immediately build a new face
+        onStart(event);
+        onMove(event);
+        onEnd(event);
+
+    };
 }
 
 /**
