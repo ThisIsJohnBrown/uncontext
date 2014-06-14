@@ -14,10 +14,9 @@ $(function() {
   init();
 
   uncontext.socket_.onmessage = function (event) {
-    window.onresize();
+    // window.onresize();
     data = JSON.parse(event.data);
     if ($('#demo-table').length) {
-      // console.log($(this).find('tr').length);
       $trs = $('#demo-table tbody tr');
       $($trs[0]).find('td:eq(1)').prepend('<span>' + data.a + '</span>');
       $($trs[1]).find('td:eq(1)').prepend('<span>' + data.b + '</span>');
@@ -26,7 +25,6 @@ $(function() {
       $($trs[4]).find('td:eq(1)').prepend('<span>' + data.e.f + '</span>');
       $($trs[5]).find('td:eq(1)').prepend('<span>' + data.e.g + '</span>');
       $trs.each(function() {
-        // console.log($(this));
         $(this).find('td:eq(1) span:eq(5)').remove();
       })
     }
@@ -101,13 +99,10 @@ function init() {
   })
 
   animate();
-  window.onresize();
+  // window.onresize();
 }
 
 window.onresize = function(event) {
-  var $hero = $('#hero');
-  canvas.width = $hero.width() + parseInt($hero.css('padding-left'), 10) + parseInt($hero.css('padding-right'), 10);
-  canvas.height = $hero.height() + parseInt($hero.css('padding-top'), 10) + parseInt($hero.css('padding-bottom'), 10);
   for (var i = 0; i < examples_.length; i++) {
     if (examples_[i].canvas.width !== examples_[i].holder.width()) {
       examples_[i].canvas.width = examples_[i].holder.width();
@@ -242,6 +237,12 @@ var exampled = function(canvas, context, letter) {
   this.holder = $('#viz-' + letter);
   this.currStroke = 0;
   this.seekStroke = 0;
+
+  // if (window.devicePixelRatio) {
+  //   this.canvas.width = this.holder.width() * window.devicePixelRatio;
+  //   this.canvas.height = this.holder.height() * window.devicePixelRatio;
+  //   this.context.scale(window.devicePixelRatio, window.devicePixelRatio);  
+  // }
 
   this.animate = function() {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);

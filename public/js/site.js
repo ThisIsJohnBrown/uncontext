@@ -37,6 +37,11 @@ Uncontext.prototype.init = function() {
 Uncontext.prototype.headerAnimationLines = function(canvas, context) {
   this.canvas = canvas;
   this.context = context;
+  if (window.devicePixelRatio) {
+    this.canvas.width = this.canvas.width  * window.devicePixelRatio;
+    this.canvas.height = this.canvas.height  * window.devicePixelRatio;
+    this.context.scale(window.devicePixelRatio, window.devicePixelRatio);  
+  }
   this.lines = [];
   this.missingLines = [];
   this.previousMissing = -1;
@@ -85,6 +90,12 @@ Uncontext.prototype.headerAnimationLines = function(canvas, context) {
 Uncontext.prototype.headerAnimationSteps = function(canvas, context) {
   this.canvas = canvas;
   this.context = context;
+  if (window.devicePixelRatio) {
+    this.canvas.width = this.canvas.width  * window.devicePixelRatio;
+    this.canvas.height = this.canvas.height  * window.devicePixelRatio;
+    this.context.scale(window.devicePixelRatio, window.devicePixelRatio);  
+  }
+
   this.lines = [];
   this.currLine = 0;
   this.ticks = 0;
@@ -117,7 +128,7 @@ Uncontext.prototype.headerAnimationSteps = function(canvas, context) {
         }
       }
       this.context.beginPath();
-      var drawY = Math.floor((this.lines[i].curr % 1) * 10) + .5;
+      var drawY = Math.floor((this.lines[i].curr % 1) * (this.canvas.height / window.devicePixelRatio)) + .5;
       this.context.moveTo(i * 20, drawY);
       this.context.lineTo((i + 1) * 20, drawY);
       this.context.stroke();
@@ -129,6 +140,11 @@ Uncontext.prototype.headerAnimationSteps = function(canvas, context) {
 Uncontext.prototype.headerAnimationWide = function(canvas, context) {
   this.canvas = canvas;
   this.context = context;
+  if (window.devicePixelRatio) {
+    this.canvas.width = this.canvas.width  * window.devicePixelRatio;
+    this.canvas.height = this.canvas.height  * window.devicePixelRatio;
+    this.context.scale(window.devicePixelRatio, window.devicePixelRatio);  
+  }
   this.lines = [];
 
   for (var i = 0; i < 3; i++) {
@@ -159,9 +175,9 @@ Uncontext.prototype.headerAnimationWide = function(canvas, context) {
       }
       this.context.beginPath();
       this.context.lineWidth = 2;
-      var drawWidth = this.lines[i].curr * canvas.width;
-      this.context.moveTo((canvas.width - drawWidth) / 2, i * 5 + 1);
-      this.context.lineTo((canvas.width - drawWidth) / 2 + drawWidth, i * 5 + 1);
+      var drawWidth = this.lines[i].curr * (this.canvas.width / window.devicePixelRatio);
+      this.context.moveTo(((this.canvas.width / window.devicePixelRatio) - drawWidth) / 2, i * 5 + 1);
+      this.context.lineTo(((this.canvas.width / window.devicePixelRatio) - drawWidth) / 2 + drawWidth, i * 5 + 1);
       this.context.stroke();
     }
   }
