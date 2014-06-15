@@ -83,13 +83,13 @@ function initConfig() {
         wireframe: false,
         tween: {
             active: true,
-            growDuration: 0.5,
-            lifetime: 10
+            growDuration: 2,
+            lifetime: 30
         },
         drift: {
             x: 0.0,
-            y: -0.1,
-            z: -1.0
+            y: 0.0,
+            z: 0.0
         },
         starfield: {
             bounds: {
@@ -382,22 +382,29 @@ function processUncontextMessage(message) {
     var aDiff = window.innerWidth / maxA;
     var bDiff = window.innerHeight / maxB;
 
-    var x = aDiff * data.a;
+    var aNorm = data.a / maxA;
+    var windowWidthQuarter = window.innerWidth * 0.25;
+    var x = aNorm * (windowWidthQuarter * 2) + windowWidthQuarter;
     var y = bDiff * data.b;
 
-    var event = {x: x, y: y, z: 0, id: 0};
+    var event = {x: x, y: y, id: 0};
 
     // Convert F and G to Drifts
     var fDiff = 1 / maxF;
     var gDiff = 1 / maxG;
+    var xDrift = (data.c === 1) ? -0.1 : 0.1;
     var yDrift = fDiff * data.e.f;
     var zDrift = gDiff * data.e.g;
-    yDrift -= 0.5;
-    zDrift *= -0.5;
+
+    // make drifts dip into negative
+    yDrift -= 0.25;
+    zDrift -= 0.25;
 
     // Apply new drift amounts
-    config.drift.y = yDrift;
-    config.drift.z = zDrift;
+    TweenMax.to(config.drift, 2, {y: yDrift, z: zDrift, ease: Cubic.easeInOut});
+
+    // Set mirror mode from C
+//    config.mirror = data.c === 1;
 
     // Call all three events to immediately build a new face
     onStart(event);
@@ -546,8 +553,8 @@ function onEnd(event) {
 
                 // add new Mesh to scene
                 var meshClone = new THREE.Mesh(mesh.geometry.clone(), material);
-                var meshWire = new THREE.Mesh(mesh.geometry.clone(), materialsWire[4]);
-                meshWire.position.z += 1.5;
+                var meshWire = new THREE.Mesh(mesh.geometry.clone(), materialsWire[1]);
+                meshWire.position.z -= 1.5;
 
                 // Add the meshes to the scene
                 var newMeshes = [meshClone, meshWire];
