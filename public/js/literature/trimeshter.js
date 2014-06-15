@@ -10,9 +10,40 @@ var materialSelection = {};    // Material applied to selection meshes
 var materials = [];            // Currently selected material array
 var materialsSolid = [];       // Solid material array, used by default
 var materialsWire = [];        // Wireframe material array
-var canvas = canvas;
 var starfield = {};
-var socket = {}                // Connection to Uncontext
+var socket = {};               // Connection to Uncontext
+
+/**
+ * Inlining THREEx.WindowResize
+ */
+var THREEx = THREEx || {};
+
+/**
+ * Update renderer and camera when the window is resized
+ *
+ * @param {Object} renderer the renderer to update
+ * @param {Object} Camera the camera to update
+ */
+THREEx.WindowResize = function (renderer, camera) {
+    var callback = function () {
+        // notify the renderer of the size change
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        // update the camera
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+    }
+    // bind the resize event
+    window.addEventListener('resize', callback, false);
+    // return .stop() the function to stop watching window resize
+    return {
+        /**
+         * Stop watching window resize
+         */
+        stop: function () {
+            window.removeEventListener('resize', callback);
+        }
+    };
+};
 
 
 // Trimeshter is self-initializing!
@@ -34,48 +65,52 @@ function init() {
  * Setup the Uncontext connection
  */
 function initInput(){
-    socket = new WebSocket('ws://literature.uncontext.com:80');
+    // Start with no drift
+    config.drift.x = config.drift.y = config.drift.z = 0;
 
+    // process incoming socket data
+    uncontext.socket_.onmessage = processUncontextMessage;
+}
+
+/**
+ * Process incoming Uncontext messages
+ * @param message
+ */
+function processUncontextMessage(message){
     // track high numbers for a, b, f and g
     var maxA = 25;
     var maxB = 20;
     var maxF = 400;
     var maxG = 467;
 
-    // Start with no drift
-    config.drift.x = config.drift.y = config.drift.z = 0;
+    var data = JSON.parse(message.data);
 
-    socket.onmessage = function (message) {
+    // Convert A and B to X and Y
+    var aDiff = window.innerWidth / maxA;
+    var bDiff = window.innerHeight / maxB;
 
-        var data = JSON.parse(message.data);
+    var x = aDiff * data.a;
+    var y = bDiff * data.b;
 
-        // Convert A and B to X and Y
-        var aDiff = window.innerWidth / maxA;
-        var bDiff = window.innerHeight / maxB;
+    var event = {x: x, y: y, z: 0, id: 0};
 
-        var x = aDiff * data.a;
-        var y = bDiff * data.b;
+    // Convert F and G to Drifts
+    var fDiff = 1 / maxF;
+    var gDiff = 1 / maxG;
+    var yDrift = fDiff * data.e.f;
+    var zDrift = gDiff * data.e.g;
+    yDrift -= 0.5;
+    zDrift *= -0.5;
 
-        var event = {x: x, y: y, z: 0, id: 0};
+    // Apply new drift amounts
+    config.drift.y = yDrift;
+    config.drift.z = zDrift;
 
-        // Convert F and G to Drifts
-        var fDiff = 1 / maxF;
-        var gDiff = 1 / maxG;
-        var yDrift = fDiff * data.e.f;
-        var zDrift = gDiff * data.e.g;
-        yDrift -= 0.5;
-        zDrift *= -0.5;
+    // Call all three events to immediately build a new face
+    onStart(event);
+    onMove(event);
+    onEnd(event);
 
-        // Apply new drift amounts
-        config.drift.y = yDrift;
-        config.drift.z = zDrift;
-
-        // Call all three events to immediately build a new face
-        onStart(event);
-        onMove(event);
-        onEnd(event);
-
-    };
 }
 
 /**
@@ -95,7 +130,7 @@ function initConfig() {
         drift: {
             x: 0.0,
             y: -0.1,
-            z: 0.0
+            z: -1.0
         },
         starfield: {
             bounds: {
@@ -112,10 +147,10 @@ function initConfig() {
  * Set up THREE.js scene
  */
 function initThree() {
-    renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: true});
+    renderer = new THREE.WebGLRenderer({ antialias: true});
 
     renderer.setSize(window.innerWidth, window.innerHeight);
-//        document.body.appendChild(renderer.domElement);
+    document.body.appendChild(renderer.domElement);
 
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
     projector = new THREE.Projector();
@@ -400,9 +435,8 @@ function onStart(event) {
  * @param event has x, y, id
  */
 function onMove(event) {
-
-    var x = ( event.x / canvas.width ) * 2 - 1;
-    var y = -( event.y / canvas.height ) * 2 + 1;
+    var x = ( event.x / window.innerWidth ) * 2 - 1;
+    var y = -( event.y / window.innerHeight ) * 2 + 1;
     var z = event.z || 0;
 
     var position = getWorldPosition(x, y);
@@ -507,8 +541,8 @@ function onMove(event) {
  */
 function onEnd(event) {
 
-    var x = ( event.x / canvas.width ) * 2 - 1;
-    var y = -( event.y / canvas.height ) * 2 + 1;
+    var x = ( event.x / window.innerWidth ) * 2 - 1;
+    var y = -( event.y / window.innerHeight ) * 2 + 1;
     var z = event.z || getRandomArbitrary(config.randomZ, -config.randomZ);
     var self = this;    // store this for use in Tween functions below
 
@@ -654,35 +688,3 @@ function sortByKey(array, key) {
 function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
 }
-
-/**
- * Inlining THREEx.WindowResize
- */
-var THREEx = THREEx || {};
-
-/**
- * Update renderer and camera when the window is resized
- *
- * @param {Object} renderer the renderer to update
- * @param {Object} Camera the camera to update
- */
-THREEx.WindowResize = function (renderer, camera) {
-    var callback = function () {
-        // notify the renderer of the size change
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        // update the camera
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-    }
-    // bind the resize event
-    window.addEventListener('resize', callback, false);
-    // return .stop() the function to stop watching window resize
-    return {
-        /**
-         * Stop watching window resize
-         */
-        stop: function () {
-            window.removeEventListener('resize', callback);
-        }
-    };
-};
