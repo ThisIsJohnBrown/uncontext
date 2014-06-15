@@ -525,5 +525,5 @@
     renderer.render(scene, camera);
   }
 
-  require(["/js/literature/OrbitControls.js"], init);
+  require(["/js/vendor/threejs/OrbitControls.js"], init);
 })();
