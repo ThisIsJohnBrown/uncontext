@@ -45,7 +45,6 @@ THREEx.WindowResize = function (renderer, camera) {
     };
 };
 
-
 // Trimeshter is self-initializing!
 init();
 
@@ -57,6 +56,7 @@ function init() {
     initThree();
     initMaterials();
     initStarfield();
+    initBranding();
     initInput();
     animate();
 }
@@ -70,47 +70,6 @@ function initInput(){
 
     // process incoming socket data
     uncontext.socket_.onmessage = processUncontextMessage;
-}
-
-/**
- * Process incoming Uncontext messages
- * @param message
- */
-function processUncontextMessage(message){
-    // track high numbers for a, b, f and g
-    var maxA = 25;
-    var maxB = 20;
-    var maxF = 400;
-    var maxG = 467;
-
-    var data = JSON.parse(message.data);
-
-    // Convert A and B to X and Y
-    var aDiff = window.innerWidth / maxA;
-    var bDiff = window.innerHeight / maxB;
-
-    var x = aDiff * data.a;
-    var y = bDiff * data.b;
-
-    var event = {x: x, y: y, z: 0, id: 0};
-
-    // Convert F and G to Drifts
-    var fDiff = 1 / maxF;
-    var gDiff = 1 / maxG;
-    var yDrift = fDiff * data.e.f;
-    var zDrift = gDiff * data.e.g;
-    yDrift -= 0.5;
-    zDrift *= -0.5;
-
-    // Apply new drift amounts
-    config.drift.y = yDrift;
-    config.drift.z = zDrift;
-
-    // Call all three events to immediately build a new face
-    onStart(event);
-    onMove(event);
-    onEnd(event);
-
 }
 
 /**
@@ -141,6 +100,10 @@ function initConfig() {
             count: 1000
         }
     }
+}
+
+function initBranding() {
+    $("body").prepend("<div id='branding'><img src='/img/literature/trimeshter/branding.png'></div>");
 }
 
 /**
@@ -175,38 +138,21 @@ function initThree() {
  * And we generate a solid and wireframe array of our chosen palette
  */
 function initMaterials() {
-    // Spring Palette from http://www.colourlovers.com/palette/3365617/spring
-    var springPalette = [
-        [45, 59, 96],
-        [248, 99, 99],
+
+    var paletteUncontext = [
+        [110, 29, 181],
+        [255, 243, 231],
         [255, 255, 255],
-        [176, 243, 176],
-        [169, 249, 245]
+        [54, 54, 54],
+        [96, 24, 72],
+        [192, 72, 72],
+        [240, 114, 65],
+        [63, 176, 148],
+        [125, 180, 181]
     ];
 
-    // BlacknBlue from http://www.colourlovers.com/palette/3370153/blacknblue
-    var blacknblue = [
-        [68, 68, 68],
-        [8, 226, 255],
-        [14, 96, 107],
-        [230, 230, 230],
-        [163, 172, 173]
-    ];
-
-    // Custom mix
-    var pl1 = [
-        [68, 68, 68],
-        [8, 226, 255],
-        [14, 96, 107],
-        [230, 230, 230],
-        [163, 172, 173],
-        [250, 2, 60],
-        [255, 0, 170],
-        [92, 240, 212]
-    ];
-
-    materialsSolid = buildMaterials(pl1, false);
-    materialsWire = buildMaterials(pl1, true);
+    materialsSolid = buildMaterials(paletteUncontext, false);
+    materialsWire = buildMaterials(paletteUncontext, true);
 
     materials = materialsSolid;
 }
@@ -417,6 +363,47 @@ function animate(time) {
 
     renderer.render(scene, camera);
     requestAnimationFrame(animate);
+}
+
+/**
+ * Process incoming Uncontext messages
+ * @param message
+ */
+function processUncontextMessage(message) {
+    // track high numbers for a, b, f and g
+    var maxA = 25;
+    var maxB = 20;
+    var maxF = 400;
+    var maxG = 467;
+
+    var data = JSON.parse(message.data);
+
+    // Convert A and B to X and Y
+    var aDiff = window.innerWidth / maxA;
+    var bDiff = window.innerHeight / maxB;
+
+    var x = aDiff * data.a;
+    var y = bDiff * data.b;
+
+    var event = {x: x, y: y, z: 0, id: 0};
+
+    // Convert F and G to Drifts
+    var fDiff = 1 / maxF;
+    var gDiff = 1 / maxG;
+    var yDrift = fDiff * data.e.f;
+    var zDrift = gDiff * data.e.g;
+    yDrift -= 0.5;
+    zDrift *= -0.5;
+
+    // Apply new drift amounts
+    config.drift.y = yDrift;
+    config.drift.z = zDrift;
+
+    // Call all three events to immediately build a new face
+    onStart(event);
+    onMove(event);
+    onEnd(event);
+
 }
 
 /**
