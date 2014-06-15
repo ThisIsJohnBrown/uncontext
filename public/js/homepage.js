@@ -103,14 +103,14 @@ function init() {
 }
 
 window.onresize = function(event) {
-  for (var i = 0; i < examples_.length; i++) {
-    if (examples_[i].canvas.width !== examples_[i].holder.width()) {
-      examples_[i].canvas.width = examples_[i].holder.width();
-    }
-    if (examples_[i].canvas.height !== examples_[i].holder.height()) {
-      examples_[i].canvas.height = examples_[i].holder.height();
-    }
-  }
+  // for (var i = 0; i < examples_.length; i++) {
+  //   if (examples_[i].canvas.width !== examples_[i].holder.width()) {
+  //     examples_[i].canvas.width = examples_[i].holder.width();
+  //   }
+  //   if (examples_[i].canvas.height !== examples_[i].holder.height()) {
+  //     examples_[i].canvas.height = examples_[i].holder.height();
+  //   }
+  // }
 };
 
 var examplea = function(canvas, context, letter) {

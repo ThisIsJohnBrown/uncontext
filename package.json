@@ -1,6 +1,6 @@
 {
-  "name": "uncontext",
-  "description": "uncontext test app",
+  "name": "uncontext.",
+  "description": "A data-driven community art(ish) project",
   "version": "0.0.1",
   "main": "uncontext-server.js",
   "dependencies": {
