@@ -83,7 +83,7 @@ function initConfig() {
         wireframe: false,
         tween: {
             active: true,
-            growDuration: 2,
+            growDuration: 1,
             lifetime: 30
         },
         drift: {
