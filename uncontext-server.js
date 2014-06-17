@@ -57,7 +57,7 @@ for (var i = 0;i < sets.length; i++) {
     scenes.sort(function(a, b) {
          return fs.statSync(__dirname + '/scenes/' + sets[i] + '/' + b).mtime.getTime() - 
                 fs.statSync(__dirname + '/scenes/' + sets[i] + '/' + a).mtime.getTime();
-     });
+    });
     var sceneArray = [];
     for (var j = 0; j < scenes.length; j++) {
       if (scenes[j].substr(0, 1) !== '.' && scenes[j] !== 'staging') {
