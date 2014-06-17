@@ -54,6 +54,10 @@ for (var i = 0;i < sets.length; i++) {
       return res.render(req.url.substr(1) + '.mustache', {datasets: datasets});
     });
     var scenes = fs.readdirSync(__dirname + '/scenes/' + sets[i]);
+    scenes.sort(function(a, b) {
+         return fs.statSync(__dirname + '/scenes/' + sets[i] + '/' + b).mtime.getTime() - 
+                fs.statSync(__dirname + '/scenes/' + sets[i] + '/' + a).mtime.getTime();
+     });
     var sceneArray = [];
     for (var j = 0; j < scenes.length; j++) {
       if (scenes[j].substr(0, 1) !== '.' && scenes[j] !== 'staging') {
