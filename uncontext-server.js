@@ -25,11 +25,11 @@ app.engine('mustache', require('hogan-middleware').__express);
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res){
-  return res.render('home.mustache', {datasets: datasets, homepage: true});
+  return res.render('home.mustache', {datasets: datasets, pagejs: 'homepage'});
 });
 
 app.get('/submit/', function(req, res) {
-  return res.render('submit.mustache', {submit: true})
+  return res.render('submit.mustache', {pagejs: 'submit'})
 });
 
 app.get('/submit-project/', function(req, res) {
@@ -42,10 +42,11 @@ app.get('/submit-project/', function(req, res) {
 });
 
 app.get('/literature/', function(req, res) {
-  return res.render('submissions.mustache', {datasets: datasets});
+  return res.render('submissions.mustache', {datasets: datasets, pagejs: 'submissions'});
 });
 
 var datasets = [];
+var gfys = [];
 var sets = fs.readdirSync(__dirname + '/scenes/');
 for (var i = 0;i < sets.length; i++) {
   if (sets[i].substr(0, 1) !== '.') {
@@ -53,34 +54,54 @@ for (var i = 0;i < sets.length; i++) {
     app.get('/' + sets[i], function(req, res){
       return res.render(req.url.substr(1) + '.mustache', {datasets: datasets});
     });
-    var scenes = fs.readdirSync(__dirname + '/scenes/' + sets[i]);
-    scenes.sort(function(a, b) {
-         return fs.statSync(__dirname + '/scenes/' + sets[i] + '/' + b).mtime.getTime() - 
-                fs.statSync(__dirname + '/scenes/' + sets[i] + '/' + a).mtime.getTime();
-    });
-    var sceneArray = [];
-    for (var j = 0; j < scenes.length; j++) {
-      if (scenes[j].substr(0, 1) !== '.' && scenes[j] !== 'staging') {
-        var data = JSON.parse(fs.readFileSync(__dirname + '/scenes/' + sets[i] + '/' + scenes[j]).toString());
-        var displayLink = '';
-        if (data.twitter) {
-          displayLink = 'http://twitter.com/' + data.twitter;
-        } else if (data.url) {
-          displayLink = data.url;
+    var scenes = [];
+    // If this is run on the production server, this takes care of the proper ordering
+    if (client) {
+      var set = sets[i];
+      client.get(set, function(e, r) {
+        var order = JSON.parse(r).order;
+        for (var j = 0; j < order.length; j++) {
+          scenes.push(order[j].json);
+          gfys.push(order[j].gfy);
         }
-        sceneArray.push({
-          'slug': scenes[j].split('.')[0],
-          'author': data.creator,
-          'title': data.name,
-          'link': displayLink
-        });
-      }
+        setUpScenes(set, scenes, gfys);
+      })
+    } else {
+      // This will just sort by submission time if it's running in dev mode
+      scenes = fs.readdirSync(__dirname + '/scenes/' + sets[i]);
+      scenes.sort(function(a, b) {
+           return fs.statSync(__dirname + '/scenes/' + sets[i] + '/' + b).mtime.getTime() - 
+                  fs.statSync(__dirname + '/scenes/' + sets[i] + '/' + a).mtime.getTime();
+      });
+      setUpScenes(sets[i], scenes);
     }
-    datasets.push({
-      name: sets[i],
-      slugs: sceneArray
-    })
   }
+}
+
+function setUpScenes(set, scenes, gfys) {
+  var sceneArray = [];
+  for (var j = 0; j < scenes.length; j++) {
+    if (scenes[j].substr(0, 1) !== '.' && scenes[j] !== 'staging') {
+      var data = JSON.parse(fs.readFileSync(__dirname + '/scenes/' + set + '/' + scenes[j]).toString());
+      var displayLink = '';
+      if (data.twitter) {
+        displayLink = 'http://twitter.com/' + data.twitter;
+      } else if (data.url) {
+        displayLink = data.url;
+      }
+      sceneArray.push({
+        'slug': scenes[j].split('.')[0],
+        'author': data.creator,
+        'title': data.name,
+        'link': displayLink,
+        'gfy': gfys[j] || false
+      });
+    }
+  }
+  datasets.push({
+    name: set,
+    slugs: sceneArray
+  })
 }
 
 app.get('/:dataset/:slug', function(req, res){
@@ -96,6 +117,24 @@ app.get('/:dataset/:slug', function(req, res){
       return res.render('404.mustache');
     }
     data.datasets = datasets;
+    for (var i = 0; i < datasets.length; i++) {
+      if (data.dataset === datasets[i].name) {
+        for (var j = 0; j < datasets[i].slugs.length; j++) {
+          if (datasets[i].slugs[j].slug === data.slug) {
+            var prev = j - 1;
+            var next = j + 1;
+            if (prev < 0) {
+              prev = datasets[i].slugs.length - 1;
+            }
+            if (next >= datasets[i].slugs.length) {
+              next = 0;
+            }
+            data.prevScene = datasets[i].slugs[prev];
+            data.nextScene = datasets[i].slugs[next];
+          }
+        }
+      }
+    }
     if (data.youtube) {
       res.render('youtube.mustache', data, function(err, html) {
         res.send(html);

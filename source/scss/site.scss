@@ -188,6 +188,12 @@ $num-datas: 5;
 
       img {
         max-width: 100%;
+        width: 100%;
+        -webkit-filter: #{"grayscale(1)"} #{"brightness(0.5)"}; // Hacky shit because of Sass filter conflict
+      }
+
+      video {
+        width:100%;
         -webkit-filter: #{"grayscale(1)"} #{"brightness(0.5)"}; // Hacky shit because of Sass filter conflict
       }
 
@@ -233,7 +239,17 @@ $num-datas: 5;
 
         .button {
           opacity: 0;
-          transition: opacity 0.3s linear;
+
+          .-mobile & {
+            opacity: 1;
+          }
+
+          @include transition(all 0.3s linear);
+
+          &:hover {
+            background-color: $cream;
+            color: black;
+          }
         }
       }
 
@@ -296,6 +312,63 @@ footer {
 
     &.dingus-github {
       margin-right: -12px;
+    }
+  }
+}
+
+.submission-nav {
+  color: red;
+  
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  z-index: 10000;
+
+  .submission-nav-holder {
+    background-color: rgba(0, 0, 0, .5);
+    margin: 16px auto;
+    width: 200px;
+    padding: 6px;
+
+    a {
+      text-decoration: none;
+    }
+    .icon {
+      // float:left;
+      margin-left:12px;
+      
+      &.u {
+        width: 19px;
+        height: 17px;
+        margin-right: 12px;
+      }
+      &.menu {
+        width: 16px;
+        height: 17px;
+      }
+      &.next {
+        background-image: url('/img/icons/next.svg');
+        width: 14px;
+        height: 17px;
+      }
+      &.prev {
+        width: 14px;
+        height: 17px;
+
+        .change-color {
+          fill: #ff0000;
+        }
+        &:hover {
+          // width: 40px;
+          .change-color {
+            // stroke-width:10;
+          }
+        }
+      }
+      &.info {
+        width: 20px;
+        height: 20px;
+      }
     }
   }
 }

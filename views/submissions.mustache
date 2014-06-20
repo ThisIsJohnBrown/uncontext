@@ -1,7 +1,6 @@
 {{> header}}
 
 <div id="wrap">
-
   <section class="section section-cream" id="submissions-hero">
     <div class="grid grid--no-gutter">
       
@@ -30,7 +29,10 @@
         {{#datasets}}
           {{#slugs}}
             <li class="submission-container grid__col">
-              <img src="/img/{{name}}/{{slug}}.gif">
+              <video class="submission-video" autoplay loop data-fallback="/img/{{name}}/{{slug}}.gif" data-mobile="/img/{{name}}/{{slug}}.jpg">
+                <source id="webmsource-{{slug}}" src="/video/{{name}}/{{slug}}.webm" type="video/webm">
+                <source id="mp4source-{{slug}}" src="/video/{{name}}/{{slug}}.mp4" type="video/mp4">
+              </video>
               <div class="submission-info">
                 <div class="info-block">
                   <p class="title">{{title}}</p>

@@ -569,10 +569,17 @@ nav {
     padding: 0 14.4px;
     position: relative;
     top: -3px;
-    transition: opacity 0.3s linear; }
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    -ms-transition: all 0.1s linear;
+    -o-transition: all 0.1s linear;
+    transition: all 0.1s linear; }
     nav a.active, nav a:link.active, nav a:visited.active {
       color: #fff3e7;
       background-color: #6e1db5; }
+    nav a:hover, nav a:link:hover, nav a:visited:hover {
+      background-color: #6e1db5;
+      color: #fff3e7 !important; }
   nav a:hover {
     opacity: 1; }
   nav li {
@@ -730,6 +737,10 @@ nav {
     padding: 0 12px; }
     #submission-list > ul .submission-container img {
       max-width: 100%;
+      width: 100%;
+      -webkit-filter: grayscale(1) brightness(0.5); }
+    #submission-list > ul .submission-container video {
+      width: 100%;
       -webkit-filter: grayscale(1) brightness(0.5); }
     #submission-list > ul .submission-container .submission-info {
       position: absolute;
@@ -760,7 +771,16 @@ nav {
         height: 60%; }
       #submission-list > ul .submission-container .submission-info .button {
         opacity: 0;
-        transition: opacity 0.3s linear; }
+        -webkit-transition: all 0.3s linear;
+        -moz-transition: all 0.3s linear;
+        -ms-transition: all 0.3s linear;
+        -o-transition: all 0.3s linear;
+        transition: all 0.3s linear; }
+        .-mobile #submission-list > ul .submission-container .submission-info .button {
+          opacity: 1; }
+        #submission-list > ul .submission-container .submission-info .button:hover {
+          background-color: #fff3e7;
+          color: black; }
     #submission-list > ul .submission-container:hover .button {
       opacity: 1; }
 
@@ -791,3 +811,38 @@ footer {
     margin: 0 0 0 12px; }
     footer .dingus.dingus-github {
       margin-right: -12px; }
+
+.submission-nav {
+  color: red;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  z-index: 10000; }
+  .submission-nav .submission-nav-holder {
+    background-color: rgba(0, 0, 0, 0.5);
+    margin: 16px auto;
+    width: 200px;
+    padding: 6px; }
+    .submission-nav .submission-nav-holder a {
+      text-decoration: none; }
+    .submission-nav .submission-nav-holder .icon {
+      margin-left: 12px; }
+      .submission-nav .submission-nav-holder .icon.u {
+        width: 19px;
+        height: 17px;
+        margin-right: 12px; }
+      .submission-nav .submission-nav-holder .icon.menu {
+        width: 16px;
+        height: 17px; }
+      .submission-nav .submission-nav-holder .icon.next {
+        background-image: url('/img/icons/next.svg');
+        width: 14px;
+        height: 17px; }
+      .submission-nav .submission-nav-holder .icon.prev {
+        width: 14px;
+        height: 17px; }
+        .submission-nav .submission-nav-holder .icon.prev .change-color {
+          fill: #ff0000; }
+      .submission-nav .submission-nav-holder .icon.info {
+        width: 20px;
+        height: 20px; }

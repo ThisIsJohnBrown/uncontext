@@ -157,11 +157,16 @@ nav {
     position: relative;
     top: -3px;
 
-    transition: opacity 0.3s linear;
+    @include transition(all 0.1s linear);
 
     &.active {
       color: $cream;
       background-color: $purple;
+    }
+
+    &:hover {
+      background-color: $purple;
+      color: $cream !important;
     }
   }
 
