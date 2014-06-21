@@ -7,6 +7,12 @@ $grey: rgb(169,169,169);
 $cream: rgb(255,243,231);
 $purple: rgb(110,29,181);
 
+$min_width: 780px;
+$max_width: 980px;
+$gutter_half: 10px;
+$inline_block_reset: 'Courier New', Monospace;
+$inline_block_reset_spacing: -.65em;
+
 //
 // Base html stuff
 //
@@ -114,6 +120,13 @@ p {
       background-color: $cream;
       color: $black;
     }
+
+    @include transition(all 0.1s linear);
+
+    &:hover {
+      background-color: $cream;
+      color: $purple;
+    }
   }
 }
 
@@ -193,3 +206,134 @@ nav {
     }
   }
 }
+
+.-hide {
+  display: none;
+}
+
+
+
+
+
+
+/*!
+ *  
+ * Grid example
+ * This basic grid format is totally extendable.
+ * I left the media query and markup structure examples in here.
+ * The current variable settings are just for example.
+ *
+ */
+
+/* -- grid -- */
+
+/* - grid: variables (set these values) - */
+
+
+/* - grid: structure - */
+.inner,
+.outer {
+  margin: 0 auto;
+  position: relative;
+}
+.inner {
+  max-width: $min_width;
+}
+.outer {
+  max-width: $max_width;
+}
+// This wraps cols for float clearing
+.col-group:after {
+  clear: both;
+  content: '.';
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+/* Do this for ie-legacy 7- to bring layout back ( hasLayout )
+.col-group {
+  zoom: 1;
+}
+*/
+.col {
+  float: left;
+  position: relative;
+}
+.col-grid {
+  font-family: $inline_block_reset;
+  letter-spacing: $inline_block_reset_spacing;
+  margin-left: -$gutter_half;
+  margin-right: -$gutter_half;
+  
+  .col {
+    display: inline-block;
+    font-family: 'Helvetica Neue', Sans-serif;
+    letter-spacing: normal;
+    vertical-align: top;
+    
+    /* For ie7- this fixes non-support of inline-block
+    display: inline;
+    */
+  }
+}
+/* If supporting ie 7-
+.ci {
+  padding-left: $gutter_half;
+  padding-right: $gutter_half;
+}
+*/
+.last {
+  float: right;
+}
+.col1of1 { float: none; }
+.col1of2, .col2of4 { width: 50%; }
+.col1of3 { width: 33.33333%; }
+.col2of3 { width: 66.66666%; }
+.col1of4 { width: 25%; }
+.col3of4 { width: 75%; }
+.col1of5 { width: 20%; }
+.col2of5 { width: 40%; }
+.col3of5 { width: 60%; }
+.col4of5 { width: 80%; }
+.col1of8 { width: 12.5%; }
+.col2of8 { width: 25%; }
+.col3of8 { width: 37.5%; }
+.col4of8 { width: 50%; }
+.col5of8 { width: 62.5%; }
+.col6of8 { width: 75%; }
+.col7of8 { width: 87.5%; }
+.col8of8 { width: 100%; }
+
+/*
+<div class="col-group">
+  <div class="col col1of2">
+    <h1>hey</h1>
+    <p></p>
+    <div class="col-group">
+      <div class="col col1of3">
+      </div>
+      <div class="col col1of3">
+      </div>
+      <div class="col col1of3">
+      </div>
+    </div>
+  </div>
+  <div class="col col1of2">
+  </div>
+</div>
+*/
+
+
+// @media (max-width: 640px) {
+//   body,
+//   .inner,
+//   .outer {
+//     min-width: 100%;
+//     max-width: 100%;
+//   }
+  
+//   .col {
+//     display: block;
+//     float: none;
+//   }
+// }

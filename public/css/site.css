@@ -126,6 +126,43 @@
   padding-left: 24px;
   vertical-align: top; }
 
+@media (max-width: 700px) {
+  .grid .grid__col {
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
+    width: auto; } }
+
+@media (max-width: 700px) and (min-width: 480px) {
+  .grid .grid__col[class*="grid__col--m-"] {
+    display: inline-block;
+    margin-right: -0.24em; }
+  .grid .grid__col.grid__col--m-1-of-2, .grid .grid__col.grid__col--m-2-of-4 {
+    width: 50%; }
+  .grid .grid__col.grid__col--m-1-of-3 {
+    width: 33.33333%; }
+  .grid .grid__col.grid__col--m-1-of-3 {
+    width: 66.66667%; }
+  .grid .grid__col.grid__col--m-1-of-4 {
+    width: 25%; }
+  .grid .grid__col.grid__col--m-3-of-4 {
+    width: 75%; } }
+
+@media (max-width: 480px) {
+  .grid .grid__col[class*="grid__col--s-"] {
+    display: inline-block;
+    margin-right: -0.24em; }
+  .grid .grid__col.grid__col--s-1-of-2, .grid .grid__col.grid__col--s-2-of-4 {
+    width: 50%; }
+  .grid .grid__col.grid__col--s-1-of-3 {
+    width: 33.33333%; }
+  .grid .grid__col.grid__col--s-1-of-3 {
+    width: 66.66667%; }
+  .grid .grid__col.grid__col--s-1-of-4 {
+    width: 25%; }
+  .grid .grid__col.grid__col--s-3-of-4 {
+    width: 75%; } }
+
 .grid .grid__col--centered {
   display: block;
   margin-left: auto;
@@ -541,10 +578,18 @@ p {
     color: #fff3e7; }
   .button.button-cream {
     border-color: #fff3e7;
-    color: #fff3e7; }
+    color: #fff3e7;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    -ms-transition: all 0.1s linear;
+    -o-transition: all 0.1s linear;
+    transition: all 0.1s linear; }
     .button.button-cream:active {
       background-color: #fff3e7;
       color: black; }
+    .button.button-cream:hover {
+      background-color: #fff3e7;
+      color: #6e1db5; }
 
 .divider {
   display: block;
@@ -594,8 +639,143 @@ nav {
       nav li:first-child a, nav li:first-child a:link, nav li:first-child a:visited {
         color: #6e1db5; }
 
+.-hide {
+  display: none; }
+
+/*!
+ *  
+ * Grid example
+ * This basic grid format is totally extendable.
+ * I left the media query and markup structure examples in here.
+ * The current variable settings are just for example.
+ *
+ */
+/* -- grid -- */
+/* - grid: variables (set these values) - */
+/* - grid: structure - */
+.inner, .outer {
+  margin: 0 auto;
+  position: relative; }
+
+.inner {
+  max-width: 780px; }
+
+.outer {
+  max-width: 980px; }
+
+.col-group:after {
+  clear: both;
+  content: '.';
+  display: block;
+  height: 0;
+  visibility: hidden; }
+
+/* Do this for ie-legacy 7- to bring layout back ( hasLayout )
+.col-group {
+  zoom: 1;
+}
+*/
+.col {
+  float: left;
+  position: relative; }
+
+.col-grid {
+  font-family: 'Courier New', Monospace;
+  letter-spacing: -0.65em;
+  margin-left: -10px;
+  margin-right: -10px; }
+  .col-grid .col {
+    display: inline-block;
+    font-family: 'Helvetica Neue', Sans-serif;
+    letter-spacing: normal;
+    vertical-align: top;
+    /* For ie7- this fixes non-support of inline-block
+    display: inline;
+    */ }
+
+/* If supporting ie 7-
+.ci {
+  padding-left: $gutter_half;
+  padding-right: $gutter_half;
+}
+*/
+.last {
+  float: right; }
+
+.col1of1 {
+  float: none; }
+
+.col1of2, .col2of4 {
+  width: 50%; }
+
+.col1of3 {
+  width: 33.33333%; }
+
+.col2of3 {
+  width: 66.66666%; }
+
+.col1of4 {
+  width: 25%; }
+
+.col3of4 {
+  width: 75%; }
+
+.col1of5 {
+  width: 20%; }
+
+.col2of5 {
+  width: 40%; }
+
+.col3of5 {
+  width: 60%; }
+
+.col4of5 {
+  width: 80%; }
+
+.col1of8 {
+  width: 12.5%; }
+
+.col2of8 {
+  width: 25%; }
+
+.col3of8 {
+  width: 37.5%; }
+
+.col4of8 {
+  width: 50%; }
+
+.col5of8 {
+  width: 62.5%; }
+
+.col6of8 {
+  width: 75%; }
+
+.col7of8 {
+  width: 87.5%; }
+
+.col8of8 {
+  width: 100%; }
+
+/*
+<div class="col-group">
+  <div class="col col1of2">
+    <h1>hey</h1>
+    <p></p>
+    <div class="col-group">
+      <div class="col col1of3">
+      </div>
+      <div class="col col1of3">
+      </div>
+      <div class="col col1of3">
+      </div>
+    </div>
+  </div>
+  <div class="col col1of2">
+  </div>
+</div>
+*/
 #wrap {
-  min-width: 1050px;
+  min-width: 780px;
   margin: 0 auto; }
 
 .grid {
@@ -691,7 +871,7 @@ nav {
   background-color: #6e1db5;
   color: #fff3e7;
   text-align: center;
-  padding: 48px 216px; }
+  padding: 48px 0; }
   #github-cta svg {
     zoom: 1.6; }
   #github-cta p {
@@ -699,6 +879,10 @@ nav {
 
 #submission-form {
   margin-top: 96px; }
+  #submission-form .col.left {
+    padding-right: 10px; }
+  #submission-form .col.right {
+    padding-left: 10px; }
   #submission-form input[type=text] {
     display: block;
     width: 100%;
@@ -726,7 +910,15 @@ nav {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    max-width: 25%; }
+    max-width: 25%;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    -ms-transition: all 0.1s linear;
+    -o-transition: all 0.1s linear;
+    transition: all 0.1s linear; }
+    #submission-form #submit-button:hover {
+      background-color: #6e1db5;
+      color: #fff3e7; }
 
 #submission-list > ul {
   padding: 0; }
@@ -770,17 +962,9 @@ nav {
       #submission-list > ul .submission-container .submission-info .info-block {
         height: 60%; }
       #submission-list > ul .submission-container .submission-info .button {
-        opacity: 0;
-        -webkit-transition: all 0.3s linear;
-        -moz-transition: all 0.3s linear;
-        -ms-transition: all 0.3s linear;
-        -o-transition: all 0.3s linear;
-        transition: all 0.3s linear; }
+        opacity: 0; }
         .-mobile #submission-list > ul .submission-container .submission-info .button {
           opacity: 1; }
-        #submission-list > ul .submission-container .submission-info .button:hover {
-          background-color: #fff3e7;
-          color: black; }
     #submission-list > ul .submission-container:hover .button {
       opacity: 1; }
 
@@ -846,3 +1030,28 @@ footer {
       .submission-nav .submission-nav-holder .icon.info {
         width: 20px;
         height: 20px; }
+
+.info-panel {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  z-index: 9500;
+  position: absolute;
+  top: 0;
+  left: 0; }
+  .info-panel .col-group {
+    margin: 0 auto;
+    position: absolute;
+    width: 100%;
+    min-width: 0;
+    max-height: 90%;
+    overflow: scroll; }
+    .info-panel .col-group .title {
+      font-size: 32px;
+      color: #FFF3E7;
+      line-height: 48px; }
+    .info-panel .col-group p.description {
+      font-size: 16px;
+      color: #fff3e7;
+      line-height: 23px; }

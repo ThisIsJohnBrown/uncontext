@@ -5,6 +5,7 @@ var app = express();
 var port = Number(process.env.PORT || 5001);
 var server = http.createServer(app).listen(port);
 var fs = require('fs');
+var markdown = require( "markdown" ).markdown;
 var client;
 
 if (process.env.REDISCLOUD_URL) {
@@ -154,6 +155,9 @@ app.get('/:dataset/:slug', function(req, res){
         data.submission = true;
         if (fs.existsSync(__dirname + '/public/js/' + req.params.dataset + '/' + req.params.slug + '.js')) {
           data.assets.js = true;
+        }
+        if (fs.existsSync(__dirname + '/scenes/' + req.params.dataset + '/' + req.params.slug + '.md')) {
+          data.description = markdown.toHTML(fs.readFileSync(__dirname + '/scenes/' + req.params.dataset + '/' + req.params.slug + '.md').toString('utf8'));
         }
         if (fs.existsSync(__dirname + '/public/css/' + req.params.dataset + '/' + req.params.slug + '.css')) {
           data.assets.css = true;

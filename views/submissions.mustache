@@ -2,9 +2,9 @@
 
 <div id="wrap">
   <section class="section section-cream" id="submissions-hero">
-    <div class="grid grid--no-gutter">
+    <div class="col-group outer">
       
-      <nav class="grid__col grid__col--1-of-2 grid__col--centered">
+      <nav class="col col1of1">
         <ul>
           <li id="logo"><a href="/">Uncontext.</a></li>
           <li><a href="/submit/">Submit</a></li>
@@ -13,7 +13,7 @@
         </ul>
       </nav>
 
-      <header class="grid__col grid__col--1-of-2 grid__col--centered">
+      <header class="col col1of1">
         <p id="session">Session 1</p>
         <h1 class="as-h1">Literature</h1>
         <canvas class="divider" width="260px" height="12px" data-divider-type="headerAnimationLines"></canvas>
@@ -22,13 +22,13 @@
     </div><!-- /grid -->
   </section><!-- /hero -->
 
-  <div class="grid">
+  <div class="col-group outer">
 
-    <section id="submission-list" class="grid__col grid__col--3-of-4 grid__col--centered">
-      <ul class="grid grid--no-gutter">
+    <section id="submission-list" class="col col1of1">
+      <ul class="col-group">
         {{#datasets}}
           {{#slugs}}
-            <li class="submission-container grid__col">
+            <li class="submission-container col col1of4">
               <video class="submission-video" autoplay loop data-fallback="/img/{{name}}/{{slug}}.gif" data-mobile="/img/{{name}}/{{slug}}.jpg">
                 <source id="webmsource-{{slug}}" src="/video/{{name}}/{{slug}}.webm" type="video/webm">
                 <source id="mp4source-{{slug}}" src="/video/{{name}}/{{slug}}.mp4" type="video/mp4">
@@ -52,9 +52,7 @@
     </section>
 
   </div>
-
+  {{> site_footer}}
 </div><!-- /wrap -->
-
-{{> site_footer}}
 
 {{> footer}}
