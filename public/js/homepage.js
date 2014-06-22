@@ -91,8 +91,8 @@ function animate() {
 }
 
 function init() {
-  canvas = document.getElementById('hero-canvas');
-  context = canvas.getContext('2d');
+  // canvas = document.getElementById('hero-canvas');
+  // context = canvas.getContext('2d');
   $('.homepage-example').each(function() {
     var letter = this.getAttribute('data-example');
     examples_.push(new window['example' + letter](this, this.getContext('2d'), letter));
