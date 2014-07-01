@@ -10,7 +10,8 @@
     "newrelic": "1.5.3",
     "gulp": "^3.6.2",
     "gulp-sass": "^0.7.1",
-    "redis": "0.10.3"
+    "redis": "0.10.3",
+    "markdown": "0.5.0"
   },
   "engines": {
     "node": "0.10.x"

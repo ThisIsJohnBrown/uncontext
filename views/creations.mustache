@@ -1,6 +1,31 @@
 
 {{> header}}
-<!-- 
+<!-- <div class="info-panel -hide">
+  <div class="col-group inner">
+    <div class="col col1of8">
+      <a class="info-close" href="#">X</a>
+    </div>
+    <div class="col col7of8">
+      <h1 class="title">{{name}}</h1>
+    </div>
+    <div class="col col1of8">&nbsp;</div>
+    <div class="col col5of8">
+      <p class="description">{{{description}}}</p>
+    </div>
+    <div class="col col2of8">
+      <p>{{creator}}</p>
+      {{#sourceCode}}
+      <p><a href="http://twitter.com/{{sourceCode}}" target="_blank">Source code</a></p>
+      {{/sourceCode}}
+      {{#twitter}}
+      <p><a href="http://twitter.com/{{twitter}}" target="_blank">@{{twitter}}</a></p>
+      {{/twitter}}
+      {{#url}}
+      <p><a href="{{url}}" target="_blank">{{url}}</a></p>
+      {{/url}}
+    </div>
+  </div>
+</div>
 <div class="submission-nav">
   <div class="submission-nav-holder">
     <a href="/{{dataset}}/">
@@ -39,7 +64,7 @@
         </g>
       </svg>
     </a>
-    <a href="asdf">
+    <a class="js-toggle-info" href="#">
       <svg class="icon info" width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
       <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
           <g id="Gallery-2" sketch:type="MSArtboardGroup" transform="translate(-544.000000, -31.000000)">

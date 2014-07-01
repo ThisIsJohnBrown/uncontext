@@ -5,7 +5,7 @@
 @import "base";
 
 #wrap {
-  min-width: 1050px;
+  min-width: $min_width;
   margin: 0 auto;
 }
 
@@ -126,7 +126,7 @@ $num-datas: 5;
   background-color: $purple;
   color: $cream;
   text-align: center;
-  padding: $baseline*4 $baseline*18;
+  padding: $baseline*4 0;
 
   svg {
     zoom: 1.6;
@@ -139,6 +139,13 @@ $num-datas: 5;
 
 #submission-form {
   margin-top: $baseline*8;
+
+  .col.left {
+    padding-right: 10px;
+  }
+  .col.right {
+    padding-left: 10px;
+  }
 
   input[type=text] {
     display: block;
@@ -172,6 +179,13 @@ $num-datas: 5;
     margin-left: auto;
     margin-right: auto;
     max-width: 25%;
+
+    @include transition(all 0.1s linear);
+
+    &:hover {
+      background-color: $purple;
+      color: $cream;
+    }
   }
 }
 
@@ -242,13 +256,6 @@ $num-datas: 5;
 
           .-mobile & {
             opacity: 1;
-          }
-
-          @include transition(all 0.3s linear);
-
-          &:hover {
-            background-color: $cream;
-            color: black;
           }
         }
       }
@@ -370,5 +377,42 @@ footer {
         height: 20px;
       }
     }
+  }
+}
+
+.info-panel {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .5);
+  color: white;
+  z-index: 9500;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  .col-group {
+    margin: 0 auto;
+    position: absolute;
+    width: 100%;
+    min-width: 0;
+    max-height: 90%;
+    overflow: scroll;
+    
+    .title {
+      font-size: 32px;
+      color: #FFF3E7;
+      line-height: 48px;
+    }
+
+    p.description {
+      // font-family: .LucidaGrandeUI;
+      font-size: 16px;
+      color: $cream;
+      line-height: 23px;
+    }
+  }
+
+  .info-close {
+    // float: right;
   }
 }

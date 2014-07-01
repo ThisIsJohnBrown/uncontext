@@ -32,10 +32,30 @@ Uncontext.prototype.init = function() {
   })
   this.animate();
 
+  $(window).on('resize', this.resize);
+  this.resize();
+
+  $('.info-close').on('click', function(e) {
+    e.preventDefault();
+    $('.info-panel').addClass('-hide');
+  });
+  $('.js-toggle-info').on('click', function(e) {
+    e.preventDefault();
+    $('.info-panel').toggleClass('-hide');
+    self.resize();
+  })
+
   self.socket_.onmessage = function (event) {
     data = JSON.parse(event.data);
     uncontext.socketData_ = data;
   };
+}
+
+Uncontext.prototype.resize = function() {
+  $('.info-panel .col-group').css({
+    left: ($(window).width() - $('.info-panel .col-group').outerWidth()) / 2,
+    top: ($(window).height() - $('.info-panel .col-group').outerHeight()) / 2
+  });
 }
 
 //  This is an animation for the first header on the homepage
