@@ -1,35 +1,50 @@
-var socketData = {};
+var canvas = null;
+var context = null;
 var speed = .3;
-var maxRows = 6;
+var max_rows = 6;
 if (document.documentElement.clientWidth > 500) {
-  maxRows = 8;
+  max_rows = 17;
 }
+var items_ = [];
+var examples_ = [];
 
 var dividers = [];
 $trs = null;
 $(function() {
   init();
-  animate();
 
   uncontext.socket_.onmessage = function (event) {
+    // window.onresize();
     data = JSON.parse(event.data);
-
-    if ($('#demo-table').length && socketData.a) {
-      // console.log($(this).find('tr').length);
+    if ($('#demo-table').length) {
       $trs = $('#demo-table tbody tr');
-      $($trs[0]).find('td:eq(1)').append('<span>' + socketData.a + '</span>');
-      $($trs[1]).find('td:eq(1)').append('<span>' + socketData.b + '</span>');
-      $($trs[2]).find('td:eq(1)').append('<span>' + socketData.c + '</span>');
-      $($trs[3]).find('td:eq(1)').append('<span>' + socketData.d + '</span>');
-      $($trs[4]).find('td:eq(1)').append('<span>' + socketData.e.f + '</span>');
-      $($trs[5]).find('td:eq(1)').append('<span>' + socketData.e.g + '</span>');
+      $($trs[0]).find('td:eq(1)').prepend('<span>' + data.a + '</span>');
+      $($trs[1]).find('td:eq(1)').prepend('<span>' + data.b + '</span>');
+      $($trs[2]).find('td:eq(1)').prepend('<span>' + data.c + '</span>');
+      $($trs[3]).find('td:eq(1)').prepend('<span>' + data.d + '</span>');
+      $($trs[4]).find('td:eq(1)').prepend('<span>' + data.e.f + '</span>');
+      $($trs[5]).find('td:eq(1)').prepend('<span>' + data.e.g + '</span>');
       $trs.each(function() {
-        // console.log($(this));
-        $(this).find('td:eq(1) span:eq(0)').remove();
+        $(this).find('td:eq(1) span:eq(5)').remove();
       })
     }
+    if (canvas) {
+      if (uncontext.socketData_.a !== data.a) {
+        var now = new Date().getTime();
+        for (var i = 0; i < data.a; i++) {
+          var item = addItem(
+            i,
+            data.a,
+            data.b,
+            data.c,
+            data.e.f / data.e.g,
+            now);
+          items_.push(item);
+        }
+      }
+    }
 
-    socketData = data;
+    uncontext.socketData_ = data;
   };
 })
 
@@ -43,160 +58,306 @@ function addItem(i, iTotal, size, direction, yOffset, now) {
   return item;
 }
 
-function init() {
-  var dividerNames = ['divider1', 'divider2', 'divider3'];
-  for (var i = 0; i < dividerNames.length; i++) {
-    var canvas = document.getElementById(dividerNames[i]);
-    var context = canvas.getContext('2d');
-    dividers.push(new window[canvas.getAttribute('data-divider-type')](canvas, context));
-  }
-  
-  window.onresize();
-}
-
 function animate() {
-  for (var i = 0; i < dividers.length; i++) {
-    dividers[i].animate();
+  // context.clearRect(0, 0, canvas.width, canvas.height);
+  var now = new Date().getTime();
+
+  // for (var i = items_.length - 1; i >= 0; i--) {
+  //   var item = items_[i];
+  //   if (item.start + item.delay + 1000 < now) {
+  //     items_.splice(i, 1);
+  //   } else if (item.start + item.delay < now) {
+  //     if (item.currSize < item.finalSize) {
+  //       item.currSize += speed;
+  //       context.beginPath();
+  //       context.arc(item.position[0] * canvas.width, item.position[1] * canvas.height, item.currSize * 3, 0, 2 * Math.PI, false);
+  //       context.strokeStyle = 'rgba(240, 208, 176, ' + (1 - (item.currSize / item.finalSize)) + ')';
+  //       context.fillStyle = 'rgba(0,0,0, ' + (1 - (item.currSize / item.finalSize)) + ')';
+  //       // context.lineWidth = 2;
+  //       context.fill();
+  //       // context.stroke();
+  //       context.closePath();
+  //     } else {
+  //       items_.splice(i, 1);
+  //     }
+  //   }
+  // }
+
+  for (var i = 0; i < examples_.length; i++) {
+    examples_[i].animate();
   }
+
   requestAnimationFrame( animate );
 }
 
+function init() {
+  canvas = document.getElementById('hero-canvas');
+  context = canvas.getContext('2d');
+  $('.homepage-example').each(function() {
+    var letter = this.getAttribute('data-example');
+    examples_.push(new window['example' + letter](this, this.getContext('2d'), letter));
+  })
+
+  animate();
+  // window.onresize();
+}
+
 window.onresize = function(event) {
-  // canvas.width = canvas.offsetWidth;
-  // canvas.height = canvas.offsetHeight;
+  // for (var i = 0; i < examples_.length; i++) {
+  //   if (examples_[i].canvas.width !== examples_[i].holder.width()) {
+  //     examples_[i].canvas.width = examples_[i].holder.width();
+  //   }
+  //   if (examples_[i].canvas.height !== examples_[i].holder.height()) {
+  //     examples_[i].canvas.height = examples_[i].holder.height();
+  //   }
+  // }
 };
 
-
-//  This is an animation for the first header on the homepage
-headerAnimationLines = function(canvas, context) {
+var examplea = function(canvas, context, letter) {
   this.canvas = canvas;
   this.context = context;
-  this.lines = [];
-  this.missingLines = [];
-  this.previousMissing = -1;
-  for (var i = 0; i < 26; i++) {
-    this.lines.push({
-      'direction': i % 2,
-      'opacity': 1
-    });
-  }
+  this.letter = letter;
+  this.holder = $('#viz-' + letter);
+  this.currNum = 0;
+  this.seekNum = 0;
 
   this.animate = function() {
-    if (socketData.a) {
-      if (socketData.a !== this.previousMissing && this.missingLines.indexOf(socketData.a) === -1) {
-        this.previousMissing = socketData.a;
-        this.missingLines.push(socketData.a);
-        if (this.missingLines.length >= socketData.d) {
-          this.missingLines.shift();
-        }
-      }
-    }
-    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-    for (var i = 0; i < this.lines.length; i++) {
-      if (this.missingLines.indexOf(i) === -1) {
-        if (this.lines[i].opacity < 1) {
-          this.lines[i].opacity += .02;
-        }
-      } else {
-        if (this.lines[i].opacity > 0) {
-          this.lines[i].opacity -= .02;
-        }
-        if (this.lines[i].opacity < 0) {
-          this.lines[i].opacity = 0;
-        }
-      }
-      this.context.beginPath();
-      this.context.strokeStyle = 'rgba(0, 0, 0, ' + this.lines[i].opacity + ')';
-      this.context.moveTo(i * 10, 10 * this.lines[i].direction);
-      this.context.lineTo((i + 1) * 10, 10 * (this.lines[i].direction ? 0 : 1));
-      this.context.stroke();
-    }
-  }
-}
-
-//  This is an animation for the second header on the homepage
-headerAnimationSteps = function(canvas, context) {
-  this.canvas = canvas;
-  this.context = context;
-  this.lines = [];
-  this.currLine = 0;
-  this.ticks = 0;
-
-  for (var i = 0; i < 5; i++) {
-    this.lines.push({
-      'curr': .5,
-      'seek': .5
-    })
-  }
-
-  this.animate = function() {
-    this.ticks++;
-    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-    if (socketData.b && this.ticks % 30 === 0) {
-      this.currLine++;
-      this.lines[this.currLine % this.lines.length].seek += socketData.b / 20.33;
-    }
-
-    for (var i = 0; i < this.lines.length; i++) {
-      if (this.lines[i].curr !== this.lines[i].seek) {
-        var diff = this.lines[i].curr - this.lines[i].seek;
-        if (Math.abs(diff) < .02) {
-          this.lines[i].curr = this.lines[i].seek;
-        } else if (diff < 0) {
-          this.lines[i].curr += .02;
-        } else {
-          this.lines[i].curr -= .02;
-        }
-      }
-      this.context.beginPath();
-      var drawY = Math.floor((this.lines[i].curr % 1) * 10) + .5;
-      this.context.moveTo(i * 20, drawY);
-      this.context.lineTo((i + 1) * 20, drawY);
-      this.context.stroke();
-    }
-  }
-}
-
-//  This is an animation for the third header on the homepage
-headerAnimationWide = function(canvas, context) {
-  this.canvas = canvas;
-  this.context = context;
-  this.lines = [];
-
-  for (var i = 0; i < 3; i++) {
-    this.lines.push({
-      'curr': 1,
-      'seek': .5
-    })
-  }
-
-  this.animate = function() {
-    this.ticks++;
-    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-    if (socketData.b) {
-      this.lines[0].seek = socketData.b / 20.33;
-      this.lines[1].seek = socketData.b / 14;
-      this.lines[2].seek = socketData.e.f / socketData.e.g;
-    }
-
-    for (var i = 0; i < this.lines.length; i++) {
-      var diff = this.lines[i].curr - this.lines[i].seek;
-      if (Math.abs(diff) < .01) {
-        this.lines[i].curr = this.lines[i].seek;
+    if (this.currNum !== this.seekNum) {
+      var diff = this.currNum - this.seekNum;
+      if (Math.abs(diff) <= 1) {
+        this.currNum = this.seekNum;
       } else if (diff < 0) {
-        this.lines[i].curr += .01;
+        this.currNum += 1;
       } else {
-        this.lines[i].curr -= .01;
+        this.currNum -= 1;
       }
-      this.context.beginPath();
-      this.context.lineWidth = 2;
-      var drawWidth = this.lines[i].curr * canvas.width;
-      this.context.moveTo((canvas.width - drawWidth) / 2, i * 5 + 1);
-      this.context.lineTo((canvas.width - drawWidth) / 2 + drawWidth, i * 5 + 1);
-      this.context.stroke();
+    }
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    if (uncontext.socketData_.a) {
+      if (uncontext.socketData_.b !== this.seekNum) {
+        this.seekNum = uncontext.socketData_.a;
+      }
+      var radius = parseInt(this.canvas.width / 26, 10);
+      var topOffset = this.canvas.height / 2;
+      this.context.fillStyle = "#6E1DB5";
+      for (var i = 0; i < this.currNum; i++) {
+        this.context.beginPath();
+        this.context.arc(radius/2 + (i * radius), topOffset, radius/2, 0, 2 * Math.PI, false);
+        this.context.fill();
+      }
+    }
+  }
+}
+
+var exampleb = function(canvas, context, letter) {
+  this.canvas = canvas;
+  this.context = context;
+  this.letter = letter;
+  this.holder = $('#viz-' + letter);
+  this.currRot = 0;
+  this.seekRot = 0;
+
+  this.animate = function() {
+    if (this.currRot !== this.seekRot) {
+      var diff = this.currRot - this.seekRot;
+      if (Math.abs(diff) < .5) {
+        this.currRot = this.seekRot;
+      } else if (diff < 0) {
+        this.currRot += .5;
+      } else {
+        this.currRot -= .5;
+      }
+    }
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    if (uncontext.socketData_.b) {
+      if (uncontext.socketData_.b !== this.seekRot) {
+        this.seekRot = uncontext.socketData_.b;
+      }
+
+      var size = this.canvas.height - 6;
+      var numSquares = Math.floor(this.canvas.width / (size + 10));
+      var offset = (this.canvas.width - (numSquares * (size + 10)) - 10) / 2;
+      for (var i = 0; i < numSquares; i++) {
+        var x = i * (size + 10)  +10;
+        var y = this.canvas.height / 2 - size / 2;
+        var width = size;
+        var height = size;
+        this.context.save();
+
+        this.context.beginPath();
+        this.context.translate(x + width / 2, y + height / 2);
+        this.context.rotate(this.currRot * Math.PI / 180);
+
+        this.context.rect(-width / 2, -height / 2, width, height);
+
+        this.context.fillStyle = "#6E1DB5";
+        this.context.fill();
+
+        this.context.restore();
+      }
+    }
+  }
+}
+
+var examplec = function(canvas, context, letter) {
+  this.canvas = canvas;
+  this.context = context;
+  this.letter = letter;
+  this.holder = $('#viz-' + letter);
+  this.currOpac = 0;
+  this.seekOpac = 0;
+
+  this.animate = function() {
+    if (this.currOpac !== this.seekOpac) {
+      var diff = this.currOpac - this.seekOpac;
+      if (Math.abs(diff) < .05) {
+        this.currOpac = this.seekOpac;
+      } else if (diff < 0) {
+        this.currOpac += .05;
+      } else {
+        this.currOpac -= .05;
+      }
+    }
+    this.currOpac = Math.floor(this.currOpac * 100)/100;
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    if (uncontext.socketData_.a) {
+      if (uncontext.socketData_.c !== this.seekOpac) {
+        this.seekOpac = uncontext.socketData_.c;
+      }
+      this.context.fillStyle = 'rgba(110, 29, 181, ' + this.currOpac + ')';
+      this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+  }
+}
+
+var exampled = function(canvas, context, letter) {
+  this.canvas = canvas;
+  this.context = context;
+  this.letter = letter;
+  this.holder = $('#viz-' + letter);
+  this.currStroke = 0;
+  this.seekStroke = 0;
+
+  // if (window.devicePixelRatio) {
+  //   this.canvas.width = this.holder.width() * window.devicePixelRatio;
+  //   this.canvas.height = this.holder.height() * window.devicePixelRatio;
+  //   this.context.scale(window.devicePixelRatio, window.devicePixelRatio);  
+  // }
+
+  this.animate = function() {
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    var size = this.canvas.height * Math.sqrt(3) * .5;
+    if (this.currStroke !== this.seekStroke) {
+      var diff = this.currStroke - this.seekStroke;
+      if (Math.abs(diff) < .03) {
+        this.currStroke = this.seekStroke;
+      } else if (diff < 0) {
+        this.currStroke += .03;
+      } else {
+        this.currStroke -= .03;
+      }
+    }
+    if (uncontext.socketData_.d) {
+      if (uncontext.socketData_.d !== this.seekStroke) {
+        this.seekStroke = uncontext.socketData_.d;
+      }
+      var numTriangles = Math.floor(this.canvas.width / (size + 10));
+      var offset = (this.canvas.width - (numTriangles * (size + 10) - 10)) / 2;
+      for (var i = 0; i < numTriangles; i++) {
+        var currOffset = (i * (size + 10) + offset);
+        this.context.save();
+        this.context.beginPath();
+        this.context.moveTo(currOffset + 0, size);
+        this.context.lineTo(currOffset + size / 2, 0);
+        this.context.lineTo(currOffset + size, size);
+        this.context.closePath();
+        this.context.clip();
+        this.context.strokeStyle = '#6E1DB5';
+        this.context.lineWidth = this.currStroke * 2;
+        this.context.beginPath();
+        this.context.moveTo(currOffset + 0, size);
+        this.context.lineTo(currOffset + size / 2, 0);
+        this.context.lineTo(currOffset + size, size);
+        this.context.closePath();
+        this.context.stroke();
+        this.context.restore();
+      }
+    }
+  }
+}
+
+var exampleef = function(canvas, context, letter) {
+  this.canvas = canvas;
+  this.context = context;
+  this.letter = letter;
+  this.holder = $('#viz-' + letter);
+  this.currNum = 0;
+  this.seekNum = 0;
+
+  this.animate = function() {
+    if (this.currNum !== this.seekNum) {
+      var diff = this.currNum - this.seekNum;
+      if (Math.abs(diff) < 5) {
+        this.currNum = this.seekNum;
+      } else if (diff < 0) {
+        this.currNum += 3;
+      } else {
+        this.currNum -= 3;
+      }
+    }
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    if (uncontext.socketData_.e) {
+      if (uncontext.socketData_.d !== this.seekNum) {
+        this.seekNum = uncontext.socketData_.e.f;
+      }
+      for (var h = 0; h < 2; h++) {
+        for (var i = 0; i < this.currNum / 2; i++) {
+          this.context.beginPath();
+          this.context.strokeStyle = '#6E1DB5';
+          this.context.moveTo(.5 + i * 2, (h * this.canvas.height / 2) + (i % 2) * (this.canvas.height / 4));
+          this.context.lineTo(.5 + i * 2, (h * this.canvas.height / 2) + (this.canvas.height / 4) + (i % 2) * (this.canvas.height / 4));
+          this.context.stroke();
+          this.context.closePath();
+        }
+      }
+    }
+  }
+}
+
+var exampleeg = function(canvas, context, letter) {
+  this.canvas = canvas;
+  this.context = context;
+  this.letter = letter;
+  this.holder = $('#viz-' + letter);
+  this.currNum = 0;
+  this.seekNum = 0;
+
+  this.animate = function() {
+    if (this.currNum !== this.seekNum) {
+      var diff = this.currNum - this.seekNum;
+      if (Math.abs(diff) < 5) {
+        this.currNum = this.seekNum;
+      } else if (diff < 0) {
+        this.currNum += 3;
+      } else {
+        this.currNum -= 3;
+      }
+    }
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    if (uncontext.socketData_.e) {
+      if (uncontext.socketData_.d !== this.seekNum) {
+        this.seekNum = uncontext.socketData_.e.g;
+      }
+      for (var h = 0; h < 2; h++) {
+        for (var i = 0; i < this.currNum / 2; i++) {
+          this.context.beginPath();
+          this.context.strokeStyle = '#6E1DB5';
+          this.context.moveTo(.5 + i * 2, (h * this.canvas.height / 2) + (i % 2) * (this.canvas.height / 4));
+          this.context.lineTo(.5 + i * 2, (h * this.canvas.height / 2) + (this.canvas.height / 4) + (i % 2) * (this.canvas.height / 4));
+          this.context.stroke();
+          this.context.closePath();
+        }
+      }
     }
   }
 }

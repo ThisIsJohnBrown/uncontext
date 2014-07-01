@@ -1,0 +1,12 @@
+{
+    "creator": "Surya Buchwald",
+    "dataset": "literature",
+    "name": "Trimeshter",
+    "slug": "trimeshter",
+    "description": "Drawing symmetrical triangular meshes in space because geometry is rad.",
+    "twitter": "momothemonster",
+    "assets": {
+        "threejs": true,
+        "tweenmax": true
+    }
+}

@@ -9,8 +9,13 @@
   margin: 0 auto;
 }
 
+.grid {
+  min-width: 900px;
+}
+
 #hero,
-#submissions-hero {
+#submissions-hero,
+#submit {
   header {
     margin: $baseline*8 auto;
   }
@@ -26,6 +31,10 @@
   }
 }
 
+#hero-canvas {
+  position: absolute;
+}
+
 #submissions-hero header {
   margin-bottom: 0;
 }
@@ -36,7 +45,7 @@
 
   td {
     height: $baseline*4;
-    font-size: 18px;
+    font-size: 16px;
     line-height: $baseline*4;
     border-bottom: 1px solid rgba($black, 0.05);
   }
@@ -52,21 +61,21 @@
     display: inline-block;
     padding: 0;
     margin: 0;
-    width: 20px;
+    width: 40px;
   }
 
   td .demo-viz-cell {
     width: 100%;
     height: 48px;
-    background-color: $purple;
+    margin: 10px 0;
   }
 }
 
 // Evenly distribute opacity from 0 to 1 over the course of num datas
-$num-datas: 8;
+$num-datas: 5;
 @for $i from 1 through $num-datas {
   $opacity: (1/$num-datas) * $i;
-  #demo-table td span:nth-child(#{$i}) {
+  #demo-table td span:nth-last-child(#{$i}) {
     opacity: $opacity;
   }
 }
@@ -86,10 +95,30 @@ $num-datas: 8;
 }
 
 #gallery-cta {
+  position: relative;
   text-align: center;
+  height: $baseline*20;
+  overflow: hidden;
+
+  .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    -webkit-filter: #{"grayscale(1)"} #{"brightness(0.4)"};
+    filter: #{"grayscale(1)"} #{"brightness(0.4)"};
+  }
+
+  .button-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+  }
 
   .button {
-    margin: $baseline*4 auto;
+    margin: $baseline*8 auto;
   }
 }
 
@@ -110,7 +139,6 @@ $num-datas: 8;
 
 #submission-form {
   margin-top: $baseline*8;
-  margin-bottom: $baseline*4;
 
   input[type=text] {
     display: block;
@@ -137,31 +165,42 @@ $num-datas: 8;
     height: 276px;
   }
 
-  #submit {
+  #submit-button {
     margin-top: $baseline*2;
     display: block;
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 25%;
   }
 }
 
 #submission-list {
+
   & > ul {
     padding: 0;
 
     .submission-container {
       margin-bottom: $baseline*2;
       position: relative;
+      width: 25%;
       padding: 0 $baseline;
 
       img {
         max-width: 100%;
+        width: 100%;
+        -webkit-filter: #{"grayscale(1)"} #{"brightness(0.5)"}; // Hacky shit because of Sass filter conflict
+      }
+
+      video {
+        width:100%;
         -webkit-filter: #{"grayscale(1)"} #{"brightness(0.5)"}; // Hacky shit because of Sass filter conflict
       }
 
       .submission-info {
         position: absolute;
         top: $baseline;
-        padding: $baseline;
+        padding: $baseline*2;
         left: 0;
         width: 100%;
         height: 100%;
@@ -173,13 +212,44 @@ $num-datas: 8;
           font-size: 16px;
         }
 
+        .author {
+          margin-top: 0.5em;
+          font-family: $sans;
+          text-transform: uppercase;
+          font-size: 12px;
+          font-weight: 700;
+          
+          a:link,
+          a:visited {
+            color: $cream;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+
+            transition: border-color 0.2s linear;
+          }
+
+          a:hover {
+            border-color: $cream;
+          }
+        }
+
         .info-block {
           height: 60%;
         }
 
         .button {
           opacity: 0;
-          transition: opacity 0.3s linear;
+
+          .-mobile & {
+            opacity: 1;
+          }
+
+          @include transition(all 0.3s linear);
+
+          &:hover {
+            background-color: $cream;
+            color: black;
+          }
         }
       }
 
@@ -196,6 +266,109 @@ $num-datas: 8;
 #hero p,
 #demo p,
 #code p,
+#submit p,
 #submissions-hero p {
   text-align: center;
+}
+
+//
+// Footer
+//
+footer {
+  margin-top: $baseline*8;
+  background-color: $black;
+  padding: $baseline*2 0;
+
+  &.home {
+    margin-top: 0;
+  }
+
+  .roll-the-credits {
+    color: $cream;
+    font-family: $sans;
+    font-size: 16px;
+
+    a:link,
+    a:visited {
+      color: $cream;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+
+      transition: border-color 0.2s linear;
+    }
+
+    a:hover {
+      border-color: $cream;
+    }
+  }
+
+  .dingus-town {
+    text-align: right;
+  }
+
+  .dingus {
+    display: inline-block;
+    margin: 0 0 0 $baseline;
+
+    &.dingus-github {
+      margin-right: -12px;
+    }
+  }
+}
+
+.submission-nav {
+  color: red;
+  
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  z-index: 10000;
+
+  .submission-nav-holder {
+    background-color: rgba(0, 0, 0, .5);
+    margin: 16px auto;
+    width: 200px;
+    padding: 6px;
+
+    a {
+      text-decoration: none;
+    }
+    .icon {
+      // float:left;
+      margin-left:12px;
+      
+      &.u {
+        width: 19px;
+        height: 17px;
+        margin-right: 12px;
+      }
+      &.menu {
+        width: 16px;
+        height: 17px;
+      }
+      &.next {
+        background-image: url('/img/icons/next.svg');
+        width: 14px;
+        height: 17px;
+      }
+      &.prev {
+        width: 14px;
+        height: 17px;
+
+        .change-color {
+          fill: #ff0000;
+        }
+        &:hover {
+          // width: 40px;
+          .change-color {
+            // stroke-width:10;
+          }
+        }
+      }
+      &.info {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
 }

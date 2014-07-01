@@ -1,13 +1,12 @@
 {{> header}}
 
 <div id="wrap">
-
   <section class="section section-cream" id="submissions-hero">
     <div class="grid grid--no-gutter">
       
       <nav class="grid__col grid__col--1-of-2 grid__col--centered">
         <ul>
-          <li id="logo"><a href="#">Uncontext.</a></li>
+          <li id="logo"><a href="/">Uncontext.</a></li>
           <li><a href="/submit/">Submit</a></li>
           <li><a href="/literature/" class="active">Submissions</a></li>
           <li><a href="/">Information</a></li>    
@@ -17,7 +16,7 @@
       <header class="grid__col grid__col--1-of-2 grid__col--centered">
         <p id="session">Session 1</p>
         <h1 class="as-h1">Literature</h1>
-        <div class="divider"></div>
+        <canvas class="divider" width="260px" height="12px" data-divider-type="headerAnimationLines"></canvas>
       </header>
     
     </div><!-- /grid -->
@@ -29,13 +28,22 @@
       <ul class="grid grid--no-gutter">
         {{#datasets}}
           {{#slugs}}
-            <li class="submission-container grid__col grid__col--1-of-4">
-              <img src="/img/{{name}}/{{slug}}.gif">
+            <li class="submission-container grid__col">
+              <video class="submission-video" autoplay loop data-fallback="/img/{{name}}/{{slug}}.gif" data-mobile="/img/{{name}}/{{slug}}.jpg">
+                <source id="webmsource-{{slug}}" src="/video/{{name}}/{{slug}}.webm" type="video/webm">
+                <source id="mp4source-{{slug}}" src="/video/{{name}}/{{slug}}.mp4" type="video/mp4">
+              </video>
               <div class="submission-info">
                 <div class="info-block">
                   <p class="title">{{title}}</p>
+                  {{^link}}
+                    <p class="author">{{author}}</p>
+                  {{/link}}
+                  {{#link}}
+                    <p class="author"><a href="{{link}}">{{author}}</a></p>
+                  {{/link}}
                 </div>
-                <a href="#" class="button button-cream">View project</a>
+                <a href="{{slug}}" class="button button-cream">View project</a>
               </div>
             </li>
           {{/slugs}}
@@ -46,5 +54,7 @@
   </div>
 
 </div><!-- /wrap -->
+
+{{> site_footer}}
 
 {{> footer}}

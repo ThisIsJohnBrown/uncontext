@@ -15,13 +15,26 @@
         <meta property="og:image" content="http://uncontext.com/img/600x600.png">
         <meta property="og:description" content="Uncontext is an art project where any collaborator can access an unending stream of structured, but seemingly random, data.">
         
+        {{#submission}}
+        <meta name="twitter:url" content="http://uncontext.com/literature/{{slug}}">
+        <meta name="twitter:card" content="summary_large_image">
+        {{#twitter}}
+        <meta name="twitter:creator" content="@{{twitter}}">
+        {{/twitter}}
+        <meta name="twitter:site" content="@uncontext">
+        <meta name="twitter:title" content="{{name}}">
+        <meta name="twitter:description" content="Uncontext is an art(ish) project where any collaborator can access an unending stream of structured, but seemingly random, data.">
+        <meta name="twitter:image:src" content="http://uncontext.com/img/literature/{{slug}}.gif">
+        {{/submission}}
+        {{^submission}}
         <meta name="twitter:url" content="http://uncontext.com">
         <meta name="twitter:card" content="summary">
         <meta name="twitter:site" content="@uncontext">
         <meta name="twitter:creator" content="@thisisjohnbrown">
         <meta name="twitter:title" content="uncontext.com">
         <meta name="twitter:description" content="Uncontext is an art project where any collaborator can access an unending stream of structured, but seemingly random, data.">
-        <meta name="twitter:image" content="http://uncontext.com/img/300x300.png">
+        <meta name="twitter:image:src" content="http://uncontext.com/img/300x300.png">
+        {{/submission}}
 
         <link rel="shortcut icon" href="/img/favicon.ico">
         <link href="/css/site.css" rel="stylesheet" type="text/css"/>

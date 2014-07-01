@@ -1,0 +1,16 @@
+{
+  "creator": "John Brown",
+  "dataset": "literature",
+  "name": "uncontext.ris",
+  "slug": "uncontextris",
+  "description": "A shocking example of what happens when you give a logogram too much caffeine.",
+  "twitter": "thisisjohnbrown",
+  "assets": {
+    "js": true,
+    "css": true,
+    "tweenmax": true,
+    "tweenmaxPlugins": ["ColorPropsPlugin"],
+    "randomcolor": true,
+    "hammerjs": true
+  }
+}

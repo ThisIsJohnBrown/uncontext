@@ -517,8 +517,9 @@ p {
 
 .section {
   width: 100%;
-  padding: 48px;
-  background-color: #fff; }
+  padding: 48px; }
+  .section.section-white {
+    background-color: #fff; }
   .section.section-cream {
     background-color: #fff3e7; }
   .section.section-black {
@@ -546,9 +547,8 @@ p {
       color: black; }
 
 .divider {
-  height: 4px;
-  background-color: black;
-  width: 100px;
+  display: block;
+  height: 12px;
   margin: 36px auto; }
 
 nav {
@@ -569,10 +569,17 @@ nav {
     padding: 0 14.4px;
     position: relative;
     top: -3px;
-    transition: opacity 0.3s linear; }
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    -ms-transition: all 0.1s linear;
+    -o-transition: all 0.1s linear;
+    transition: all 0.1s linear; }
     nav a.active, nav a:link.active, nav a:visited.active {
       color: #fff3e7;
       background-color: #6e1db5; }
+    nav a:hover, nav a:link:hover, nav a:visited:hover {
+      background-color: #6e1db5;
+      color: #fff3e7 !important; }
   nav a:hover {
     opacity: 1; }
   nav li {
@@ -591,14 +598,20 @@ nav {
   min-width: 1050px;
   margin: 0 auto; }
 
-#hero header, #submissions-hero header {
+.grid {
+  min-width: 900px; }
+
+#hero header, #submissions-hero header, #submit header {
   margin: 96px auto; }
-#hero h1, #submissions-hero h1 {
+#hero h1, #submissions-hero h1, #submit h1 {
   margin-bottom: 24px; }
-#hero #session, #submissions-hero #session {
+#hero #session, #submissions-hero #session, #submit #session {
   text-transform: uppercase;
   font-weight: 200;
   margin-bottom: -12px; }
+
+#hero-canvas {
+  position: absolute; }
 
 #submissions-hero header {
   margin-bottom: 0; }
@@ -608,7 +621,7 @@ nav {
   margin-bottom: 24px; }
   #demo-table td {
     height: 48px;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 48px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
   #demo-table thead td {
@@ -620,34 +633,25 @@ nav {
     display: inline-block;
     padding: 0;
     margin: 0;
-    width: 20px; }
+    width: 40px; }
   #demo-table td .demo-viz-cell {
     width: 100%;
     height: 48px;
-    background-color: #6e1db5; }
+    margin: 10px 0; }
 
-#demo-table td span:nth-child(1) {
-  opacity: 0.125; }
+#demo-table td span:nth-last-child(1) {
+  opacity: 0.2; }
 
-#demo-table td span:nth-child(2) {
-  opacity: 0.25; }
+#demo-table td span:nth-last-child(2) {
+  opacity: 0.4; }
 
-#demo-table td span:nth-child(3) {
-  opacity: 0.375; }
+#demo-table td span:nth-last-child(3) {
+  opacity: 0.6; }
 
-#demo-table td span:nth-child(4) {
-  opacity: 0.5; }
+#demo-table td span:nth-last-child(4) {
+  opacity: 0.8; }
 
-#demo-table td span:nth-child(5) {
-  opacity: 0.625; }
-
-#demo-table td span:nth-child(6) {
-  opacity: 0.75; }
-
-#demo-table td span:nth-child(7) {
-  opacity: 0.875; }
-
-#demo-table td span:nth-child(8) {
+#demo-table td span:nth-last-child(5) {
   opacity: 1; }
 
 #code-sample {
@@ -663,9 +667,25 @@ nav {
   margin: 96px auto; }
 
 #gallery-cta {
-  text-align: center; }
+  position: relative;
+  text-align: center;
+  height: 240px;
+  overflow: hidden; }
+  #gallery-cta .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    -webkit-filter: grayscale(1) brightness(0.4);
+    filter: grayscale(1) brightness(0.4); }
+  #gallery-cta .button-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center; }
   #gallery-cta .button {
-    margin: 48px auto; }
+    margin: 96px auto; }
 
 #github-cta {
   background-color: #6e1db5;
@@ -678,8 +698,7 @@ nav {
     margin: 24px auto; }
 
 #submission-form {
-  margin-top: 96px;
-  margin-bottom: 48px; }
+  margin-top: 96px; }
   #submission-form input[type=text] {
     display: block;
     width: 100%;
@@ -701,24 +720,32 @@ nav {
     background: transparent;
     width: 100%;
     height: 276px; }
-  #submission-form #submit {
+  #submission-form #submit-button {
     margin-top: 24px;
     display: block;
-    text-align: center; }
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 25%; }
 
 #submission-list > ul {
   padding: 0; }
   #submission-list > ul .submission-container {
     margin-bottom: 24px;
     position: relative;
+    width: 25%;
     padding: 0 12px; }
     #submission-list > ul .submission-container img {
       max-width: 100%;
+      width: 100%;
+      -webkit-filter: grayscale(1) brightness(0.5); }
+    #submission-list > ul .submission-container video {
+      width: 100%;
       -webkit-filter: grayscale(1) brightness(0.5); }
     #submission-list > ul .submission-container .submission-info {
       position: absolute;
       top: 12px;
-      padding: 12px;
+      padding: 24px;
       left: 0;
       width: 100%;
       height: 100%;
@@ -727,13 +754,95 @@ nav {
       #submission-list > ul .submission-container .submission-info .title {
         font-family: "Verlag A", "Verlag B", "Helvetica Neue", "Helvetica", sans-serif;
         font-size: 16px; }
+      #submission-list > ul .submission-container .submission-info .author {
+        margin-top: 0.5em;
+        font-family: "Verlag A", "Verlag B", "Helvetica Neue", "Helvetica", sans-serif;
+        text-transform: uppercase;
+        font-size: 12px;
+        font-weight: 700; }
+        #submission-list > ul .submission-container .submission-info .author a:link, #submission-list > ul .submission-container .submission-info .author a:visited {
+          color: #fff3e7;
+          text-decoration: none;
+          border-bottom: 2px solid transparent;
+          transition: border-color 0.2s linear; }
+        #submission-list > ul .submission-container .submission-info .author a:hover {
+          border-color: #fff3e7; }
       #submission-list > ul .submission-container .submission-info .info-block {
         height: 60%; }
       #submission-list > ul .submission-container .submission-info .button {
         opacity: 0;
-        transition: opacity 0.3s linear; }
+        -webkit-transition: all 0.3s linear;
+        -moz-transition: all 0.3s linear;
+        -ms-transition: all 0.3s linear;
+        -o-transition: all 0.3s linear;
+        transition: all 0.3s linear; }
+        .-mobile #submission-list > ul .submission-container .submission-info .button {
+          opacity: 1; }
+        #submission-list > ul .submission-container .submission-info .button:hover {
+          background-color: #fff3e7;
+          color: black; }
     #submission-list > ul .submission-container:hover .button {
       opacity: 1; }
 
-#hero p, #demo p, #code p, #submissions-hero p {
+#hero p, #demo p, #code p, #submit p, #submissions-hero p {
   text-align: center; }
+
+footer {
+  margin-top: 96px;
+  background-color: black;
+  padding: 24px 0; }
+  footer.home {
+    margin-top: 0; }
+  footer .roll-the-credits {
+    color: #fff3e7;
+    font-family: "Verlag A", "Verlag B", "Helvetica Neue", "Helvetica", sans-serif;
+    font-size: 16px; }
+    footer .roll-the-credits a:link, footer .roll-the-credits a:visited {
+      color: #fff3e7;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s linear; }
+    footer .roll-the-credits a:hover {
+      border-color: #fff3e7; }
+  footer .dingus-town {
+    text-align: right; }
+  footer .dingus {
+    display: inline-block;
+    margin: 0 0 0 12px; }
+    footer .dingus.dingus-github {
+      margin-right: -12px; }
+
+.submission-nav {
+  color: red;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  z-index: 10000; }
+  .submission-nav .submission-nav-holder {
+    background-color: rgba(0, 0, 0, 0.5);
+    margin: 16px auto;
+    width: 200px;
+    padding: 6px; }
+    .submission-nav .submission-nav-holder a {
+      text-decoration: none; }
+    .submission-nav .submission-nav-holder .icon {
+      margin-left: 12px; }
+      .submission-nav .submission-nav-holder .icon.u {
+        width: 19px;
+        height: 17px;
+        margin-right: 12px; }
+      .submission-nav .submission-nav-holder .icon.menu {
+        width: 16px;
+        height: 17px; }
+      .submission-nav .submission-nav-holder .icon.next {
+        background-image: url('/img/icons/next.svg');
+        width: 14px;
+        height: 17px; }
+      .submission-nav .submission-nav-holder .icon.prev {
+        width: 14px;
+        height: 17px; }
+        .submission-nav .submission-nav-holder .icon.prev .change-color {
+          fill: #ff0000; }
+      .submission-nav .submission-nav-holder .icon.info {
+        width: 20px;
+        height: 20px; }

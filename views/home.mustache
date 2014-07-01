@@ -1,13 +1,13 @@
 {{> header}}
 
 <div id="wrap">
-
+  <canvas id="hero-canvas" width="500px" height="300"></canvas>
   <section class="section section-cream" id="hero">
     <div class="grid grid--no-gutter">
       
       <nav class="grid__col grid__col--1-of-2 grid__col--centered">
         <ul>
-          <li id="logo"><a href="#">Uncontext.</a></li>
+          <li id="logo"><a href="/">Uncontext.</a></li>
           <li><a href="/submit/">Submit</a></li>
           <li><a href="/literature/">Submissions</a></li>
           <li><a href="/" class="active">Information</a></li>    
@@ -17,19 +17,19 @@
       <header class="grid__col grid__col--1-of-2 grid__col--centered">
         <p id="session">Session 1</p>
         <h1 class="as-h1">Literature</h1>
-        <canvas id="divider1" width="260px" height="10px" data-divider-type="headerAnimationLines"></canvas>
+        <canvas class="divider" width="260px" height="12px" data-divider-type="headerAnimationLines"></canvas>
         <p>Uncontext is an art project where any collaborator can access an unending stream of structured&mdash;but seemingly random&mdash;data. Use this data it to generate art, write poems, control robots, or anything else.</p>
       </header>
     
     </div><!-- /grid -->
   </section><!-- /hero -->
 
-  <section class="section" id="demo">
+  <section class="section section-white" id="demo">
     <div class="grid grid--no-gutter">
       
       <h2 class="as-h2">Live data</h2>
-      <canvas id="divider2" width="100px" height="10px" data-divider-type="headerAnimationSteps"></canvas>
-      <p class="grid__col grid__col--1-of-2 grid__col--centered">The source of this session’s data is derived from &ldquo;literature.&rdquo; More details will be revealead at the end of the session, before Session 2. It’s a mystery! Don’t let the source dictate your exploration (unless you want it to).</p>
+      <canvas class="divider" width="100px" height="12px" data-divider-type="headerAnimationSteps"></canvas>
+      <p class="grid__col grid__col--1-of-2 grid__col--centered">The theme of the current session is Literature, because that is the source of the session&rsquo;s data. We&rsquo;d provide more details, but it&rsquo;s a mystery! More details will be revealead at the end of the session, just before Session 2. Don’t let the source dictate your exploration (unless you want it to).</p>
       <table id="demo-table" class="grid__col grid__col--3-of-4 grid__col--centered">
         <thead>
           <tr class="grid grid--no-gutter">
@@ -42,97 +42,91 @@
           <tr>
             <td>a</td>
             <td>
-              <span>9</span>
-              <span>8</span>
-              <span>12</span>
-              <span>15</span>
-              <span>6</span>
-              <span>22</span>
-              <span>11</span>
-              <span>2</span>
+              <span>-</span>
+              <span>-</span>
+              <span>-</span>
+              <span>-</span>
+              <span>-</span>
             </td>
             <td>
-              <div id="viz-a" class="demo-viz-cell"></div>
+              <div id="viz-a" class="demo-viz-cell">
+                <canvas width="400" height="40" class="homepage-example" data-example="a"></canvas>
+              </div>
             </td>
           </tr>
           <tr>
             <td>b</td>
             <td>
-              <span>9</span>
-              <span>8</span>
-              <span>12</span>
-              <span>15</span>
-              <span>6</span>
-              <span>22</span>
-              <span>11</span>
-              <span>2</span>
+              <span>-</span>
+              <span>-</span>
+              <span>-</span>
+              <span>-</span>
+              <span>-</span>
             </td>
             <td>
-              <div id="viz-b" class="demo-viz-cell"></div>
+              <div id="viz-b" class="demo-viz-cell">
+                <canvas width="400" height="40" class="homepage-example" data-example="b"></canvas>
+              </div>
             </td>
           </tr>
           <tr>
             <td>c</td>
             <td>
-              <span>9</span>
-              <span>8</span>
-              <span>12</span>
-              <span>15</span>
-              <span>6</span>
-              <span>22</span>
-              <span>11</span>
-              <span>2</span>
+              <span>-</span>
+              <span>-</span>
+              <span>-</span>
+              <span>-</span>
+              <span>-</span>
             </td>
             <td>
-              <div id="viz-c" class="demo-viz-cell"></div>
+              <div id="viz-c" class="demo-viz-cell">
+                <canvas width="400" height="40" class="homepage-example" data-example="c"></canvas>
+              </div>
             </td>
           </tr>
           <tr>
             <td>d</td>
             <td>
-              <span>9</span>
-              <span>8</span>
-              <span>12</span>
-              <span>15</span>
-              <span>6</span>
-              <span>22</span>
-              <span>11</span>
-              <span>2</span>
+              <span>-</span>
+              <span>-</span>
+              <span>-</span>
+              <span>-</span>
+              <span>-</span>
             </td>
             <td>
-              <div id="viz-d" class="demo-viz-cell"></div>
+              <div id="viz-d" class="demo-viz-cell">
+                <canvas width="400" height="40" class="homepage-example" data-example="d"></canvas>
+              </div>
             </td>
           </tr>
           <tr>
             <td>e.f</td>
             <td>
-              <span>9</span>
-              <span>8</span>
-              <span>12</span>
-              <span>15</span>
-              <span>6</span>
-              <span>22</span>
-              <span>11</span>
-              <span>2</span>
+              <span>-</span>
+              <span>-</span>
+              <span>-</span>
+              <span>-</span>
+              <span>-</span>
             </td>
             <td>
-              <div id="viz-ef" class="demo-viz-cell"></div>
+              <div id="viz-ef" class="demo-viz-cell">
+                <canvas width="400" height="40" class="homepage-example" data-example="ef"></canvas>
+              </div>
             </td>
           </tr>
           <tr>
             <td>e.g</td>
             <td>
-              <span>9</span>
-              <span>8</span>
-              <span>12</span>
-              <span>15</span>
-              <span>6</span>
-              <span>22</span>
-              <span>11</span>
-              <span>2</span>
+              <span>-</span>
+              <span>-</span>
+              <span>-</span>
+              <span>-</span>
+              <span>-</span>
             </td>
             <td>
-              <div id="viz-eg" class="demo-viz-cell"></div>
+              <div id="viz-eg" class="demo-viz-cell">
+                <canvas width="400" height="40" class="homepage-example" data-example="eg"></canvas>
+              </div>
             </td>
           </tr>
         </tbody>
@@ -144,14 +138,15 @@
   <section id="code" class="section section-cream">
     <div class="grid grid--no-gutter">
 
-      <h2 class="as-h2">It&rsquo;s easy as shit</h2>
-      <canvas id="divider3" width="100px" height="12px" data-divider-type="headerAnimationWide"></canvas>
-      <p class="grid__col grid__col--1-of-2 grid__col--centered">Do whatever you want with Uncontext’s data stream. 3D print a piece of toast, kill your friends, hell, microwave your dad. If you want to get a quick and easy taste for the power, just play with this example code using Socket.io and D3.</p>
+      <h2 class="as-h2">It&rsquo;s easy to use (relatively speaking)</h2>
+      <canvas class="divider" width="100px" height="12px" data-divider-type="headerAnimationWide"></canvas>
+      <p class="grid__col grid__col--1-of-2 grid__col--centered">Do whatever you want with Uncontext’s data stream, it doesn&rsquo;t have to be constrained to the browser. For instance, make a very bad self driving car, shoot non-toxic paint at a Denny&rsquo;s, or make an Arduino go bleep beep boop. But, if you want to get a quick and easy taste of the power, just play with this example code using your browser and a websocket.</p>
       <pre id="code-sample" class="grid__col grid__col--1-of-2 grid__col--centered">
 &lt;script&gt;
   socket_ = new WebSocket('ws://literature.uncontext.com:80');
   socket_.onmessage = function (data) {
     console.log(data);
+    generateBanana(data);
   };
 &lt;/script&gt;</pre>
 
@@ -159,11 +154,14 @@
   </section><!-- /code -->
 
   <section id="gallery-cta" class="section section-black">
-
-    <a href="#" class="button button-cream">View current submissions</a>
-
+    <img src="/img/waves.gif" class="background-image">
+    <div class="button-container">
+      <a href="/literature/" class="button button-cream">View current submissions</a>
+    </div>
   </section>
 
 </div>
+
+{{> site_footer}}
 
 {{> footer}}
