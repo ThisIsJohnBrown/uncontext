@@ -73,7 +73,7 @@ for (var i = 0;i < sets.length; i++) {
            return fs.statSync(__dirname + '/scenes/' + sets[i] + '/' + b).mtime.getTime() - 
                   fs.statSync(__dirname + '/scenes/' + sets[i] + '/' + a).mtime.getTime();
       });
-      setUpScenes(sets[i], scenes);
+      setUpScenes(sets[i], scenes, gfys);
     }
   }
 }
