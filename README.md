@@ -14,7 +14,7 @@ Everyone is invited to connect with their platform of choice, consume that data,
 * Program interactive visuals
 * Write a series of sonnets
 * Control robotic arms
-* Compose a symphomic movement
+* Compose a symphonic movement
 * 3D print physical representations
 
 Each socket will have a theme surrounding the data, but the true nature of the bits will remain a mystery until the next socket is released.
@@ -78,7 +78,7 @@ For information about the scene, the file should look like this:
 }
 ```
 
-If your project is meant to be viewed in the browser, read [1]. If it is prerendered or physical or some other adjective that doesn't lend itself to viewing in a browser, skip to [2].
+If your project is meant to be viewed in the browser, read [1]. If it is pre-rendered or physical or some other adjective that doesn't lend itself to viewing in a browser, skip to [2].
 
 [1]
 
@@ -86,7 +86,7 @@ I assume you have some assets you created. For our Rain Water example, your java
 
 If you have some third party frameworks you need, know that jQuery and Bootstrap will be available to you.
 
-The following can also be instantiated on the page for you to use by adding thise to your `rainwater.json` file:
+The following can also be instantiated on the page for you to use by adding this to your `rainwater.json` file:
 
 ```
 "assets": {
