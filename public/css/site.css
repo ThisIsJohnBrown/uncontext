@@ -1040,6 +1040,17 @@ footer {
   position: absolute;
   top: 0;
   left: 0; }
+  .info-panel a:link, .info-panel a:visited {
+    color: white;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -ms-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear; }
+  .info-panel a:hover {
+    border-color: white; }
   .info-panel .col-group {
     margin: 0 auto;
     position: absolute;
@@ -1050,8 +1061,29 @@ footer {
     .info-panel .col-group .title {
       font-size: 32px;
       color: #FFF3E7;
-      line-height: 48px; }
+      line-height: 48px;
+      margin-top: 0; }
     .info-panel .col-group p.description {
       font-size: 16px;
       color: #fff3e7;
       line-height: 23px; }
+  .info-panel .info-close {
+    font-size: 32px;
+    line-height: 48px; }
+  @media (max-width: 640px) {
+    .info-panel .inner, .info-panel .outer {
+      min-width: 100%;
+      max-width: 100%; }
+    .info-panel .inner {
+      margin-top: 52px;
+      margin-bottom: -52px;
+      padding-bottom: 52px; }
+    .info-panel .col {
+      margin-left: 32px;
+      margin-right: 32px;
+      display: block;
+      float: none;
+      width: 100%; }
+    .info-panel .info-close {
+      float: none;
+      margin-top: 64px; } }

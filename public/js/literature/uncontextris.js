@@ -532,25 +532,25 @@ function initialize() {
   drawGameBoard();
   updateBoard();
 
-  canvas.addEventListener('mousedown', onMouseDown, false);
+  // canvas.addEventListener('mousedown', onMouseDown, false);
 
-  Hammer(window).on("swipeleft", function() {
-    moveLeft();
-  });
+  // Hammer(window).on("swipeleft", function() {
+  //   moveLeft();
+  // });
 
-  Hammer(window).on("swiperight", function() {
-    moveRight();
-  });
+  // Hammer(window).on("swiperight", function() {
+  //   moveRight();
+  // });
 
-  Hammer(window).on("swipedown", function() {
-    slamPiece();
-  });
+  // Hammer(window).on("swipedown", function() {
+  //   slamPiece();
+  // });
 
-  Hammer(window).on("tap", function() {
-    rotateShape();
-  });
+  // Hammer(window).on("tap", function() {
+  //   rotateShape();
+  // });
 
-  $.nonbounce();
+  // $.nonbounce();
 }
 
 function shiftColors(degree) {

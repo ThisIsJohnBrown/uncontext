@@ -390,6 +390,19 @@ footer {
   top: 0;
   left: 0;
 
+  a:link,
+  a:visited {
+    color: white;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+
+    @include transition(all 0.2s linear);
+  }
+
+  a:hover {
+    border-color: white;
+  }
+
   .col-group {
     margin: 0 auto;
     position: absolute;
@@ -402,6 +415,7 @@ footer {
       font-size: 32px;
       color: #FFF3E7;
       line-height: 48px;
+      margin-top: 0;
     }
 
     p.description {
@@ -413,6 +427,34 @@ footer {
   }
 
   .info-close {
-    // float: right;
+    font-size: 32px;
+    line-height: 48px;
+  }
+
+  @media (max-width: 640px) {
+    .inner,
+    .outer {
+      min-width: 100%;
+      max-width: 100%;
+    }
+
+    .inner {
+      margin-top: 52px;
+      margin-bottom: -52px;
+      padding-bottom: 52px;
+    }
+    
+    .col {
+      margin-left: 32px;
+      margin-right: 32px;
+      display: block;
+      float: none;
+      width: 100%;
+    }
+
+    .info-close {
+      float:none;
+      margin-top: 64px;
+    }
   }
 }
