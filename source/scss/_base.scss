@@ -212,8 +212,13 @@ nav {
 }
 
 
-
-
+// Ugly class for centering col3of4s
+// Don't use this anywhere, else, please
+// Just a grid bandaid
+.grid-center {
+  margin-left: auto;
+  margin-right: auto;
+}
 
 
 /*!

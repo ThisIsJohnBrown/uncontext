@@ -642,6 +642,10 @@ nav {
 .-hide {
   display: none; }
 
+.grid-center {
+  margin-left: auto;
+  margin-right: auto; }
+
 /*!
  *  
  * Grid example
@@ -972,7 +976,6 @@ nav {
   text-align: center; }
 
 footer {
-  margin-top: 96px;
   background-color: black;
   padding: 24px 0; }
   footer.home {
