@@ -4,7 +4,7 @@
   <section class="section section-cream" id="hero">
     <div class="col-group outer">
       
-      <nav class="col col1of1">
+      <nav class="grid-center col3of4">
         <ul>
           <li id="logo"><a href="/">Uncontext.</a></li>
           <li><a href="/submit/">Submit</a></li>
@@ -18,9 +18,8 @@
         <p id="session">Session 1</p>
         <h1 class="as-h1">Literature</h1>
         <canvas class="divider" width="260px" height="12px" data-divider-type="headerAnimationLines"></canvas>
-        <div class="col-group inner">
-          <div class="col col1of4">&nbsp;</div>
-          <p class="col col2of4">Uncontext is an art project where any collaborator can access an unending stream of structured&mdash;but seemingly random&mdash;data. Use this data it to generate art, write poems, control robots, or anything else.</p>
+        <div class="inner">
+          <p class="grid-center col3of4">Uncontext is an art project where any collaborator can access an unending stream of structured&mdash;but seemingly random&mdash;data. Use this data it to generate art, write poems, control robots, or anything else.</p>
         </div>
       </header>
     
@@ -33,8 +32,7 @@
       <h2 class="as-h2">Live data</h2>
       <canvas class="divider" width="100px" height="12px" data-divider-type="headerAnimationSteps"></canvas>
       <div class="col-group inner">
-        <div class="col col1of4">&nbsp;</div>
-        <p class="col col2of4">The theme of the current session is Literature, because that is the source of the session&rsquo;s data. We&rsquo;d provide more details, but it&rsquo;s a mystery! More details will be revealead at the end of the session, just before Session 2. Don’t let the source dictate your exploration (unless you want it to).</p>
+        <p class="grid-center col3of4">The theme of the current session is Literature, because that is the source of the session&rsquo;s data. We&rsquo;d provide more details, but it&rsquo;s a mystery! More details will be revealead at the end of the session, just before Session 2. Don’t let the source dictate your exploration (unless you want it to).</p>
       </div>
       <table id="demo-table" class="col-group inner">
         <thead>
@@ -147,13 +145,10 @@
       <h2 class="as-h2">It&rsquo;s easy to use (relatively speaking)</h2>
       <canvas class="divider" width="100px" height="12px" data-divider-type="headerAnimationWide"></canvas>
       <div class="col-group inner">
-        <div class="col col1of4">&nbsp;</div>
-        <p class="col col2of4">Do whatever you want with Uncontext’s data stream, it doesn&rsquo;t have to be constrained to the browser. For instance, make a very bad self driving car, shoot non-toxic paint at a Denny&rsquo;s, or make an Arduino go bleep beep boop. But, if you want to get a quick and easy taste of the power, just play with this example code using your browser and a websocket.</p>
+        <p class="grid-center col3of4">Do whatever you want with Uncontext’s data stream, it doesn&rsquo;t have to be constrained to the browser. For instance, make a very bad self driving car, shoot non-toxic paint at a Denny&rsquo;s, or make an Arduino go bleep beep boop. But, if you want to get a quick and easy taste of the power, just play with this example code using your browser and a websocket.</p>
       </div>
       <div class="col-group inner">
-        <div class="col col1of8">&nbsp;</div>
-        <pre id="code-sample" class="col col6of8">
-      
+        <pre id="code-sample" class="grid-center col3of4">
 &lt;script&gt;
   socket_ = new WebSocket('ws://literature.uncontext.com:80');
   socket_.onmessage = function (data) {
