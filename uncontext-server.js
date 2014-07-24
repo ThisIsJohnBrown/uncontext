@@ -74,12 +74,12 @@ for (var i = 0;i < sets.length; i++) {
            return fs.statSync(__dirname + '/scenes/' + sets[i] + '/' + b).mtime.getTime() - 
                   fs.statSync(__dirname + '/scenes/' + sets[i] + '/' + a).mtime.getTime();
       });
-      setUpScenes(sets[i], scenes, gfys);
+      setUpScenes(sets[i], scenes);
     }
   }
 }
 
-function setUpScenes(set, scenes, gfys) {
+function setUpScenes(set, scenes) {
   var sceneArray = [];
   for (var j = 0; j < scenes.length; j++) {
     if (scenes[j].substr(0, 1) !== '.' && scenes[j] !== 'staging' && scenes[j].substr(scenes[j].length - 5) == '.json') {
