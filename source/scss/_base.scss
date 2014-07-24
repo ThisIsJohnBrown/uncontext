@@ -1,4 +1,13 @@
 //
+// Typography
+//
+
+$baseline: 12px;
+$sans: "Verlag A", "Verlag B", "Helvetica Neue", "Helvetica", sans-serif;
+$serif: 'Mercury Text G1 A', 'Mercury Text G1 B', serif;
+$code: Consolas, "Liberation Mono", Menlo, Courier, monospace; // Ripped from Github like a chump
+
+//
 // Colors
 //
 
@@ -23,18 +32,10 @@ $inline_block_reset_spacing: -.65em;
 
 html,
 body {
-  font-family: "Verlag A", "Verlag B", "Helvetica Neue", "Helvetica", sans-serif;
+  font-family: $sans;
   text-rendering: optimizeLegibility;
   background-color: $cream;
 }
-//
-// Typography
-//
-
-$baseline: 12px;
-$sans: "Verlag A", "Verlag B", "Helvetica Neue", "Helvetica", sans-serif;
-$serif: 'Mercury Text G1 A', 'Mercury Text G1 B', serif;
-$code: Consolas, "Liberation Mono", Menlo, Courier, monospace; // Ripped from Github like a chump
 
 .as-h1 {
   margin: $baseline 0;
