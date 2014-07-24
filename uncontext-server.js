@@ -82,7 +82,7 @@ for (var i = 0;i < sets.length; i++) {
 function setUpScenes(set, scenes, gfys) {
   var sceneArray = [];
   for (var j = 0; j < scenes.length; j++) {
-    if (scenes[j].substr(0, 1) !== '.' && scenes[j] !== 'staging') {
+    if (scenes[j].substr(0, 1) !== '.' && scenes[j] !== 'staging' && scenes[j].substr(scenes[j].length - 5) == '.json') {
       var data = JSON.parse(fs.readFileSync(__dirname + '/scenes/' + set + '/' + scenes[j]).toString());
       var displayLink = '';
       if (data.twitter) {
