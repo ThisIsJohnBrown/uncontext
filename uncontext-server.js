@@ -47,7 +47,7 @@ app.get('/literature/', function(req, res) {
 });
 
 var datasets = [];
-var gfys = [];
+// var gfys = [];
 var sets = fs.readdirSync(__dirname + '/scenes/');
 for (var i = 0;i < sets.length; i++) {
   if (sets[i].substr(0, 1) !== '.') {
@@ -63,9 +63,9 @@ for (var i = 0;i < sets.length; i++) {
         var order = JSON.parse(r).order;
         for (var j = 0; j < order.length; j++) {
           scenes.push(order[j].json);
-          gfys.push(order[j].gfy);
+          // gfys.push(order[j].gfy);
         }
-        setUpScenes(set, scenes, gfys);
+        setUpScenes(set, scenes);
       })
     } else {
       // This will just sort by submission time if it's running in dev mode
@@ -95,7 +95,7 @@ function setUpScenes(set, scenes, gfys) {
         'author': data.creator,
         'title': data.name,
         'link': displayLink,
-        'gfy': gfys[j] || false
+        // 'gfy': gfys[j] || false
       });
     }
   }
