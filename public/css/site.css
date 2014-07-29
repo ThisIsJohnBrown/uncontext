@@ -562,86 +562,10 @@ p {
   .section.section-black {
     background-color: black; }
 
-.button {
-  display: inline-block;
-  padding: 0 12px;
-  font-size: 14px;
-  line-height: 32px;
-  height: 36px;
-  border: 2px solid #6e1db5;
-  color: #6e1db5;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-weight: 600; }
-  .button:active {
-    background-color: #6e1db5;
-    color: #fff3e7; }
-  .button.button-cream {
-    border-color: #fff3e7;
-    color: #fff3e7;
-    -webkit-transition: all 0.1s linear;
-    -moz-transition: all 0.1s linear;
-    -ms-transition: all 0.1s linear;
-    -o-transition: all 0.1s linear;
-    transition: all 0.1s linear; }
-    .button.button-cream:active {
-      background-color: #fff3e7;
-      color: black; }
-    .button.button-cream:hover {
-      background-color: #fff3e7;
-      color: #6e1db5; }
-
 .divider {
   display: block;
   height: 12px;
   margin: 36px auto; }
-
-nav {
-  margin-bottom: 48px; }
-  nav ul {
-    border: 4px solid #6e1db5;
-    list-style: none;
-    margin: 0;
-    padding: 0; }
-  nav a, nav a:link, nav a:visited {
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: black;
-    text-decoration: none;
-    line-height: 48px;
-    padding: 0 14.4px;
-    position: relative;
-    top: -3px;
-    -webkit-transition: all 0.1s linear;
-    -moz-transition: all 0.1s linear;
-    -ms-transition: all 0.1s linear;
-    -o-transition: all 0.1s linear;
-    transition: all 0.1s linear; }
-    nav a:hover, nav a:link:hover, nav a:visited:hover {
-      color: #6e1db5; }
-    nav a.active, nav a:link.active, nav a:visited.active {
-      color: #fff3e7;
-      background-color: #6e1db5; }
-      nav a.active:hover, nav a:link.active:hover, nav a:visited.active:hover {
-        color: #fff3e7; }
-  nav a:hover {
-    opacity: 1; }
-  nav li {
-    display: inline-block;
-    float: right;
-    margin: 0;
-    padding: 0;
-    height: 40px;
-    overflow: hidden; }
-    nav li:first-child {
-      float: left; }
-      nav li:first-child a, nav li:first-child a:link, nav li:first-child a:visited {
-        color: #6e1db5; }
-
-.-hide {
-  display: none; }
 
 .grid-center {
   margin-left: auto;
@@ -779,6 +703,82 @@ nav {
   </div>
 </div>
 */
+nav {
+  margin-bottom: 48px; }
+  nav ul {
+    border: 4px solid #6e1db5;
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+  nav a, nav a:link, nav a:visited {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: black;
+    text-decoration: none;
+    line-height: 48px;
+    padding: 0 14.4px;
+    position: relative;
+    top: -3px;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    -ms-transition: all 0.1s linear;
+    -o-transition: all 0.1s linear;
+    transition: all 0.1s linear; }
+    nav a:hover, nav a:link:hover, nav a:visited:hover {
+      color: #6e1db5; }
+    nav a.active, nav a:link.active, nav a:visited.active {
+      color: #fff3e7;
+      background-color: #6e1db5; }
+      nav a.active:hover, nav a:link.active:hover, nav a:visited.active:hover {
+        color: #fff3e7; }
+  nav a:hover {
+    opacity: 1; }
+  nav li {
+    display: inline-block;
+    float: right;
+    margin: 0;
+    padding: 0;
+    height: 40px;
+    overflow: hidden; }
+    nav li:first-child {
+      float: left; }
+      nav li:first-child a, nav li:first-child a:link, nav li:first-child a:visited {
+        color: #6e1db5; }
+
+.-hide {
+  display: none; }
+
+.button {
+  display: inline-block;
+  padding: 0 12px;
+  font-size: 14px;
+  line-height: 32px;
+  height: 36px;
+  border: 2px solid #6e1db5;
+  color: #6e1db5;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 600; }
+  .button:active {
+    background-color: #6e1db5;
+    color: #fff3e7; }
+  .button.button-cream {
+    border-color: #fff3e7;
+    color: #fff3e7;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    -ms-transition: all 0.1s linear;
+    -o-transition: all 0.1s linear;
+    transition: all 0.1s linear; }
+    .button.button-cream:active {
+      background-color: #fff3e7;
+      color: black; }
+    .button.button-cream:hover {
+      background-color: #fff3e7;
+      color: #6e1db5; }
+
 #wrap {
   min-width: 780px;
   margin: 0 auto; }

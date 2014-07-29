@@ -1,0 +1,38 @@
+//
+// Buttons
+//
+
+.button {
+  display: inline-block;
+  padding: 0 $baseline;
+  font-size: 14px;
+  line-height: $baseline*3 - 4;
+  height: $baseline*3;
+  border: 2px solid $purple;
+  color: $purple;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 600;
+
+  &:active {
+    background-color: $purple;
+    color: $cream;
+  }
+
+  &.button-cream {
+    border-color: $cream;
+    color: $cream;
+
+    &:active {
+      background-color: $cream;
+      color: $black;
+    }
+
+    @include transition(all 0.1s linear);
+
+    &:hover {
+      background-color: $cream;
+      color: $purple;
+    }
+  }
+}

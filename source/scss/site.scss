@@ -3,6 +3,8 @@
 @import "normalize";
 @import "mixins";
 @import "base";
+@import "nav";
+@import "buttons";
 
 #wrap {
   min-width: $min_width;
