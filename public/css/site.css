@@ -619,12 +619,13 @@ nav {
     -ms-transition: all 0.1s linear;
     -o-transition: all 0.1s linear;
     transition: all 0.1s linear; }
+    nav a:hover, nav a:link:hover, nav a:visited:hover {
+      color: #6e1db5; }
     nav a.active, nav a:link.active, nav a:visited.active {
       color: #fff3e7;
       background-color: #6e1db5; }
-    nav a:hover, nav a:link:hover, nav a:visited:hover {
-      background-color: #6e1db5;
-      color: #fff3e7 !important; }
+      nav a.active:hover, nav a:link.active:hover, nav a:visited.active:hover {
+        color: #fff3e7; }
   nav a:hover {
     opacity: 1; }
   nav li {

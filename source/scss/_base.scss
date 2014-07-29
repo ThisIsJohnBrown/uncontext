@@ -172,14 +172,16 @@ nav {
 
     @include transition(all 0.1s linear);
 
+    &:hover {
+      color: $purple;
+    }
+
     &.active {
       color: $cream;
       background-color: $purple;
-    }
-
-    &:hover {
-      background-color: $purple;
-      color: $cream !important;
+      &:hover {
+        color: $cream;
+      }
     }
   }
 
