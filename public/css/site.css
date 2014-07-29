@@ -779,6 +779,54 @@ nav {
       background-color: #fff3e7;
       color: #6e1db5; }
 
+#submission-list > ul {
+  padding: 0; }
+  #submission-list > ul .submission-container {
+    margin-bottom: 24px;
+    position: relative;
+    width: 25%;
+    padding: 0 12px; }
+    #submission-list > ul .submission-container img {
+      max-width: 100%;
+      width: 100%;
+      -webkit-filter: grayscale(1) brightness(0.5); }
+    #submission-list > ul .submission-container video {
+      width: 100%;
+      -webkit-filter: grayscale(1) brightness(0.5); }
+    #submission-list > ul .submission-container .submission-info {
+      position: absolute;
+      top: 12px;
+      padding: 24px;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      color: #fff3e7;
+      text-align: center; }
+      #submission-list > ul .submission-container .submission-info .title {
+        font-family: "Verlag A", "Verlag B", "Helvetica Neue", "Helvetica", sans-serif;
+        font-size: 16px; }
+      #submission-list > ul .submission-container .submission-info .author {
+        margin-top: 0.5em;
+        font-family: "Verlag A", "Verlag B", "Helvetica Neue", "Helvetica", sans-serif;
+        text-transform: uppercase;
+        font-size: 12px;
+        font-weight: 700; }
+        #submission-list > ul .submission-container .submission-info .author a:link, #submission-list > ul .submission-container .submission-info .author a:visited {
+          color: #fff3e7;
+          text-decoration: none;
+          border-bottom: 2px solid transparent;
+          transition: border-color 0.2s linear; }
+        #submission-list > ul .submission-container .submission-info .author a:hover {
+          border-color: #fff3e7; }
+      #submission-list > ul .submission-container .submission-info .info-block {
+        height: 60%; }
+      #submission-list > ul .submission-container .submission-info .button {
+        opacity: 0; }
+        .-mobile #submission-list > ul .submission-container .submission-info .button {
+          opacity: 1; }
+    #submission-list > ul .submission-container:hover .button {
+      opacity: 1; }
+
 #wrap {
   min-width: 780px;
   margin: 0 auto; }
@@ -924,54 +972,6 @@ nav {
     #submission-form #submit-button:hover {
       background-color: #6e1db5;
       color: #fff3e7; }
-
-#submission-list > ul {
-  padding: 0; }
-  #submission-list > ul .submission-container {
-    margin-bottom: 24px;
-    position: relative;
-    width: 25%;
-    padding: 0 12px; }
-    #submission-list > ul .submission-container img {
-      max-width: 100%;
-      width: 100%;
-      -webkit-filter: grayscale(1) brightness(0.5); }
-    #submission-list > ul .submission-container video {
-      width: 100%;
-      -webkit-filter: grayscale(1) brightness(0.5); }
-    #submission-list > ul .submission-container .submission-info {
-      position: absolute;
-      top: 12px;
-      padding: 24px;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      color: #fff3e7;
-      text-align: center; }
-      #submission-list > ul .submission-container .submission-info .title {
-        font-family: "Verlag A", "Verlag B", "Helvetica Neue", "Helvetica", sans-serif;
-        font-size: 16px; }
-      #submission-list > ul .submission-container .submission-info .author {
-        margin-top: 0.5em;
-        font-family: "Verlag A", "Verlag B", "Helvetica Neue", "Helvetica", sans-serif;
-        text-transform: uppercase;
-        font-size: 12px;
-        font-weight: 700; }
-        #submission-list > ul .submission-container .submission-info .author a:link, #submission-list > ul .submission-container .submission-info .author a:visited {
-          color: #fff3e7;
-          text-decoration: none;
-          border-bottom: 2px solid transparent;
-          transition: border-color 0.2s linear; }
-        #submission-list > ul .submission-container .submission-info .author a:hover {
-          border-color: #fff3e7; }
-      #submission-list > ul .submission-container .submission-info .info-block {
-        height: 60%; }
-      #submission-list > ul .submission-container .submission-info .button {
-        opacity: 0; }
-        .-mobile #submission-list > ul .submission-container .submission-info .button {
-          opacity: 1; }
-    #submission-list > ul .submission-container:hover .button {
-      opacity: 1; }
 
 #hero p, #demo p, #code p, #submit p, #submissions-hero p {
   text-align: center; }
