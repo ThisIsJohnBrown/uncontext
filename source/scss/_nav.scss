@@ -1,0 +1,72 @@
+//
+//  Nav
+//
+
+nav {
+  margin-bottom: $baseline*4;
+
+  ul {
+    @extend %clearfix;
+
+    border: 4px solid $purple;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  a,
+  a:link,
+  a:visited {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: $black;
+    text-decoration: none;
+    line-height: $baseline*4;
+    padding: 0 $baseline*1.2;
+    position: relative;
+    top: -3px;
+
+    @include transition(all 0.1s linear);
+
+    &:hover {
+      color: $purple;
+    }
+
+    &.active {
+      color: $cream;
+      background-color: $purple;
+      &:hover {
+        color: $cream;
+      }
+    }
+  }
+
+  a:hover {
+    opacity: 1;
+  }
+
+  li {
+    display: inline-block;
+    float: right;
+    margin: 0;
+    padding: 0;
+    height: 40px;
+    overflow: hidden;
+
+    &:first-child {
+      float: left;
+
+      a,
+      a:link,
+      a:visited {
+        color: $purple;
+      }
+    }
+  }
+}
+
+.-hide {
+  display: none;
+}

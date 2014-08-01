@@ -1,0 +1,78 @@
+//
+// Submissions
+//
+
+.submission-list {
+  margin-left: 0;
+  padding-left: 0;
+
+  .submission-container {
+    margin-bottom: $baseline*2;
+    position: relative;
+    width: 25%;
+    padding: 0 $baseline;
+
+    img {
+      max-width: 100%;
+      width: 100%;
+      -webkit-filter: #{"grayscale(1)"} #{"brightness(0.5)"}; // Hacky shit because of Sass filter conflict
+    }
+
+    video {
+      width:100%;
+      -webkit-filter: #{"grayscale(1)"} #{"brightness(0.5)"}; // Hacky shit because of Sass filter conflict
+    }
+  }
+}
+
+.submission-info {
+  position: absolute;
+  top: $baseline;
+  padding: $baseline*2;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: $cream;
+  text-align: center;
+
+  .title {
+    font-family: $sans;
+    font-size: 16px;
+  }
+
+  .author {
+    margin-top: 0.5em;
+    font-family: $sans;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 700;
+    
+    a:link,
+    a:visited {
+      color: $cream;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s linear;
+    }
+
+    a:hover { border-color: $cream; }
+  }
+
+  .info-block {
+    height: 60%;
+  }
+
+  .button {
+    opacity: 0;
+    text-decoration: none;
+
+    .-mobile & { opacity: 1; }
+    &:hover { color: black; }
+  }
+}
+
+.submission-container:hover {
+  .submission-info .button {
+    opacity: 1;
+  }
+}

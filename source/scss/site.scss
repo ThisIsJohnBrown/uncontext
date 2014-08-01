@@ -3,6 +3,10 @@
 @import "normalize";
 @import "mixins";
 @import "base";
+@import "nav";
+@import "buttons";
+@import "submissions";
+@import "submission";
 
 #wrap {
   min-width: $min_width;
@@ -189,87 +193,6 @@ $num-datas: 5;
   }
 }
 
-#submission-list {
-
-  & > ul {
-    padding: 0;
-
-    .submission-container {
-      margin-bottom: $baseline*2;
-      position: relative;
-      width: 25%;
-      padding: 0 $baseline;
-
-      img {
-        max-width: 100%;
-        width: 100%;
-        -webkit-filter: #{"grayscale(1)"} #{"brightness(0.5)"}; // Hacky shit because of Sass filter conflict
-      }
-
-      video {
-        width:100%;
-        -webkit-filter: #{"grayscale(1)"} #{"brightness(0.5)"}; // Hacky shit because of Sass filter conflict
-      }
-
-      .submission-info {
-        position: absolute;
-        top: $baseline;
-        padding: $baseline*2;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        color: $cream;
-        text-align: center;
-
-        .title {
-          font-family: $sans;
-          font-size: 16px;
-        }
-
-        .author {
-          margin-top: 0.5em;
-          font-family: $sans;
-          text-transform: uppercase;
-          font-size: 12px;
-          font-weight: 700;
-          
-          a:link,
-          a:visited {
-            color: $cream;
-            text-decoration: none;
-            border-bottom: 2px solid transparent;
-
-            transition: border-color 0.2s linear;
-          }
-
-          a:hover {
-            border-color: $cream;
-          }
-        }
-
-        .info-block {
-          height: 60%;
-        }
-
-        .button {
-          opacity: 0;
-
-          .-mobile & {
-            opacity: 1;
-          }
-        }
-      }
-
-      &:hover {
-        .button {
-          opacity: 1;
-        }
-    }
-    
-    }
-  }
-}
-
 #hero p,
 #demo p,
 #code p,
@@ -282,7 +205,6 @@ $num-datas: 5;
 // Footer
 //
 footer {
-  margin-top: $baseline*8;
   background-color: $black;
   padding: $baseline*2 0;
 
@@ -320,99 +242,5 @@ footer {
     &.dingus-github {
       margin-right: -12px;
     }
-  }
-}
-
-.submission-nav {
-  color: red;
-  
-  position: absolute;
-  text-align: center;
-  width: 100%;
-  z-index: 10000;
-
-  .submission-nav-holder {
-    background-color: rgba(0, 0, 0, .5);
-    margin: 16px auto;
-    width: 200px;
-    padding: 6px;
-
-    a {
-      text-decoration: none;
-    }
-    .icon {
-      // float:left;
-      margin-left:12px;
-      
-      &.u {
-        width: 19px;
-        height: 17px;
-        margin-right: 12px;
-      }
-      &.menu {
-        width: 16px;
-        height: 17px;
-      }
-      &.next {
-        background-image: url('/img/icons/next.svg');
-        width: 14px;
-        height: 17px;
-      }
-      &.prev {
-        width: 14px;
-        height: 17px;
-
-        .change-color {
-          fill: #ff0000;
-        }
-        &:hover {
-          // width: 40px;
-          .change-color {
-            // stroke-width:10;
-          }
-        }
-      }
-      &.info {
-        width: 20px;
-        height: 20px;
-      }
-    }
-  }
-}
-
-.info-panel {
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, .5);
-  color: white;
-  z-index: 9500;
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  .col-group {
-    margin: 0 auto;
-    position: absolute;
-    width: 100%;
-    min-width: 0;
-    max-height: 90%;
-    overflow: scroll;
-    
-    .title {
-      font-size: 32px;
-      color: #FFF3E7;
-      line-height: 48px;
-    }
-
-    p.description {
-      // font-family: .LucidaGrandeUI;
-      font-size: 16px;
-      color: $cream;
-      line-height: 23px;
-    }
-  }
-
-  .info-close {
-    // float: right;
   }
 }
