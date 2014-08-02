@@ -2,7 +2,7 @@
 ***
 
 ## Very much in beta! Updates coming soon.
-#### May 24th, 2013: Switched to ws:// protocol, so update your code if you have any.
+#### May 24th, 2014: Switched to ws:// protocol, so update your code if you have any.
 
 ***
 
