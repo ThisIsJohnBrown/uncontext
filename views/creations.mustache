@@ -2,18 +2,20 @@
 {{> header}}
 <div class="info-panel -hide">
   <div class="col-group inner">
-    <div class="col col1of8">
-      <a class="info-close" href="#">X</a>
-    </div>
-    <div class="col col7of8">
-      <h1 class="title">{{name}}</h1>
+    <div class="info-header">
+      <div class="col col1of8">
+        <a class="info-close" href="#"></a>
+      </div>
+      <div class="col col7of8">
+        <h1 class="title">{{name}}</h1>
+      </div>
     </div>
     <div class="col col1of8">&nbsp;</div>
     <div class="col col4of8">
-      <p class="description">{{{description}}}{{{description}}}{{{description}}}{{{description}}}{{{description}}}{{{description}}}{{{description}}}{{{description}}}{{{description}}}{{{description}}}{{{description}}}{{{description}}}{{{description}}}{{{description}}}{{{description}}}{{{description}}}</p>
+      <div class="description">{{{description}}}</div>
     </div>
     <div class="col col1of8">&nbsp;</div>
-    <div class="col col2of8">
+    <div class="info-meta col col2of8">
       <p>{{creator}}</p>
       {{#sourceCode}}
       <p><a href="http://twitter.com/{{sourceCode}}" target="_blank">Source code</a></p>

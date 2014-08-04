@@ -512,7 +512,7 @@ table {
 td, th {
   padding: 0; }
 
-nav ul:after, .submission-nav:after {
+nav ul:after, .submission-nav:after, .info-panel .info-header:after {
   content: "";
   display: table;
   clear: both; }
@@ -876,7 +876,7 @@ nav {
 .info-panel {
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
   color: white;
   z-index: 9500;
   position: absolute;
@@ -885,7 +885,7 @@ nav {
   .info-panel a:link, .info-panel a:visited {
     color: white;
     text-decoration: none;
-    border-bottom: 2px solid transparent;
+    border-bottom: 1px solid transparent;
     -webkit-transition: all 0.2s linear;
     -moz-transition: all 0.2s linear;
     -ms-transition: all 0.2s linear;
@@ -893,25 +893,43 @@ nav {
     transition: all 0.2s linear; }
   .info-panel a:hover {
     border-color: white; }
+  .info-panel .info-header {
+    padding-top: 100px;
+    height: 30vh; }
   .info-panel .col-group {
     margin: 0 auto;
     position: absolute;
     width: 100%;
-    min-width: 0;
-    max-height: 90%;
-    overflow: scroll; }
+    min-width: 0; }
     .info-panel .col-group .title {
       font-size: 32px;
       color: #FFF3E7;
       line-height: 48px;
       margin-top: 0; }
-    .info-panel .col-group p.description {
-      font-size: 16px;
+    .info-panel .col-group .description {
+      font-family: "Verlag A", "Verlag B", "Helvetica Neue", "Helvetica", sans-serif;
+      font-size: 20px;
       color: #fff3e7;
-      line-height: 23px; }
-  .info-panel .info-close {
-    font-size: 32px;
-    line-height: 48px; }
+      line-height: 32px;
+      height: 60vh;
+      overflow-y: auto; }
+  .info-panel .info-meta p {
+    font-family: "Verlag A", "Verlag B", "Helvetica Neue", "Helvetica", sans-serif;
+    font-size: 20px;
+    line-height: 32px; }
+  .info-panel a.info-close:link, .info-panel a.info-close:visited {
+    display: block;
+    position: relative;
+    top: 12px;
+    width: 22px;
+    height: 22px;
+    background: transparent url('/img/icons/icon-close.svg') no-repeat center center;
+    opacity: 0.5;
+    transition: opacity 0.3s linear;
+    border: none; }
+  .info-panel a.info-close:hover {
+    border: none;
+    opacity: 1; }
   @media (max-width: 640px) {
     .info-panel .inner, .info-panel .outer {
       min-width: 100%;

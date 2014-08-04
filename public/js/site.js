@@ -53,8 +53,7 @@ Uncontext.prototype.init = function() {
 
 Uncontext.prototype.resize = function() {
   $('.info-panel .col-group').css({
-    left: ($(window).width() - $('.info-panel .col-group').outerWidth()) / 2,
-    top: ($(window).height() - $('.info-panel .col-group').outerHeight()) / 2
+    left: ($(window).width() - $('.info-panel .col-group').outerWidth()) / 2
   });
 }
 
