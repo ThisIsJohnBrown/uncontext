@@ -1,0 +1,25 @@
+#shape-artboard {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background-color: hsl(5, 95.4%, 78.2%);
+
+  transition: background-color 0.2s ease-in-out;
+}
+
+.shape-container {
+  display: block;
+  position: absolute;
+  fill: none;
+
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+}
+
+.shape-square {
+  stroke-dashoffset: 0;
+
+  transition: stroke-dashoffset 0.3s ease-in-out;
+}
