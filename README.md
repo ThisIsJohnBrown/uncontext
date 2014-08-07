@@ -100,6 +100,7 @@ The following can also be instantiated on the page for you to use by adding this
   "kineticjs": true, // Kinetic.js 5.1.0,
   "randomcolor": true, // RandomColor - https://github.com/davidmerfield/randomColor
   "requirejs": true, // require.js 2.1.14
+  "p5js": true, // p5.min.js
 }
 ```
 
