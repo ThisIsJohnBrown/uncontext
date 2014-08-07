@@ -1,0 +1,13 @@
+{
+  "creator": "Caleb Anderson",
+  "dataset": "literature",
+  "name": "Datafall",
+  "slug": "datafall",
+  "description": "Data is my downfall",
+  "twitter": "RobotCaleb",
+  "url": "http://robotrising.org",
+  "assets": {
+    "js": true,
+    "p5js": true
+  }
+}
