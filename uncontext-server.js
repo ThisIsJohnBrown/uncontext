@@ -83,20 +83,23 @@ function setUpScenes(set, scenes) {
   var sceneArray = [];
   for (var j = 0; j < scenes.length; j++) {
     if (scenes[j].substr(0, 1) !== '.' && scenes[j] !== 'staging' && scenes[j].substr(scenes[j].length - 5) == '.json') {
-      var data = JSON.parse(fs.readFileSync(__dirname + '/scenes/' + set + '/' + scenes[j]).toString());
-      var displayLink = '';
-      if (data.twitter) {
-        displayLink = 'http://twitter.com/' + data.twitter;
-      } else if (data.url) {
-        displayLink = data.url;
+      var jsonFile = __dirname + '/scenes/' + set + '/' + scenes[j];
+      if (fs.existsSync(jsonFile)) {
+        var data = JSON.parse(fs.readFileSync(jsonFile).toString());
+        var displayLink = '';
+        if (data.twitter) {
+          displayLink = 'http://twitter.com/' + data.twitter;
+        } else if (data.url) {
+          displayLink = data.url;
+        }
+        sceneArray.push({
+          'slug': scenes[j].split('.')[0],
+          'author': data.creator,
+          'title': data.name,
+          'link': displayLink,
+          // 'gfy': gfys[j] || false
+        });
       }
-      sceneArray.push({
-        'slug': scenes[j].split('.')[0],
-        'author': data.creator,
-        'title': data.name,
-        'link': displayLink,
-        // 'gfy': gfys[j] || false
-      });
     }
   }
   datasets.push({
