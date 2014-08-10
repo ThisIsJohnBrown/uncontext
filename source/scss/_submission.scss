@@ -109,6 +109,20 @@ $asset-size: 20px;
       line-height: 32px;
       height: 60vh;
       overflow-y: auto;
+      
+      p {
+        margin-bottom: 12px;
+      }
+      a {
+        border-color: white;
+      }
+
+      li {
+        font-family: $serif;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 1.4;
+      }
     }
   }
 

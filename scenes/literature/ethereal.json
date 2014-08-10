@@ -1,10 +1,10 @@
 {
-  "creator": "John Brown",
+  "creator": "Chris Arth",
   "dataset": "literature",
   "name": "Ethereal Net of Dreams",
   "slug": "ethereal",
   "description": "",
-  "twitter": "thisisjohnbrown",
+  "twitter": "chrisarth",
   "assets": {
     "p5js": true
   }

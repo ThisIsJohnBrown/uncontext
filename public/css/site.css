@@ -913,6 +913,15 @@ nav {
       line-height: 32px;
       height: 60vh;
       overflow-y: auto; }
+      .info-panel .col-group .description p {
+        margin-bottom: 12px; }
+      .info-panel .col-group .description a {
+        border-color: white; }
+      .info-panel .col-group .description li {
+        font-family: 'Mercury Text G1 A', 'Mercury Text G1 B', serif;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 1.4; }
   .info-panel .info-meta p {
     font-family: "Verlag A", "Verlag B", "Helvetica Neue", "Helvetica", sans-serif;
     font-size: 20px;
