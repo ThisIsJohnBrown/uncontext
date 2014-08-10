@@ -17,9 +17,15 @@ scene.add(cubeHolder);
 
 camera.position.z = 5;
 
-var context = new webkitAudioContext(),
-        oscillator = context.createOscillator(),
-gainNode =     context.createGainNode();
+var context = new webkitAudioContext();
+var oscillator = context.createOscillator();
+
+var gainNode;
+if (context.createGain) {
+  gainNode = context.createGain();
+} else if (context.createGainNode) {
+  gainNode = context.createGainNode();
+}
 oscillator.connect(context.destination); // Connect to speakers
 oscillator.start(0)
  oscillator.frequency.value = 900;
