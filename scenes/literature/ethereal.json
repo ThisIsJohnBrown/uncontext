@@ -1,0 +1,11 @@
+{
+  "creator": "John Brown",
+  "dataset": "literature",
+  "name": "Ethereal Net of Dreams",
+  "slug": "ethereal",
+  "description": "",
+  "twitter": "thisisjohnbrown",
+  "assets": {
+    "p5js": true
+  }
+}
