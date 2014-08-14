@@ -1,11 +1,6 @@
 # Uncontext
 ***
 
-## Very much in beta! Updates coming soon.
-#### May 24th, 2014: Switched to ws:// protocol, so update your code if you have any.
-
-***
-
 #### What's it all about?
 Uncontext provides the world with a socket that is streaming data in a structured format, 24/7. Built with node.js and socket.io, almost anything can be connected to uncontext: websites, Arduino, Cinder, Unity, iOS, and Android are just the beginning.
 
