@@ -1,0 +1,11 @@
+{
+  "creator": "John Brown",
+  "dataset": "literature",
+  "name": "French Unrest",
+  "slug": "french-unrest",
+  "description": "Sarkozy seeks redemption.",
+  "twitter": "thisisjohnbrown",
+  "assets": {
+    "tweenmax": true
+  }
+}
