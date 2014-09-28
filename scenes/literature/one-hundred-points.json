@@ -1,0 +1,11 @@
+{
+  "creator": "John Brown",
+  "dataset": "literature",
+  "name": "One Hundred Points",
+  "slug": "one-hundred-points",
+  "description": "When two dodecahedrons meet, they miss the other three that complete them.",
+  "twitter": "thisisjohnbrown",
+  "assets": {
+    "tweenmax": true
+  }
+}
