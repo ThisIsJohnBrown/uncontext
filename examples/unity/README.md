@@ -1,1 +1,1 @@
-Get the awesome [UnitySocketIO-WebSocketSharp plugin](https://github.com/kaistseo/UnitySocketIO-WebSocketSharp), and then drop CMain.cs into your scene.
+Get the awesome [WebSocketSharp plugin](https://github.com/sta/websocket-sharp), and then drop CMain.cs into your scene.

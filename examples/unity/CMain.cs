@@ -1,30 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using WebSocketSharp;
 
 public class CMain : MonoBehaviour {
 
-	SocketIOClient.Client socket;
-	// https://github.com/kaistseo/UnitySocketIO-WebSocketSharp
-
+	WebSocket socket;
+	// https://github.com/sta/websocket-sharp
+	
 	void Start () {
-		socket = new SocketIOClient.Client("http://literature.uncontext.com:80/");
-
-		socket.On("0", (data) => {
-			Debug.Log (data.Json.ToJsonString());
-		});
-		socket.Error += (sender, e) => {
-			Debug.Log ("socket Error: " + e.Message.ToString ());
+		socket = new WebSocket("ws://literature.uncontext.com:80");
+	
+		socket.OnError += (sender, e) => {
+			Debug.Log ("socket Error: " + e.Message.ToString());
 		};
-
+		socket.OnMessage += (sender, e) => {
+			Debug.Log ("socket message: " + e.Data);
+		};
+		
 		socket.Connect();
 	}
 
 	void OnGUI () {
-
+		
 		if (GUI.Button (new Rect (20, 120, 150, 30), "Close Connection")) {
 			Debug.Log ("Closing");
-
+			
 			socket.Close();
 		}
 	}
