@@ -1,0 +1,21 @@
+Build Instructions (currently only for MacOS, similar commands/paths should work on any platform)
+
+
+Prerequisites:
+
+1) Processing
+2) Contents of the Uncontext library
+3) Java 1.6 or newer
+
+
+Instructions:
+
+1) Open a terminal window and navigate to the 'src' folder for the uncontext library.
+
+2) Compile the code:
+
+	javac -cp /Applications/Processing.app/Contents/Java/core.jar:../library/java_websocket.jar -target 1.6 -source 1.6 uncontext/*.java
+
+3) Build the .jar file:
+
+	jar -cf uncontext.jar uncontext

@@ -1,0 +1,3 @@
+application.windows=uncontext.jar,java_websocket.jar
+application.macosx=uncontext.jar,java_websocket.jar
+application.linux=uncontext.jar,java_websocket.jar
