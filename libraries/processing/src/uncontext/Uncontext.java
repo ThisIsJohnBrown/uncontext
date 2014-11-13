@@ -26,20 +26,28 @@ public class Uncontext {
 	private Method dataMethod;
 	
 	/**
-	* Constructor
-	*/
-	public Uncontext(PApplet _parent, String _streamName) {
-		this.parent = _parent;
+	 * Constructor, this should be used in the setup() method of the sketch. 
+	 * The data stream will connect automatically.
+	 * <p>
+	 * Typical usage:
+	 * <p>
+	 * unctx = new Uncontext(this, "literature");
+	 *
+	 * @param parent The parent applet.
+	 * @param streamName A valid uncontext stream name.
+	 */
+	public Uncontext(PApplet parent, String streamName) {
+		this.parent = parent;
 		this.parent.registerMethod("dispose", this);
 
-		if(_streamName == null){
+		if(streamName == null){
 			parent.println("Uncontext: Error, stream name is null.");
 			return;
 		}
 
 		boolean streamExists = false;
 		for(Streams s : Streams.values()) {
-			if( s.getName().equals(_streamName.toLowerCase()) ) {
+			if( s.getName().equals(streamName.toLowerCase()) ) {
 				currentStream = s;
 				streamExists = true;
 				break;
@@ -52,13 +60,13 @@ public class Uncontext {
 				this.startStream();
 			}
 		} else {
-			parent.println("Uncontext: There are no streams named '" + _streamName + "', please use one of the following.");
+			parent.println("Uncontext: There are no streams named '" + streamName + "', please use one of the following.");
 			this.list();
 		}
 	}
 
 	/**
-	* List the currently available streams
+	* Print the list of available streams in the debug console.
 	*/
 	public static void list() {
 		System.out.println("------------------- Uncontext Data Streams ----------------------");
@@ -70,8 +78,8 @@ public class Uncontext {
 	}
 
 	/**
-	* Stop the stream
-	*/
+	 * Stop the stream, if it's running.
+	 */
 	public void stop() {
 		if(connected) {
 			connected = false;
@@ -80,8 +88,8 @@ public class Uncontext {
 	}
 
 	/**
-	* Start the stream
-	*/
+	 * Start the stream, if it isn't running.
+	 */
 	public void start(){
 		if(!connected){
 			startStream();
@@ -89,23 +97,28 @@ public class Uncontext {
 	}
 
 	/**
-	* Check to see if the stream is currently connected
-	*/
+	 * Check to see if the stream is currently connected.
+	 *
+	 * @return True if the stream is connected, False if it isn't.
+	 */
 	public boolean isConnected() {
 		return connected;
 	}
 
 	/**
-	* Clean up, stop the stream
-	*/
+	 * Clean things up, stop the stream. This is called automatically when the 
+	 * sketch stops.
+	 */
 	public void dispose() {
 		this.stop();
 	}
 
-	
 	//////////////////////////////////
 
-
+	/**
+	 * Use reflection to find and validate the data handler method in the 
+	 * sketch based on the enum of available streams.
+	 */
 	private void attachEvents() {
 		
 		boolean methodFound = false;
@@ -113,18 +126,19 @@ public class Uncontext {
 			dataMethod = parent.getClass().getMethod(DATA_METHOD_NAME, currentStream.getMethodParameters()); 
 			methodFound = true;
 		} catch (NoSuchMethodException e){
-			// ignore missing methods, just means they didn't specify one or the signatire is wrong.
-			// both cases will be caught later and error messages will be displayed.
+			// ignore missing methods, just means they didn't specify one or 
+			// the signatire is wrong. Both cases will be caught later and error 
+			// messages will be displayed.
 		} catch (Exception e) { 
 			System.err.println("Uncontext: Error while iterating through potential data handlers.");
 		}
 
 		if(!methodFound) {
 
-			// A method matching one of the streams was not found so
-			// check to see if a method name matches the data handler
-			// which might indicate that they have simply made a 
-			// mistake in the method signature.
+			// A data handler method matching one of the streams was not found 
+			// so check to see if any method name matches the data handler name.
+			// This could indicate that they have simply made a mistake in the 
+			// method signature.
 
 			Method[] allMethods = parent.getClass().getMethods();
 			boolean methodExists = false;
@@ -146,11 +160,17 @@ public class Uncontext {
 		}
 	}
 
+	/**
+	 * Start the websocket stream.
+	 */
 	private void startStream() {
 		try{
 			cc = new WebSocketClient( new java.net.URI( this.generateURL(currentStream) ), new Draft_17() ) {
 				@Override
 				public void onMessage( String message ) {
+					// If "stop" is called, data may still come in before the 
+					// stream shuts down, so check the connected value and 
+					// don't handle messages if connected is false.
 					if(connected) {
 						handleData(message);
 					}
@@ -185,10 +205,13 @@ public class Uncontext {
 		    cc.connect();
 
 		} catch( URISyntaxException ex ){
-
+			// This should never happen, URI generation is not exposed.
 		}
 	}
 
+	/**
+	 * Data handler for JSON messages from the stream.
+	 */
 	private void handleData(String message){
 		
 		JSONObject data = null;
@@ -213,6 +236,9 @@ public class Uncontext {
 		}
 	}
 
+	/**
+	 * Helper function to generate websocket URLs
+	 */
 	private String generateURL(Streams stream) {
 		return "ws://" + stream.getName() + "." + BASE_URL + ":" + PORT;
 	}
