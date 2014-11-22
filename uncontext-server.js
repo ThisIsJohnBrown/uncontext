@@ -33,6 +33,10 @@ app.get('/submit/', function(req, res) {
   return res.render('submit.mustache', {pagejs: 'submit'})
 });
 
+app.get('/libraries/processing/', function(req, res) {
+  return res.render('libraries/processing.mustache', {pagejs: 'processing'})
+});
+
 app.get('/submit-project/', function(req, res) {
   if (client) {
     var key = req.query.title + '-' + new Date().getTime();

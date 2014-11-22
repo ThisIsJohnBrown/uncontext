@@ -1,0 +1,62 @@
+{{> header}}
+
+<div id="wrap">
+
+  <section class="section section-cream" id="submissions-hero">
+    <div class="col-group outer">
+      
+      <nav class="grid-center col3of4">
+        <ul>
+          <li id="logo"><a href="/">Uncontext.</a></li>
+          <li><a href="/submit/">Submit</a></li>
+          <li><a href="/literature/" class="active">Submissions</a></li>
+          <li><a href="/">Information</a></li>    
+        </ul>
+      </nav>
+
+      <header class="col col1of1">
+        <p id="session">Library for</p>
+        <h1 class="as-h1">Processing</h1>
+        <canvas class="divider" width="260px" height="12px" data-divider-type="headerAnimationLines"></canvas>
+        <div class="inner">
+          <p class="grid-center col3of4">Description</p>
+        </div>
+      </header>
+    
+    </div><!-- /grid -->
+  </section><!-- /hero -->
+
+  <section class="section section-white" id="demo">
+    <div class="col-group inner">
+      
+      <h2 class="as-h2">Documentation</h2>
+      <canvas class="divider" width="100px" height="12px" data-divider-type="headerAnimationSteps"></canvas>
+      <div class="col-group inner">
+        <p class="grid-center col3of4">Here be things worth saying</p>
+      </div>
+    </div><!-- /grid -->
+  </section><!-- /demo -->
+
+  <section id="code" class="section section-cream">
+    <div class="col-group inner">
+
+      <h2 class="as-h2">Code?</h2>
+      <canvas class="divider" width="100px" height="12px" data-divider-type="headerAnimationWide"></canvas>
+      <div class="col-group inner">
+        <pre id="code-sample" class="grid-center col3of4">
+&lt;script&gt;
+  socket_ = new WebSocket('ws://literature.uncontext.com:80');
+  socket_.onmessage = function (data) {
+    console.log(data);
+    generateBanana(data);
+  };
+&lt;/script&gt;</pre>
+
+      </div><!-- /grid -->
+    </div>
+  </section><!-- /code -->
+
+  {{> site_footer}}
+</div>
+
+{{> footer}}
