@@ -15,8 +15,8 @@
       
 
       <header class="col col1of1">
-        <p id="session">Session 1</p>
-        <h1 class="as-h1">Literature</h1>
+        <p id="session">Session 2</p>
+        <h1 class="as-h1">Duel</h1>
         <canvas class="divider" width="260px" height="12px" data-divider-type="headerAnimationLines"></canvas>
         <div class="inner">
           <p class="grid-center col3of4">Uncontext is an art project where any collaborator can access an unending stream of structured&mdash;but seemingly random&mdash;data. Use this data it to generate art, write poems, control robots, or anything else.</p>
@@ -32,8 +32,9 @@
       <h2 class="as-h2">Live data</h2>
       <canvas class="divider" width="100px" height="12px" data-divider-type="headerAnimationSteps"></canvas>
       <div class="col-group inner">
-        <p class="grid-center col3of4">The theme of the current session is Literature, because that is the source of the session&rsquo;s data. We&rsquo;d provide more details, but it&rsquo;s a mystery! More details will be revealead at the end of the session, just before Session 2. Don’t let the source dictate your exploration (unless you want it to).</p>
+        <p class="grid-center col3of4">The theme of the current session is Duel, because that is the source of the session&rsquo;s data. We&rsquo;d provide more details, but it&rsquo;s a mystery! Don’t let the source dictate your exploration (unless you want it to).</p>
       </div>
+      <!-- TODO Update code samples -->
       <table id="demo-table" class="col-group inner">
         <thead>
           <tr class="col-group inner">
@@ -150,7 +151,7 @@
       <div class="col-group inner">
         <pre id="code-sample" class="grid-center col3of4">
 &lt;script&gt;
-  socket_ = new WebSocket('ws://literature.uncontext.com:80');
+  socket_ = new WebSocket('ws://duel.uncontext.com:80');
   socket_.onmessage = function (data) {
     console.log(data);
     generateBanana(data);
