@@ -46,7 +46,7 @@ app.get('/submit-project/', function(req, res) {
   return res.send('success!');
 });
 
-app.get('/literature/', function(req, res) {
+app.get('/submissions/', function(req, res) {
   return res.render('submissions.mustache', {datasets: datasets, pagejs: 'submissions'});
 });
 
