@@ -758,7 +758,7 @@ nav {
   height: 36px;
   border: 2px solid #6e1db5;
   color: #6e1db5;
-  text-decoration: none;
+  text-decoration: none !important;
   text-transform: uppercase;
   font-weight: 600; }
   .button:active {

@@ -10,7 +10,7 @@
   height: $baseline*3;
   border: 2px solid $purple;
   color: $purple;
-  text-decoration: none;
+  text-decoration: none !important;
   text-transform: uppercase;
   font-weight: 600;
 
