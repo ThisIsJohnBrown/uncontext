@@ -7,6 +7,7 @@
 @import "buttons";
 @import "submissions";
 @import "submission";
+@import "shows";
 
 #wrap {
   min-width: $min_width;
@@ -19,7 +20,8 @@
 
 #hero,
 #submissions-hero,
-#submit {
+#submit,
+#shows {
   header {
     margin: $baseline*8 auto;
   }
@@ -197,7 +199,8 @@ $num-datas: 5;
 #demo p,
 #code p,
 #submit p,
-#submissions-hero p {
+#submissions-hero p,
+#shows p {
   text-align: center;
 }
 

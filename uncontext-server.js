@@ -54,6 +54,10 @@ app.get('/submissions/', function(req, res) {
   return res.render('submissions.mustache', {datasets: datasets, pagejs: 'submissions'});
 });
 
+app.get('/shows/duel-at-diode/', function(req, res) {
+  return res.render('shows/duel-at-diode.mustache');
+});
+
 var datasets = [];
 // var gfys = [];
 var sets = fs.readdirSync(__dirname + '/scenes/');

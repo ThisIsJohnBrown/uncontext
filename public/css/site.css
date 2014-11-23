@@ -957,6 +957,62 @@ nav {
       float: none;
       margin-top: 64px; } }
 
+.show-info {
+  box-sizing: border-box;
+  background-color: black;
+  padding: 24px;
+  margin-bottom: 48px;
+  color: #fff3e7; }
+
+.show-info h4, .show-info h5, .show-info .address, .show-info .subtext {
+  text-align: center; }
+
+.show-info h4 {
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 24px; }
+
+.show-info .address {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 16px;
+  line-height: 24px;
+  border-bottom: 1px solid rgba(255, 243, 231, 0.3);
+  padding-bottom: 12px;
+  margin-bottom: 12px; }
+
+.show-info h5, .show-info .subtext {
+  font-family: "Verlag A", "Verlag B", "Helvetica Neue", "Helvetica", sans-serif;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  line-height: 24px; }
+
+.artist-list {
+  list-style: none;
+  padding: 0; }
+  .artist-list li {
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    line-height: 36px; }
+
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  /* 16:9 */
+  padding-top: 25px;
+  height: 0; }
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+
 #wrap {
   min-width: 780px;
   margin: 0 auto; }
@@ -964,11 +1020,11 @@ nav {
 .grid {
   min-width: 900px; }
 
-#hero header, #submissions-hero header, #submit header {
+#hero header, #submissions-hero header, #submit header, #shows header {
   margin: 96px auto; }
-#hero h1, #submissions-hero h1, #submit h1 {
+#hero h1, #submissions-hero h1, #submit h1, #shows h1 {
   margin-bottom: 24px; }
-#hero #session, #submissions-hero #session, #submit #session {
+#hero #session, #submissions-hero #session, #submit #session, #shows #session {
   text-transform: uppercase;
   font-weight: 200;
   margin-bottom: -12px; }
@@ -1103,7 +1159,7 @@ nav {
       background-color: #6e1db5;
       color: #fff3e7; }
 
-#hero p, #demo p, #code p, #submit p, #submissions-hero p {
+#hero p, #demo p, #code p, #submit p, #submissions-hero p, #shows p {
   text-align: center; }
 
 footer {
