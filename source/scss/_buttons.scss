@@ -14,9 +14,12 @@
   text-transform: uppercase;
   font-weight: 600;
 
-  &:active {
+  &:active,
+  &:hover {
     background-color: $purple;
     color: $cream;
+
+    @include transition(all 0.1s linear);
   }
 
   &.button-cream {

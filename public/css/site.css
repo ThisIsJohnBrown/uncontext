@@ -761,9 +761,14 @@ nav {
   text-decoration: none !important;
   text-transform: uppercase;
   font-weight: 600; }
-  .button:active {
+  .button:active, .button:hover {
     background-color: #6e1db5;
-    color: #fff3e7; }
+    color: #fff3e7;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    -ms-transition: all 0.1s linear;
+    -o-transition: all 0.1s linear;
+    transition: all 0.1s linear; }
   .button.button-cream {
     border-color: #fff3e7;
     color: #fff3e7;
@@ -778,6 +783,12 @@ nav {
     .button.button-cream:hover {
       background-color: #fff3e7;
       color: #6e1db5; }
+
+.show-callout {
+  text-align: center;
+  padding-bottom: 48px; }
+  .show-callout p {
+    margin-bottom: 24px; }
 
 .submission-list {
   margin-left: 0;

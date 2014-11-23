@@ -1,4 +1,18 @@
 //
+// Show Callout
+//
+
+.show-callout {
+  text-align: center;
+  padding-bottom: $baseline*4;
+
+  p {
+    margin-bottom: $baseline*2;
+  }
+}
+
+
+//
 // Submissions
 //
 
