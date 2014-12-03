@@ -33,6 +33,10 @@ app.get('/submit/', function(req, res) {
   return res.render('submit.mustache', {pagejs: 'submit'})
 });
 
+app.get('/duel/source/', function(req, res) {
+  return res.render('duel-source.mustache', {pagejs: 'duel-source'})
+});
+
 app.get('/libraries/processing/', function(req, res) {
   return res.render('libraries/processing.mustache', {pagejs: 'processing'})
 });

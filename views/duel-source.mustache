@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>Empty Board Example</title>
+
+  <link rel="stylesheet" href="/css/vendor/chessboard-0.3.0.css" />
+  <style>
+    @import url("http://cloud.typography.com/7675692/750644/css/fonts.css");
+     body {
+      background-color: #fff3e7;
+     }
+    h1, h2, h3 {
+      font-family: 'Verlag A', 'Verlag B', 'Helvetica Neue', Helvetica, sans-serif;
+      color: #6e1db5;
+    }
+
+    p {
+      font-family: 'Mercury Text G1 A', 'Mercury Text G1 B', serif;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    #board {
+      
+    }
+
+    .half {
+      width: 49%;
+    }
+
+    .left {
+      float: left;
+    }
+
+    .right {
+      float: right;
+    }
+
+    .half p {
+      max-width: 480px;
+    }
+
+    .clear {
+      clear: both;
+    }
+
+    .long {
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .wrapper {
+      margin-left: auto;
+      margin-right: auto;
+      width: 1080px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+<h1 class="center">duel.uncontext.com</h1>
+<div class="half left">
+  <p><strong>uncontext.</strong> is a community driven project surrounding seemingly random, streaming data with no context. Anyone can connect to the data and create with it. The data has no identifying features, and the dataset used for all the pieces you see here looks like this:</p>
+  <h3 id="data"></h3>
+  <p>The source of the data for this particular dataset was kept from the artists until this very show. They only had the streaming numbers to work with and the name of the data set, which is "duel".</p>
+  <p>I found a massive database of historical chess games dating back to the 1400s. I did a search through it and collected the moves for all the games that ended in a draw since January 1, 1970 (an important date in computer science). The stream of data that is sent out is all derived from these games of chess.</p>
+</div>
+<div class="half right">
+  <div id="board" style="width: 350px"></div>
+</div>
+<div class="clear"><br></div>
+<div class="half left">
+
+  <p><strong>Frequency</strong> - Every minute, another game is played. The number of moves will fit into each minute, so the more moves there are, the quicker the pace.</p>
+  <p><strong>a</strong> - <span class="data-a"></span> - This is the x,y coordinate that the latest piece played moved to.</p>
+  <p><strong>b</strong> - <span class="data-b"></span> - Each new game (every minute), this resets to 0,0. As pieces are captured, these numbers increase to 1,1. The first number is white, the second is black, and it represents the total percentage of pieces that will be captured.</p>
+  <p><strong>c</strong> - <span class="data-c"></span> - An indicator of whether a piece was captured.</p>
+</div>
+<div class="half right">
+  <p><strong>d</strong> - <span class="data-d"></span> - Each piece type is assigned a value. Pawn - 1, Knight - 2, Bishop - 3, Rook - 4, Queen - 5, King - 6. As pieces are moved, a running total is kept of those pieces and their value. This is then divided by the current move count.</p>
+  <p><strong>e</strong> - <span class="data-e"></span> - A percentage of moves left in this game.</p>
+  <p><strong>f</strong> - <span class="data-f"></span> - At the beginning of each game, the game number since starting the stream on November 8th is stored. On each move, that number is multiplied by the move number, then added to the stored number. The remainder after being divided by 100 is then taken and normalized. Definitely the most abstract of the data attributes.</p>
+</div>
+
+</div>
+
+<script src="/js/vendor/jquery-1.11.0.min.js"></script>
+<script src="/js/vendor/chessboard-0.3.0.min.js"></script>
+<script>
+
+var board;
+var socket;
+var socketTimeout;
+var socketData;
+var initialRun = true;
+
+var init = function() {
+
+  board = new ChessBoard('board', 'start');
+  resetSocket();
+
+};
+
+function resetSocket() {
+  socket = new WebSocket('ws://uncontext-duel-data.herokuapp.com');
+  
+  socket.onclose = function (event) {
+    socketTimeout = setTimeout(resetSocket, 2000);
+  }
+  
+  socket.onopen = function (event) {
+    if (socketTimeout) {
+      clearTimeout(socketTimeout);
+    }
+  }
+
+  socket.onmessage = function (event) {
+    var tempJSON = JSON.parse(event.data);
+    console.log(tempJSON);
+    if (tempJSON.e == 1 || initialRun) {
+      board = new ChessBoard('board', 'start');
+      if (initialRun) {
+        board.position(tempJSON.fen, false);
+      }
+      initialRun = false;
+    }
+    if (socketData) {
+      board.position(socketData.fen, false);
+    }
+    board.move(tempJSON.from + '-' + tempJSON.to);
+    socketData = tempJSON;
+    delete tempJSON.fen;
+    delete tempJSON.from;
+    delete tempJSON.to;
+    document.getElementById('data').innerHTML = JSON.stringify(tempJSON);
+    tempJSON.a[0] = tempJSON.a[0].toFixed(2);
+    tempJSON.a[1] = tempJSON.a[1].toFixed(2);
+    tempJSON.b[0] = tempJSON.b[0].toFixed(2);
+    tempJSON.b[1] = tempJSON.b[1].toFixed(2);
+    document.getElementsByClassName('data-a')[0].innerHTML = '[' + tempJSON.a + ']';
+    document.getElementsByClassName('data-b')[0].innerHTML = '[' + tempJSON.b + ']';
+    document.getElementsByClassName('data-c')[0].innerHTML = tempJSON.c;
+    document.getElementsByClassName('data-d')[0].innerHTML = tempJSON.d.toFixed(2);
+    document.getElementsByClassName('data-e')[0].innerHTML = tempJSON.e.toFixed(2);
+    document.getElementsByClassName('data-f')[0].innerHTML = tempJSON.f.toFixed(2);
+  }
+}
+
+$(document).ready(init);
+
+</script>
+</body>
+</html>
