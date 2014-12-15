@@ -67,6 +67,7 @@ var datasets = [];
 var sets = fs.readdirSync(__dirname + '/scenes/');
 setUpDataset(0);
 
+
 function setUpDataset(i) {
   if (i < sets.length) {
     if (sets[i].substr(0, 1) !== '.') {
