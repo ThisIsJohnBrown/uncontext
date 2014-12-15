@@ -1,0 +1,9 @@
+{
+  "creator": "Mike Creighton",
+  "dataset": "duel",
+  "name": "Fragmented Portraiture",
+  "slug": "fragmented-portraiture",
+  "description": "Fragmented Portraiture is a portrait painting application built with modern web technologies that assembles paintings through additive digital brushstrokes. Each brushstroke's position, width, opacity, length, and lifespan are derived from the uncontext data feed. The reference images used for each painting come from hand-picked photos from Flickr's Creative Commons Attribution-ShareAlike-licensed catalog.",
+  "twitter": "mikecreighton",
+  "external": "http://fragmented.mikecreighton.com/exhibit"
+}

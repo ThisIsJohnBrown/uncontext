@@ -1035,7 +1035,8 @@ nav {
   margin: 96px auto; }
 #hero h1, #submissions-hero h1, #submit h1, #shows h1 {
   margin-bottom: 24px; }
-#hero #session, #submissions-hero #session, #submit #session, #shows #session {
+#hero #session, #submissions-hero #session, #submit #session, #shows #session, #hero .session, #submissions-hero .session, #submit .session, #shows .session, .session {
+  text-align: center;
   text-transform: uppercase;
   font-weight: 200;
   margin-bottom: -12px; }
@@ -1045,6 +1046,12 @@ nav {
 
 #submissions-hero header {
   margin-bottom: 0; }
+
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
 
 #demo-table {
   margin-top: 48px;

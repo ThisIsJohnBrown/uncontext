@@ -1,4 +1,4 @@
-require('newrelic');
+//require('newrelic');
 var http = require('http');
 var express = require('express');
 var app = express();
@@ -65,32 +65,45 @@ app.get('/shows/duel-at-diode/', function(req, res) {
 var datasets = [];
 // var gfys = [];
 var sets = fs.readdirSync(__dirname + '/scenes/');
-for (var i = 0;i < sets.length; i++) {
-  if (sets[i].substr(0, 1) !== '.') {
-    datasets[sets[i]] = [];
-    app.get('/' + sets[i], function(req, res){
-      return res.render(req.url.substr(1) + '.mustache', {datasets: datasets});
-    });
-    var scenes = [];
-    // If this is run on the production server, this takes care of the proper ordering
-    if (client) {
-      var set = sets[i];
-      client.get(set, function(e, r) {
-        var order = JSON.parse(r).order;
-        for (var j = 0; j < order.length; j++) {
-          scenes.push(order[j].json);
-          // gfys.push(order[j].gfy);
-        }
-        setUpScenes(set, scenes);
-      })
-    } else {
-      // This will just sort by submission time if it's running in dev mode
-      scenes = fs.readdirSync(__dirname + '/scenes/' + sets[i]);
-      scenes.sort(function(a, b) {
-           return fs.statSync(__dirname + '/scenes/' + sets[i] + '/' + b).mtime.getTime() - 
-                  fs.statSync(__dirname + '/scenes/' + sets[i] + '/' + a).mtime.getTime();
+setUpDataset(0);
+
+function setUpDataset(i) {
+  if (i < sets.length) {
+    if (sets[i].substr(0, 1) !== '.') {
+      datasets[sets[i]] = [];
+      app.get('/' + sets[i], function(req, res){
+        return res.render(req.url.substr(1) + '.mustache', {datasets: datasets});
       });
-      setUpScenes(sets[i], scenes);
+      var scenes = [];
+      // If this is run on the production server, this takes care of the proper ordering
+      if (client) {
+        var set = sets[i];
+        client.get(set, function(e, r) {
+          if (r) {
+            var order = JSON.parse(r).order;
+            for (var j = 0; j < order.length; j++) {
+              scenes.push(order[j].json);
+              // gfys.push(order[j].gfy);
+            }
+            setUpScenes(set, scenes);
+            setUpDataset(++i);
+          } else {
+            client.set(set, JSON.stringify({'name': set, 'order': []}), redis.print);
+            setUpDataset(++i);
+          }
+        })
+      } else {
+        // This will just sort by submission time if it's running in dev mode
+        scenes = fs.readdirSync(__dirname + '/scenes/' + sets[i]);
+        scenes.sort(function(a, b) {
+             return fs.statSync(__dirname + '/scenes/' + sets[i] + '/' + b).mtime.getTime() - 
+                    fs.statSync(__dirname + '/scenes/' + sets[i] + '/' + a).mtime.getTime();
+        });
+        setUpScenes(sets[i], scenes);
+        setUpDataset(++i);
+      }
+    } else {
+      setUpDataset(++i);
     }
   }
 }
@@ -113,14 +126,18 @@ function setUpScenes(set, scenes) {
           'author': data.creator,
           'title': data.name,
           'link': displayLink,
+          'externalLink': data.externalLink
           // 'gfy': gfys[j] || false
         });
       }
     }
   }
   datasets.push({
+    num: 2 - datasets.length,
+    prettyName: set.charAt(0).toUpperCase() + set.slice(1),
     name: set,
-    slugs: sceneArray
+    slugs: sceneArray,
+    odd: datasets.length % 2 ? true : false
   })
 }
 
@@ -155,7 +172,9 @@ app.get('/:dataset/:slug', function(req, res){
         }
       }
     }
-    if (data.youtube) {
+    if (data.external) {
+      
+    } if (data.youtube) {
       res.render('youtube.mustache', data, function(err, html) {
         res.send(html);
       });
@@ -168,6 +187,15 @@ app.get('/:dataset/:slug', function(req, res){
         if (!err) {
           data.content = html;
         }
+        if (fs.existsSync(__dirname + '/scenes/' + req.params.dataset + '/' + req.params.slug + '.md')) {
+          data.description = markdown.toHTML(fs.readFileSync(__dirname + '/scenes/' + req.params.dataset + '/' + req.params.slug + '.md').toString('utf8'));
+        }
+        if (data.external) {
+          res.render('external.mustache', data, function(err, html) {
+            res.send(html);
+          });
+        }
+
         if (!data.assets) {
           data.assets = {};
         }
@@ -175,15 +203,14 @@ app.get('/:dataset/:slug', function(req, res){
         if (fs.existsSync(__dirname + '/public/js/' + req.params.dataset + '/' + req.params.slug + '.js')) {
           data.assets.js = true;
         }
-        if (fs.existsSync(__dirname + '/scenes/' + req.params.dataset + '/' + req.params.slug + '.md')) {
-          data.description = markdown.toHTML(fs.readFileSync(__dirname + '/scenes/' + req.params.dataset + '/' + req.params.slug + '.md').toString('utf8'));
-        }
         if (fs.existsSync(__dirname + '/public/css/' + req.params.dataset + '/' + req.params.slug + '.css')) {
           data.assets.css = true;
         }
-        res.render('creations.mustache', data, function(err, html2) {
-          res.send(html2);
-        });
+        if (!data.external) {
+          res.render('creations.mustache', data, function(err, html2) {
+            res.send(html2);
+          });
+        }
       });
     }
 

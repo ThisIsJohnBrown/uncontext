@@ -1,0 +1,8 @@
+{
+  "creator": "Michael Jennings",
+  "dataset": "duel",
+  "name": "Electrodynamics",
+  "slug": "electrodynamics",
+  "description": "Two lightning bolts are generated from the Uncontext data and run towards each other. The bendiness, speed, frequency, direction, thickness, and amount of branching of each lightning bolt is determined by the data stream. The two lightning bolts are meant to be \"dueling\" with each other. The left bolt draws from the X members of the A and B streams, while the right bolt draws from the Y members of A and B. The left bolt draws from E, while the right bolt draws from F. The C and D streams affect both bolts in the same way.",
+  "externalLink": "https://github.com/jenningsm/electrodynamics"
+}

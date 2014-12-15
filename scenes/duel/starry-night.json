@@ -1,0 +1,9 @@
+{
+  "creator": "Josh Michaels",
+  "dataset": "duel",
+  "name": "Starry Night",
+  "slug": "starry-night",
+  "description": "A recreation of the Starry Night screen saver from After Dark. Uncontext data defines what the building shapes are, where and how often they are drawn, and the style of window they have.",
+  "twitter": "joshjet",
+  "external": "http://www.the55.net/_14/sketch/uncontext_1?nobox=1"
+}

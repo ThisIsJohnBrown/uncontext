@@ -30,11 +30,24 @@
     margin-bottom: $baseline*2;
   }
 
-  #session {
+  #session, .session {
     text-transform: uppercase;
     font-weight: 200;
     margin-bottom: -$baseline;
   }
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.session {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 200;
+  margin-bottom: -$baseline;
 }
 
 #hero-canvas {

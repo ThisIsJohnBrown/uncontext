@@ -1,0 +1,9 @@
+{
+  "creator": "Travis Feldman",
+  "dataset": "duel",
+  "name": "Socket Monkey Synth",
+  "slug": "socket-monkey-synth",
+  "description": "What does data sound like? For the Socket Monkey, the uncontext data stream is rendered into chirps, whirs, and matching facial expressions.  It was made during the uncontext hackday at Instrument using p5.js.",
+  "twitter": "moleculesynth",
+  "external": "http://travisfeldman.org/25"
+}
