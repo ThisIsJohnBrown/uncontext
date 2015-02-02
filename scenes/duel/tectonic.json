@@ -1,0 +1,11 @@
+{
+  "creator": "Ben Purdy",
+  "name": "tectonic",
+  "slug": "tectonic",
+  "description": "An endless dynamic landscape.",
+  "twitter": "purdybot",
+  "url": "http://benpurdy.com",
+  "assets": {
+  	"threejs": true,
+  }
+}
